@@ -1,0 +1,11 @@
+.page
+  = link_to page.title, edit_admin_page_path(page)
+  = "(Homepage)" if defined?(is_homepage)
+  .actions
+    / = render :partial => 'admin/shared/selector', :locals => { :name => 'Actions' }
+    - unless defined?(is_homepage)
+      = link_to 'Delete Page', admin_page_path(page, :format => :js), :remote => true, :method => :delete
+      |
+      = link_to 'New Sub-Page', new_admin_page_path(:parent_id => page.id), :remote => true, :method => :get, 'data-type' => :html
+      |
+      = link_to 'Reorder Page', '#move', :class => 'reorder' 

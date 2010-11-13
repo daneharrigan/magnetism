@@ -1,0 +1,21 @@
+%h2
+  New Page
+  - if parent_page
+    = "Under #{parent_page.title}"
+= form_for [:admin, resource] do |f|
+  .large-title
+    = f.label :title, 'Page Title'
+    = f.text_field :title
+  / %ol.fields
+  /   %li
+  /     = f.label :template_id
+  /     = f.select :template_id, @templates
+  /   - unless @parent.try(:blog?)
+  /     %li
+  /       = f.label :blog, 'Is this a blog section?'
+  /       = f.check_box :blog
+  .actions
+    = link_to 'Cancel', '#cancel', :class => 'cancel'
+    = f.submit
+    - if parent_page
+      = f.hidden_field :parent_id, :value => parent_page.id

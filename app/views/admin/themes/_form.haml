@@ -1,0 +1,7 @@
+= form_for [:admin, :manage, resource] do |f|
+  .large-title
+    = f.label :name
+    = f.text_field :name
+  .actions
+    = link_to 'Cancel', '#cancel', :class => 'cancel'
+    = f.submit

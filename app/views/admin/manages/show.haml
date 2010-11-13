@@ -1,0 +1,9 @@
+%h2 Sites
+
+%ol#sites= render :partial => 'admin/sites/site', :collection => site_collection, :as => :site
+
+%h2 Themes
+
+%ol#themes= render :partial => 'admin/themes/theme', :collection => theme_collection, :as => :theme
+
+= link_to 'New Theme', new_admin_manage_theme_path, :class => 'new', :remote => true, :method => :get, 'data-type' => :html

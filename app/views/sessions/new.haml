@@ -1,0 +1,12 @@
+= form_for :session, :url => admin_session_path do |f|
+  %h2 Sign In
+  - if flash[:failure]
+    %p.message.failure= flash[:failure]
+  %fieldset
+    = f.label :email
+    = f.text_field :email, :value => 'dharrigan@example.com'
+  %fieldset
+    = f.label :password
+    = f.password_field :password, :value => 'password'
+  %div
+    = f.submit 'Sign In'

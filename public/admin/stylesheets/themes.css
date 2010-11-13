@@ -1,0 +1,48 @@
+#side-bar {
+	float: right;
+	width: 250px;
+	background: #FFF;
+}
+#side-bar h2 {
+	font-size: 14px;
+	cursor: pointer;
+}
+#side-bar ul {
+	margin-bottom: 20px;
+}
+#side-bar li {
+	list-style: none;
+	margin-bottom: 5px;
+	padding: 0 20px;
+}
+#tabs {
+	border-bottom: 2px solid #5BB4E7;
+	margin-right: 270px;
+	height: 38px;
+}
+.toggle-content li,
+#tabs li {
+	display: inline-block;
+}
+#tabs li {
+	margin-right: 5px;
+	
+}
+#tabs a.active:link,
+#tabs a.active:visited {
+	border-color: #5BB4E7;
+}
+#template-content {
+	padding: 20px;
+	margin-right: 270px;
+	list-style: none;
+}
+.toggle-content {
+	border-top: 2px solid #5BB4E7;
+	text-align: right;
+}
+.bottom:link, .bottom:visited {
+	border-radius: 0 0 10px 10px;	
+	border: 2px solid #5bb4e7;
+	border-top: none;
+}

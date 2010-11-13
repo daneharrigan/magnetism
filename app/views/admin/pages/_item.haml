@@ -1,0 +1,4 @@
+%li{ :id => "page-#{page.id}" }
+  = render :partial => 'page', :locals => { :page => page }
+  - unless page.pages.empty?
+    = render :partial => 'collection', :locals => { :list => page.pages }

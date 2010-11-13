@@ -1,0 +1,8 @@
+%h2 Pages
+
+#homepage
+  = render :partial => 'page', :locals => { :page => homepage, :is_homepage => true }
+
+#pages= render :partial => 'collection', :locals => { :list => collection }
+
+= link_to 'New Page', new_admin_page_path, :class => 'new', :remote => true, :method => :get, 'data-type' => :html

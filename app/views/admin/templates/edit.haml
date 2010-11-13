@@ -1,0 +1,28 @@
+%li
+  = form_for [:admin, :manage, parent, resource] do |f|
+    .large-title
+      %label.title Page Title
+      %span.input 
+
+    %ol.fields
+      %li
+        %label First Name
+        %span.input
+      %li
+        %label First Name
+        %span.input
+      %li
+        %label First Name
+        %span.input
+      %li.textarea
+        %label First Name
+        %span.textarea
+
+    .actions
+      = link_to 'Add Field', '#'
+      |
+      = f.submit
+
+    %ol.toggle-content
+      %li= link_to 'Form View', '#', :class => 'tab bottom'
+      %li= link_to 'Code View', '#', :class => 'tab bottom'

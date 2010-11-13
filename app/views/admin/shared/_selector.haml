@@ -1,0 +1,6 @@
+.selector{ :id => defined?(id) ? id : nil, :class => defined?(open_direction) ? "open-#{open_direction}" : 'open-down' }
+  %h2
+    %span= name
+  %ul
+  / = render :partial => 'admin/sites/selector', :collection => Site.all, :as => :site
+  / %li= link_to 'Add another site', new_admin_manage_site_path, :remote => true, :method => :get
