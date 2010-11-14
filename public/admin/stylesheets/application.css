@@ -130,10 +130,8 @@ section {
 	border: 2px solid #5bb4e7;
 	border-bottom: none;
 }
-#mainNav a.active:link,
-#mainNav a.active:visited,
-#tabs a.active:link,
-#tabs a.active:visited {
+.tab-collection a.active:link,
+.tab-collection a.active:visited {
 	background: #FFF;
 	color: #000;
 	border-color: #FFF;

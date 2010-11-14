@@ -16,6 +16,7 @@
 	padding: 0 20px;
 }
 #tabs {
+	position: relative;
 	border-bottom: 2px solid #5BB4E7;
 	margin-right: 270px;
 	height: 38px;
@@ -29,13 +30,21 @@
 	
 }
 #tabs a.active:link,
-#tabs a.active:visited {
+#tabs a.active:visited,
+.toggle-content a.active:link,
+.toggle-content a.active:visited {
 	border-color: #5BB4E7;
 }
 #template-content {
 	padding: 20px;
 	margin-right: 270px;
 	list-style: none;
+}
+#template-content > li {
+	display: none;
+}
+#template-content > li.active {
+	display: block;
 }
 .toggle-content {
 	border-top: 2px solid #5BB4E7;
@@ -45,4 +54,6 @@
 	border-radius: 0 0 10px 10px;	
 	border: 2px solid #5bb4e7;
 	border-top: none;
+	position: relative;
+	bottom: 2px;
 }

@@ -57,10 +57,10 @@ namespace :db do
   # dependent tasks
   task :theme do
     Theme.create(:name => 'Theme Name - 1')
-    Rake::Task['db:template'].invoke
+    Rake::Task['db:templates'].invoke
   end
 
-  task :template => :template_types do
+  task :templates => :template_types do
     theme = Theme.first
     content = <<-STR
 <html>
@@ -72,6 +72,11 @@ namespace :db do
 
     theme.templates.create(
       :name => 'Homepage',
+      :template_type => TemplateType.template,
+      :content => content)
+
+    theme.templates.create(
+      :name => 'Single Page',
       :template_type => TemplateType.template,
       :content => content)
   end

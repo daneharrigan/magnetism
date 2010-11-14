@@ -9,9 +9,9 @@ jQuery(function($){
 		}
 	});
 
-	$('a[data-type=html]').bind('ajax:success',function(el, html, status){
-		$('body').prepend(html);
-	});
+	$('a[data-remote=true][data-type=html]').bind('ajax:success',
+		function(el, html, status){ $('body').prepend(html) }
+	);
 
 	$(document).keyup(function(event){
 		if(event.keyCode == 27)
