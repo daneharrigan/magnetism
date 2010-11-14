@@ -47,4 +47,20 @@ jQuery(function($){
 		Template.focus(this);
 		e.preventDefault();
 	});
+
+	$('li.active ol.toggle-content a').live('click', function(e){
+		var $li = $('#template-content > li.active');
+		// activate tab
+		$li.find('ol.toggle-content a').removeClass('active');
+		$(this).addClass('active');
+
+		// display appropriate view
+		var view = $(this).attr('data-view');
+		$li.find('form')
+			.removeClass('form-active')
+			.removeClass('code-active')
+			.addClass(view + '-active');
+
+		e.preventDefault();
+	});
 });

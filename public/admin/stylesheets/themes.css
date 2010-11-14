@@ -57,3 +57,10 @@
 	position: relative;
 	bottom: 2px;
 }
+.form-content, .code-content {
+	display: none;
+}
+.form-active .form-content,
+.code-active .code-content {
+	display: block;
+}
