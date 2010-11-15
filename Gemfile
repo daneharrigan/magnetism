@@ -20,4 +20,5 @@ group :test do
   gem 'ruby-debug19'
   gem 'database_cleaner', '0.6.0'
   gem 'factory_girl', '1.3.2'
+  gem 'cover_me', '1.0.0.rc4'
 end

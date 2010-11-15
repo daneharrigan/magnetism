@@ -56,8 +56,7 @@ jQuery(function($){
 
 		// display appropriate view
 		var view = $(this).attr('data-view');
-		$li.find('form')
-			.removeClass('form-active')
+		$li.removeClass('form-active')
 			.removeClass('code-active')
 			.addClass(view + '-active');
 

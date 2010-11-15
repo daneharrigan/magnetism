@@ -5,6 +5,7 @@ module Admin
     before_filter :authenticate
     helper_method :current_site
     layout :layout_selector
+    resources_configuration[:self][:route_prefix] = 'admin'
 
     # TODO DH: definitely add an around_filter to catch any
     # exceptions raised in an xhr request. maybe also catch

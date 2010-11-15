@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <title>Coverage Report</title>
+    <link href="report.css?0.6552450895082098" media="screen" rel="stylesheet" type="text/css" />
+    <link href="index.css?0.19412465454234062" media="screen" rel="stylesheet" type="text/css" />
+    <script src="jquery.js?0.9041470974607275"></script>
+    <script src="jquery.tablesorter.js?0.5435565625968429"></script>
+    <script>
+      $(function() {
+        
+        function filterByPercent() {
+          var p = $('#filter_by_percent').val();
+          if (p == 0 ) {
+            $('#main tbody tr').show();
+          } else if (p == 10) {
+            $('#main tbody tr.row').show();
+            $('#main tbody tr.10').hide();
+          } else if (p == 100) {
+            $('#main tbody tr.row').hide();
+            $('#main tbody tr.10').show();
+          } else {
+            $('#main tbody tr.row').hide();
+            var x = 0;
+            while (x < p) {
+              $('#main tbody tr.' + x).show();
+              x++;
+            }
+          }
+        }
+        
+        function filterByName(name) {
+          $('#main tbody tr:visible').each(function() {
+            if ($(this).attr('id').indexOf(name) != -1) {
+              $(this).show();
+            } else {
+              $(this).hide();
+            }
+          });
+        }
+        
+        $('#filter_by_percent').change(function(e) {
+          filterByPercent();
+          filterByName($('#filter_by_name').val());
+        });
+      
+        $('#filter_by_name').keyup(function(e) {
+          filterByPercent();
+          filterByName($(this).val());
+        });
+        
+        $("#main").tablesorter(); 
+      });
+    </script>
+  </head>
+  <body>
+    <div id='big_total' class='miss'>0%</div>
+    
+    <h1>Coverage Report</h1>
+    
+    <div id='filters'>
+      Filter:
+      <input type='text' id='filter_by_name'>
+      
+      Code Coverage Threshold:
+      <select id='filter_by_percent'>
+        <option value='0'>Show All</option>
+        <option value='1'><= 10% Coverage</option>
+        <option value='2'><= 20% Coverage</option>
+        <option value='3'><= 30% Coverage</option>
+        <option value='4'><= 40% Coverage</option>
+        <option value='5'><= 50% Coverage</option>
+        <option value='6'><= 60% Coverage</option>
+        <option value='7'><= 70% Coverage</option>
+        <option value='8'><= 80% Coverage</option>
+        <option value='9'><= 90% Coverage</option>
+        <option value='10'>< 100% Coverage</option>
+        <option value='100'>= 100% Coverage</option>
+      </select>
+    </div>
+
+    <table cellpadding='0' cellspacing='1'>
+      <tr>
+        <th>Legend</th>
+      </tr>
+      <tr>
+        
+        <td class='hit'>This file was tested 100%!</td>
+      </tr>
+      <tr>
+        <td class='near'>This file was tested >90%!</td>
+      </tr>
+      <tr>
+        <td class='miss'>This file was not tested nearly enough!</td>
+      </tr>
+    </table>
+    
+    <div>&nbsp;</div>
+
+    <table cellpadding="0" cellspacing='1' id='main'>
+      <thead>
+        <tr class='header'>
+          <th>File</th>
+          <th>Lines</th>
+          <th>Lines Of Code</th>
+          <th>Tested %</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        
+      </tbody>
+      
+      <tr class='header'>
+        <th>Total</th>
+        <th>0</th>
+        <th>0</th>
+        <th>0%</th>
+      </tr>
+    </table>
+    <p>Generated on: 2010-11-14 23:57:05 -0500</p>
+  </body>
+</html>

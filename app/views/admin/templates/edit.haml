@@ -1,6 +1,7 @@
-%li{ 'data-template-id' => resource.id }
-  = form_for [:admin, :manage, parent, resource], :html => {:class => 'form-active'} do |f|
-    .form-content
+/ - debugger
+%li.form-active{ 'data-template-id' => resource.id }
+  .form-content
+    = form_for [:admin, :manage, association_chain, resource].flatten do |f|
       .large-title
         %label.title Page Title
         %span.input 
@@ -23,9 +24,12 @@
         = link_to 'Add Field', '#'
         |
         = f.submit
-    .code-content
-      CODE
-  
-    %ol.toggle-content.tab-collection
-      %li= link_to 'Form View', '#', :class => 'tab bottom active', 'data-view' => 'form'
-      %li= link_to 'Code View', '#', :class => 'tab bottom', 'data-view' => 'code'
+  .code-content
+    = form_for [:admin, :manage, association_chain, resource].flatten do |f|
+      = f.text_area :content
+      .actions
+        = f.submit
+
+  %ol.toggle-content.tab-collection
+    %li= link_to 'Form View', '#', :class => 'tab bottom active', 'data-view' => 'form'
+    %li= link_to 'Code View', '#', :class => 'tab bottom', 'data-view' => 'code'
