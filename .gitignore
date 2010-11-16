@@ -5,3 +5,4 @@ tmp/**/*
 .rvmrc
 .rspec
 *.tmproj
+coverage*
