@@ -17,6 +17,9 @@ html, body {
 fieldset {
 	border: none;
 }
+ul, ol {
+  list-style: none;
+}
 p {
 	margin-bottom: 20px;
 }
@@ -194,7 +197,6 @@ a.new:active, a.new:hover {
 .selector li {
 	display: block;
 	padding: 0 20px;
-	list-style: none;
 	line-height: 25px;
 }
 .open-up ul {
@@ -262,7 +264,6 @@ a.new:active, a.new:hover {
 }
 .fields li {
 	position: relative;
-	list-style: none;
 }
 
 /* overlay windows */
