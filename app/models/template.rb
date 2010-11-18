@@ -5,6 +5,7 @@ class Template < ActiveRecord::Base
 
   belongs_to :theme
   belongs_to :template_type
+  has_many :fields
 
   scope :templates, lambda { where(:template_type_id => TemplateType.template.id) }
   scope :snippets, lambda { where(:template_type_id => TemplateType.snippet.id) }

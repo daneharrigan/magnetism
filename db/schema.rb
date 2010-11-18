@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101112205213) do
+ActiveRecord::Schema.define(:version => 20101118042524) do
+
+  create_table "fields", :force => true do |t|
+    t.string   "name"
+    t.integer  "field_type_id"
+    t.integer  "template_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pages", :force => true do |t|
     t.string   "title"
