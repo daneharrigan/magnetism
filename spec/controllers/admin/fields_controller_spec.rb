@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Admin::FieldsController do
   before(:each) do
     login_as Factory(:user)
-    template = Factory(:template)
+    @template = Factory(:template)
     @params = {
-      :theme_id => template.theme.id,
-      :template_id => template.id
+      :theme_id => @template.theme.id,
+      :template_id => @template.id
     }
   end
 
@@ -44,6 +44,35 @@ describe Admin::FieldsController do
 
     it 'creates a field' do
       lambda { post :create, @params }.should change(Field, :count).by(+1)
+    end
+
+    describe '#association_group' do
+      it 'returns an array of the theme, template and field' do
+        post :create, @params
+        field = Field.last
+        association_group = [field.template.theme, field.template, field].flatten
+        controller.association_group(field).should == association_group
+      end
+    end
+  end
+
+  describe '#destroy' do
+    before(:each) do
+      field = Factory(:field, :template => @template)
+      @params[:id] = field.id
+    end
+
+    it 'deletes a field' do
+      lambda { delete :destroy, @params }.should change(Field, :count).by(-1)
+    end
+
+    it 'does not render anything' do
+      delete :destroy, @params
+      response.body.strip.empty?.should == true
+    end
+
+    it 'returns a status of OK' do
+      response.status.should == 200
     end
   end
 end

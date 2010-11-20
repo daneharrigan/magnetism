@@ -8,4 +8,5 @@
       = f.label :field_type_id
       = f.select :field_type_id, options_from_collection_for_select(field_type_collection, :id, :name)
   .actions
+    = link_to 'Cancel', '#cancel', :class => 'cancel'
     = f.submit

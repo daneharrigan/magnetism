@@ -12,4 +12,16 @@ describe Field do
     before(:each) { Factory(:field) }
     it { should validate_uniqueness_of(:name).scoped_to(:template_id) }
   end
+
+  describe '#auto_position' do
+    let(:template) do
+      field = Factory(:field)
+      field.template
+    end
+
+    it 'sets the position attribute to the total number of fields for that template' do
+      field = Factory(:field, :template => template)
+      field.position.should == template.fields.count
+    end
+  end
 end

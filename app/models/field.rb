@@ -4,4 +4,11 @@ class Field < ActiveRecord::Base
 
   belongs_to :template
   belongs_to :field_type
+
+  before_create :auto_position
+
+  private
+    def auto_position
+      write_attribute :position, template.fields.count + 1
+    end
 end

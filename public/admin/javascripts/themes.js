@@ -26,6 +26,9 @@ var Template = {
   },
   add_field: function(html){
     $('#template-content > li.active div.form-content ol.fields') .append(html);
+  },
+  remove_field: function(link){
+    $(link).parents('li:first').remove();
   }
 };
 
@@ -69,5 +72,9 @@ jQuery(function($){
   $('#new_field').live('ajax:success', function(el, html, status){
     Template.add_field(html);
     $('#overlay').remove();
+  });
+
+  $('a[data-method=delete]').live('ajax:success', function(el, html, status){
+    Template.remove_field(this);
   });
 });
