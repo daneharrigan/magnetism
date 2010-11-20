@@ -23,6 +23,9 @@ var Template = {
   },
   link_id: function(link){
     return link.href.match(/(\d+)+(\/edit)$/)[1];
+  },
+  add_field: function(html){
+    $('#template-content > li.active div.form-content ol.fields') .append(html);
   }
 };
 
@@ -61,5 +64,10 @@ jQuery(function($){
       .addClass(view + '-active');
 
     e.preventDefault();
+  });
+
+  $('#new_field').live('ajax:success', function(el, html, status){
+    Template.add_field(html);
+    $('#overlay').remove();
   });
 });

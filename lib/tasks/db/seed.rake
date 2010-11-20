@@ -3,7 +3,7 @@ namespace :db do
     Rake::Task['db:user'].invoke
     Rake::Task['db:site'].invoke
   end
-  
+
   # all of the peices being seeded. this keeps the
   # rake tasks clean and with a single purpose
 
@@ -60,7 +60,7 @@ namespace :db do
     Rake::Task['db:templates'].invoke
   end
 
-  task :templates => :template_types do
+  task :templates => [:template_types, :field_types] do
     theme = Theme.first
     content = <<-STR
 <html>
@@ -70,15 +70,29 @@ namespace :db do
 </html>
     STR
 
-    theme.templates.create(
+    homepage = theme.templates.create(
       :name => 'Homepage',
       :template_type => TemplateType.template,
       :content => content)
 
-    theme.templates.create(
+    page = theme.templates.create(
       :name => 'Single Page',
       :template_type => TemplateType.template,
       :content => content)
+
+    # homepage fields
+    homepage.fields.create(
+      :name => 'Headline',
+      :field_type => FieldType.text_field)
+
+    homepage.fields.create(
+      :name => 'Features',
+      :field_type => FieldType.large_text_field)
+
+    # page fields
+    page.fields.create(
+      :name => 'Narrative',
+      :field_type => FieldType.large_text_field)
   end
 
   task :template_types do
@@ -86,5 +100,10 @@ namespace :db do
     TemplateType.create(:name => 'Snippet')
     TemplateType.create(:name => 'JavaScript')
     TemplateType.create(:name => 'Stylesheet')
+  end
+
+  task :field_types do
+    FieldType.create(:name => 'Text field')
+    FieldType.create(:name => 'Large text field')
   end
 end

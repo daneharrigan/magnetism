@@ -6,6 +6,7 @@
         %span.input
 
       %ol.fields
+        = render :partial => 'admin/fields/item', :collection => resource.fields, :as => :field
 
       .actions
         = link_to 'Add Field', new_polymorphic_path([:admin, :manage, association_chain, resource, :field].flatten), :remote => true, :method => :get, 'data-type' => :html

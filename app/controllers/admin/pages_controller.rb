@@ -28,7 +28,7 @@ module Admin
       end
 
       def parent_page
-        @_parent_page ||= current_site.pages.find(params[:parent_id]) if params[:parent_id]
+        @parent_page ||= current_site.pages.find(params[:parent_id]) if params[:parent_id]
       end
   end
 end

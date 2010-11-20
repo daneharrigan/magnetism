@@ -1,302 +1,302 @@
 /* html5 elements */
 header, footer, section {
-	display: block;
+  display: block;
 }
 
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 html, body {
-	background: #333;
-	color: #666;
-	font: 14px/16px Helvetica, Arial, sans-serif;
-	text-align: center;
-	min-width: 900px;
+  background: #333;
+  color: #666;
+  font: 14px/16px Helvetica, Arial, sans-serif;
+  text-align: center;
+  min-width: 900px;
 }
 fieldset {
-	border: none;
+  border: none;
 }
 ul, ol {
   list-style: none;
 }
 p {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 h1 {
-	position: absolute;
-	top: 0;
-	left: 0;
-	color: #FFF;
-	font-weight: bold;
-	font-size: 14px;
-	padding: 0 20px;
-	line-height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0 20px;
+  line-height: 50px;
 }
 #overlay h2,
 #content > h2,
 #side-bar h2 {
-	font-size: 18px;
-	margin-bottom: 20px;
-	background: #e2f1f9;
-	padding: 10px 20px;	
+  font-size: 18px;
+  margin-bottom: 20px;
+  background: #e2f1f9;
+  padding: 10px 20px;  
 }
 .container {
-/*	width: 800px; */
-	margin: 0 auto;
-	text-align: left;
-	position: relative;
+/*  width: 800px; */
+  margin: 0 auto;
+  text-align: left;
+  position: relative;
 }
 a:link, a:visited {
-	text-decoration: none;
-	color: #333;
+  text-decoration: none;
+  color: #333;
 }
 a:active, a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 header {
-	background: #000;
-	height: 100px;
+  background: #000;
+  height: 100px;
 }
 footer p {
-	padding: 20px;
-	color: #AAA;
+  padding: 20px;
+  color: #AAA;
 }
 footer div.container {
-	text-align: right;
+  text-align: right;
 }
 footer a:link,
 footer a:visited {
-	color: #FFF;
+  color: #FFF;
 }
 section {
-	background: #FFF;
+  background: #FFF;
 }
 .notice, .failure, .success {
-	font-style: italic;
-	font-weight: bold;
-	text-align: center;
-	padding: 10px 40px;
-	margin-bottom: 20px;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 40px;
+  margin-bottom: 20px;
 }
 .notice {
-	background: #FFD;
-	border: 1px solid #FC0;
+  background: #FFD;
+  border: 1px solid #FC0;
 }
 .failure {
-	background: #fcc;
-	border: 1px solid #f99;
+  background: #fcc;
+  border: 1px solid #f99;
 }
 .success {
-	border: 1px solid #00a14c;
-	background: #79f7b4;
+  border: 1px solid #00a14c;
+  background: #79f7b4;
 }
 #settings {
-	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 0 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 10px;
 }
 #settings li {
-	padding: 0 10px;
-	line-height: 50px;
+  padding: 0 10px;
+  line-height: 50px;
 }
 #mainNav li, #settings li {
-	display: inline;
+  display: inline;
 }
 #settings a:link, #settings a:visited {
-	color: #FFF;
+  color: #FFF;
 }
 #mainNav {
-	height: 50px;
-	background: #198fd3;
-	position: relative;
-	top: 50px;
+  height: 50px;
+  background: #198fd3;
+  position: relative;
+  top: 50px;
 }
 #mainNav ul {
-	padding: 0 20px;
+  padding: 0 20px;
 }
 #mainNav a:link, #mainNav a:visited {
-	position: relative;
-	top: 10px;
+  position: relative;
+  top: 10px;
 }
 #content {
-	padding: 20px;
+  padding: 20px;
 }
 .tab:link, .tab:visited {
-	display: inline-block;
-	padding: 0 18px;
-	line-height: 38px;
-	background: #5bb4e7;
-	color: #bfe6fc;
-	border-radius: 10px 10px 0 0;	
-	border: 2px solid #5bb4e7;
-	border-bottom: none;
+  display: inline-block;
+  padding: 0 18px;
+  line-height: 38px;
+  background: #5bb4e7;
+  color: #bfe6fc;
+  border-radius: 10px 10px 0 0;  
+  border: 2px solid #5bb4e7;
+  border-bottom: none;
 }
 .tab-collection a.active:link,
 .tab-collection a.active:visited {
-	background: #FFF;
-	color: #000;
-	border-color: #FFF;
+  background: #FFF;
+  color: #000;
+  border-color: #FFF;
 }
 a.new:link, a.new:visited {
-	padding: 10px 20px;
-	background: #ebd158;
-	color: #FFF;
-	font-weight: bold;
-	margin: 20px 0;
-	display: inline-block;
+  padding: 10px 20px;
+  background: #ebd158;
+  color: #FFF;
+  font-weight: bold;
+  margin: 20px 0;
+  display: inline-block;
 }
 a.new:active, a.new:hover {
-	background: #ecc71b;
+  background: #ecc71b;
 }
 
 /* site selector */
 .selector {
-	position: relative;
-	z-index: 10;
-	display: inline-block;
+  position: relative;
+  z-index: 10;
+  display: inline-block;
 }
 .selector ul {
-	display: none;
-	position: absolute;
-	background: #004c78;
-	width: 100%;
-	left: 0;
-	z-index: 1;
+  display: none;
+  position: absolute;
+  background: #004c78;
+  width: 100%;
+  left: 0;
+  z-index: 1;
 }
 .selector h2 {
-	line-height: 30px;
-	color: #FFF;
-	border-radius: 20px;
-	cursor: pointer;
-	position: relative;
-	font-size: 14px;
-	z-index: 2;
-	background: #0066a1;
-	padding: 0 13px 0 20px;
+  line-height: 30px;
+  color: #FFF;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+  font-size: 14px;
+  z-index: 2;
+  background: #0066a1;
+  padding: 0 13px 0 20px;
 }
 .selector h2 span {
-	background: url(/admin/images/site-arrow.gif) no-repeat;
-	background-position: right 6px;
-	display: block;
+  background: url(/admin/images/site-arrow.gif) no-repeat;
+  background-position: right 6px;
+  display: block;
 }
 .selector:hover h2 span,
 #template-list div.active h2 span,
 #mainNav div.active h2 span {
-	background-position: right -18px;
+  background-position: right -18px;
 }
 #template-list div.active ul,
 #mainNav div.active ul {
-	display: block;
+  display: block;
 }
 .selector a:link, .selector a:visited {
-	color: #FFF;
+  color: #FFF;
 }
 #mainNav .selector li,
 .selector li {
-	display: block;
-	padding: 0 20px;
-	line-height: 25px;
+  display: block;
+  padding: 0 20px;
+  line-height: 25px;
 }
 .open-up ul {
-	bottom: 0;
-	border-radius: 20px;
-	padding: 10px 0 40px;
+  bottom: 0;
+  border-radius: 20px;
+  padding: 10px 0 40px;
 }
 #site-selector ul,
 .open-down ul {
-	top: 0;
-	border-radius: 20px;
-	padding: 30px 0 20px;
-	
+  top: 0;
+  border-radius: 20px;
+  padding: 30px 0 20px;
 }
 #site-selector {
-	position: absolute;
-	right: 20px;
-	top: 10px;	
-	width: 160px;
+  position: absolute;
+  right: 20px;
+  top: 10px;  
+  width: 160px;
 }
 
 #content input[type=text],
 #overlay input[type=text],
 #content textarea, span.textarea, .input {
-	font: 14px/16px Helvetica, Arial, sans-serif;
-	padding: 2px 4px;
-	width: 72%;
-	border: 1px inset #CCC;
-	width: 75%;
-	display: inline-block;
-	height: 20px;
+  font: 14px/16px Helvetica, Arial, sans-serif;
+  padding: 2px 4px;
+  width: 72%;
+  border: 1px inset #CCC;
+  width: 75%;
+  display: inline-block;
+  height: 20px;
 }
 #content textarea, span.textarea {
-	height: 200px;
+  height: 200px;
 }
 .large-title .input,
 #overlay .large-title input,
 #content .large-title input {
-	font-size: 24px;
-	line-height: 24px;
-	height: 24px;
+  font-size: 24px;
+  line-height: 24px;
+  height: 24px;
 }
 .large-title label {
-	font-size: 24px;
-	font-weight: normal;
+  font-size: 24px;
+  font-weight: normal;
 }
 .large-title label,
 .fields label {
-	display: inline-block;
-	width: 120px;
+  display: inline-block;
+  width: 120px;
 }
 #overlay input[type=text] {
-	width: 360px;
+  width: 360px;
 }
 .actions {
-	line-height: 50px;
-	text-align: right;
+  line-height: 50px;
+  text-align: right;
 }
 .fields li.textarea label {
-	position: absolute;
-	top: 10px;
+  position: absolute;
+  top: 10px;
 }
 .fields li.textarea .textarea {
-	margin-left: 124px;
+  margin-left: 124px;
 }
 .fields li {
-	position: relative;
+  position: relative;
+  margin-top: 5px;
 }
 
 /* overlay windows */
 #overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	background: rgba(0, 0, 0, 0.3);
-	z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 }
 #overlay-window {
-	border: 2px solid #198FD3;
-	background: #FFF;
-	width: 500px;
-	text-align: left;
-	padding: 20px;
-	margin: 150px auto;
-	-webkit-box-shadow: 0 0 15px #555;
+  border: 2px solid #198FD3;
+  background: #FFF;
+  width: 500px;
+  text-align: left;
+  padding: 20px;
+  margin: 150px auto;
+  -webkit-box-shadow: 0 0 15px #555;
 }
 #overlay .error {
-	border-color: #F33;
-	background: #FEE;
+  border-color: #F33;
+  background: #FEE;
 }
 #overlay .error h2 {
-	background: #FBB;
+  background: #FBB;
 }
 .try-again {
-	text-align: center;
+  text-align: center;
 }
 
 /* extras */
 .clear {
-	clear: both;
+  clear: both;
 }

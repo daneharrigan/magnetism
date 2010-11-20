@@ -6,11 +6,11 @@ module Admin
 
     protected
       def site_collection
-        @_site_collection ||= Site.all
+        @site_collection ||= Site.all
       end
 
       def theme_collection
-        @_theme_collection ||= Theme.all
+        @theme_collection ||= Theme.all
       end
   end
 end
