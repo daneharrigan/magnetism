@@ -6,3 +6,4 @@ tmp/**/*
 .rspec
 *.tmproj
 coverage*
+*.swp
