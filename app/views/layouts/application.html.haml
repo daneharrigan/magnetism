@@ -3,6 +3,7 @@
   %head
     %title Magnetism
     = javascript_include_tag '/admin/javascripts/jquery'
+    = javascript_include_tag '/admin/javascripts/jquery-ui'
     = javascript_include_tag '/admin/javascripts/rails'
     = javascript_include_tag '/admin/javascripts/application'
     = section_javascript_include_tag
@@ -19,4 +20,4 @@
             %div{:class => flash.keys.first}= flash.values.first
 
           = yield
-    / = render 'admin/footer'
+    = render 'admin/footer'

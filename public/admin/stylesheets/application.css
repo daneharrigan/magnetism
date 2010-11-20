@@ -61,8 +61,6 @@ header {
 footer p {
   padding: 20px;
   color: #AAA;
-}
-footer div.container {
   text-align: right;
 }
 footer a:link,
