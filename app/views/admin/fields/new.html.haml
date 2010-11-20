@@ -1,1 +1,7 @@
 %h2 New Field
+= form_for [:admin, :manage, association_chain, resource].flatten do |f|
+  .large-title
+    = f.label :name
+    = f.text_field :name
+  .actions
+    = f.submit
