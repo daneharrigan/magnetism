@@ -37,9 +37,9 @@ describe Admin::FieldsController do
       }
     end
 
-    it 'renders _item partial' do
+    it 'renders _span partial' do
       post :create, @params
-      response.should render_template('admin/fields/_item')
+      response.should render_template('admin/fields/_span')
     end
 
     it 'creates a field' do

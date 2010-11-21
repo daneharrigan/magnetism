@@ -10,6 +10,7 @@ describe Template do
   it { should belong_to(:template_type) }
   it { should belong_to(:theme) }
   it { should have_many(:fields) }
+  it { should have_many(:pages) }
 
   context 'when a template exists' do
     before(:each) { Factory(:template) }

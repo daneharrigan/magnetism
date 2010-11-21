@@ -1,9 +1,10 @@
 class Page < ActiveRecord::Base
   belongs_to :site
   belongs_to :parent, :class_name => 'Page'
+  belongs_to :template
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
 
-  validates_presence_of :title, :site_id
+  validates_presence_of :title, :site_id, :template_id
   # validates_presence_of :publish_at # if the page is going active
   validates_uniqueness_of :title, :scope => [:site_id, :parent_id]
   validates_uniqueness_of :slug, :scope => [:site_id, :parent_id]

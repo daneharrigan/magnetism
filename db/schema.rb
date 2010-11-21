@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20101120064931) do
     t.string   "slug"
     t.integer  "site_id"
     t.integer  "parent_id"
+    t.integer  "template_id"
     t.datetime "publish_at"
     t.datetime "created_at"
     t.datetime "updated_at"

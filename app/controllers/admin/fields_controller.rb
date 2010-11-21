@@ -7,7 +7,7 @@ module Admin
 
     def create
       field = parent.fields.create(params[:field])
-      render :partial => 'item', :locals => { :field => field }
+      render :partial => 'span', :locals => { :field => field }
     end
 
     def destroy

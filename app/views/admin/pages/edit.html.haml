@@ -3,6 +3,8 @@
   .large-title
     = f.label :title, 'Page Title'
     = f.text_field :title
+  %ol.fields
+    = render :partial => 'admin/fields/item', :collection => resource.template.fields, :as => :field
   .actions
     = link_to 'Cancel', admin_pages_path
     = f.submit

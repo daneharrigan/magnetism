@@ -3,4 +3,5 @@ Factory.define :page do |f|
   f.sequence(:slug) { |n| "page-title-#{n}" }
   f.publish_at 1.hour.ago
   f.association :site
+  f.association :template, :factory => :template_with_generic_template_type
 end

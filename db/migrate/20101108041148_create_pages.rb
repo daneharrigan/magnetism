@@ -5,8 +5,8 @@ class CreatePages < ActiveRecord::Migration
       t.string :slug
       t.integer :site_id
       t.integer :parent_id
+      t.integer :template_id
       t.datetime :publish_at
-      # t.integer :template_id
       # t.boolean :blog, :default => false
       # t.string :uri_matcher
       # t.boolean :active, :default => false

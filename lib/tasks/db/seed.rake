@@ -28,19 +28,25 @@ namespace :db do
 
   task :pages do
     site = Site.first
+    theme = Theme.first
+    single_page_template = theme.templates.first(:conditions => { :name => 'Single Page' })
+    homepage_template = theme.templates.first(:conditions => { :name => 'Homepage' })
 
     homepage = site.pages.create(
       :title => 'Homepage',
       :slug => '/',
-      :publish_at => 1.hour.ago)
+      :publish_at => 1.hour.ago,
+      :template => homepage_template)
 
     homepage.pages << site.pages.create(
       :title => 'Page Title - 1',
-      :publish_at => 1.hour.ago)
+      :publish_at => 1.hour.ago,
+      :template => single_page_template)
 
     homepage.pages << site.pages.create(
       :title => 'Page Title - 2',
-      :publish_at => 1.hour.ago)
+      :publish_at => 1.hour.ago,
+      :template => single_page_template)
 
     ## defining page so i dont need to chain
     ## over and over for sub pages
@@ -48,7 +54,8 @@ namespace :db do
 
     page.pages << site.pages.create(
       :title => 'Page Title - 3',
-      :publish_at => 1.hour.ago)
+      :publish_at => 1.hour.ago,
+      :template => single_page_template)
 
     site.homepage = homepage
     site.save!
