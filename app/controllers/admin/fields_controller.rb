@@ -12,7 +12,7 @@ module Admin
 
     def destroy
       resource.destroy
-      render :nothing => true, :status => :ok
+      render :nothing => true
     end
 
     def field_type_collection

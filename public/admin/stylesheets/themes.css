@@ -1,64 +1,69 @@
 #side-bar {
-	float: right;
-	width: 250px;
-	background: #FFF;
+  float: right;
+  width: 250px;
+  background: #FFF;
 }
 #side-bar h2 {
-	font-size: 14px;
-	cursor: pointer;
+  font-size: 14px;
+  cursor: pointer;
 }
 #side-bar ul {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 #side-bar li {
-	margin-bottom: 5px;
-	padding: 0 20px;
+  margin-bottom: 5px;
+  padding: 0 20px;
 }
 #tabs {
-	position: relative;
-	border-bottom: 2px solid #5BB4E7;
-	margin-right: 270px;
-	height: 38px;
+  position: relative;
+  border-bottom: 2px solid #5BB4E7;
+  margin-right: 270px;
+  height: 38px;
 }
 .toggle-content li,
 #tabs li {
-	display: inline-block;
+  display: inline-block;
 }
 #tabs li {
-	margin-right: 5px;
-	
+  margin-right: 5px;
+  
 }
 #tabs a.active:link,
 #tabs a.active:visited,
 .toggle-content a.active:link,
 .toggle-content a.active:visited {
-	border-color: #5BB4E7;
+  border-color: #5BB4E7;
 }
 #template-content {
-	padding: 20px;
-	margin-right: 270px;
+  padding: 20px;
+  margin-right: 270px;
 }
 #template-content > li {
-	display: none;
+  display: none;
 }
 #template-content > li.active {
-	display: block;
+  display: block;
 }
 .toggle-content {
-	border-top: 2px solid #5BB4E7;
-	text-align: right;
+  border-top: 2px solid #5BB4E7;
+  text-align: right;
 }
 .bottom:link, .bottom:visited {
-	border-radius: 0 0 10px 10px;	
-	border: 2px solid #5bb4e7;
-	border-top: none;
-	position: relative;
-	bottom: 2px;
+  border-radius: 0 0 10px 10px;  
+  border: 2px solid #5bb4e7;
+  border-top: none;
+  position: relative;
+  bottom: 2px;
 }
 .form-content, .code-content {
-	display: none;
+  display: none;
 }
 .form-active .form-content,
 .code-active .code-content {
-	display: block;
+  display: block;
+}
+.fields .placeholder {
+  height: 25px;
+  background: #eee;
+  border: 1px dashed #aaa;
 }

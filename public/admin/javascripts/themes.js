@@ -9,6 +9,14 @@ var Template = {
 
     $('#tabs').append($tab);
     $('#template-content').append(html);
+
+    var $fields = $('ol.fields');
+    $fields.sortable({
+      handle: 'a.sort',
+      placeholder: 'placeholder',
+      stop: Template.sort_fields
+    });
+    $fields.disableSelection();
   },
   focus: function(link){
     var link_id = Template.link_id(link);
@@ -29,6 +37,12 @@ var Template = {
   },
   remove_field: function(link){
     $(link).parents('li:first').remove();
+  },
+  sort_fields: function(){
+    var $ol = $(this),
+        params = $ol.sortable('serialize', { key: 'position[]' }),
+        $form = $ol.parents('form');
+    $.ajax({ url: $form.attr('action'), data: params, type: 'put' });
   }
 };
 
