@@ -6,10 +6,10 @@
   .large-title
     = f.label :title, 'Page Title'
     = f.text_field :title
-  / %ol.fields
-  /   %li
-  /     = f.label :template_id
-  /     = f.select :template_id, @templates
+  %ol.fields
+    %li
+      = f.label :template_id
+      = f.select :template_id, options_from_collection_for_select(template_collection, :id, :name)
   /   - unless @parent.try(:blog?)
   /     %li
   /       = f.label :blog, 'Is this a blog section?'

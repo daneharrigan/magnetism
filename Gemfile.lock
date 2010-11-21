@@ -31,7 +31,6 @@ GEM
     archive-tar-minitar (0.5.2)
     arel (1.0.1)
       activesupport (~> 3.0.0)
-    bcrypt-ruby (2.1.2)
     builder (2.1.2)
     chronic (0.2.3)
       hoe (>= 1.2.1)
@@ -45,9 +44,6 @@ GEM
       hashie
     daemons (1.0.10)
     database_cleaner (0.6.0)
-    devise (1.1.2)
-      bcrypt-ruby (~> 2.1.2)
-      warden (~> 0.10.7)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -124,8 +120,6 @@ GEM
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
-    warden (0.10.7)
-      rack (>= 1.0.0)
     yamler (0.1.0)
 
 PLATFORMS
@@ -136,7 +130,6 @@ DEPENDENCIES
   clearance (= 0.9.0.rc6)
   cover_me (= 1.0.0.rc4)
   database_cleaner (= 0.6.0)
-  devise (= 1.1.2)
   factory_girl (= 1.3.2)
   haml (= 3.0.23)
   inherited_resources (= 1.1.2)

@@ -1,7 +1,7 @@
 module Admin
   class PagesController < MagnetismController
     actions :all
-    helper_method :homepage, :parent_page
+    helper_method :homepage, :parent_page, :template_collection
     layout_options :overlay => :new, :none => :destroy
 
     alias_method :show, :redirect_to_edit
@@ -29,6 +29,10 @@ module Admin
 
       def parent_page
         @parent_page ||= current_site.pages.find(params[:parent_id]) if params[:parent_id]
+      end
+
+      def template_collection
+        @template_collection ||= current_site.theme.templates
       end
   end
 end

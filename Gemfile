@@ -5,7 +5,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'haml', '3.0.23'
 gem 'chronic', '0.2.3'
 gem 'clearance', '0.9.0.rc6'
-gem 'devise', '1.1.2'
+#gem 'devise', '1.1.2'
 gem 'inherited_resources', '1.1.2'
 
 group :development do
