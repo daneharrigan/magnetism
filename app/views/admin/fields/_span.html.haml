@@ -1,5 +1,6 @@
 %li{ :class => field_class(field), :id => "field-#{field.id}" }
   = label_tag field.name
   = field_tag(field, :span)
-  = link_to '(Delete)', polymorphic_path([:admin, :manage, association_group(field)].flatten), :remote => true, :method => :delete
-  = link_to '(Sort)', '#sort', :class => 'sort'
+  = link_to '(E)', edit_polymorphic_path([:admin, :manage, association_group(field)].flatten), :remote => true, 'data-type' => :html
+  = link_to '(D)', polymorphic_path([:admin, :manage, association_group(field)].flatten), :remote => true, :method => :delete
+  = link_to '(S)', '#sort', :class => 'sort'

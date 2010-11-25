@@ -75,4 +75,20 @@ describe Admin::FieldsController do
       response.status.should == 200
     end
   end
+
+  describe '#edit' do
+    before(:each) do
+      field = Factory(:field, :template => @template)
+      @params[:id] = field.id
+      get :edit, @params
+    end
+
+    it 'renders the edit template' do
+      response.should render_template('admin/fields/edit')
+    end
+
+    it 'renders the overlay layout' do
+      response.should render_template('layouts/overlay')
+    end
+  end
 end

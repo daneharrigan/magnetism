@@ -14,8 +14,15 @@ describe FieldHelper do
     end
 
     context 'when returning a form field' do
-      it 'should return a text input'
-      it 'should return a textarea'
+      it 'should return a text input'do
+        field = Factory(:field_with_data, :field_type => Factory(:field_type_text_field))
+        field_tag(field).should == %{<input name="" value="" type="text" id="" />}
+      end
+
+      it 'should return a textarea' do
+        field = Factory(:field_with_data, :field_type => Factory(:field_type_large_text_field))
+        field_tag(field).should == %{<textarea name="" value="" id=""></textarea>}
+      end
     end
   end
 

@@ -1,5 +1,5 @@
 %h2 Edit Page
-= form_for [:admin, resource] do |f|
+= form_for [:admin, resource], :html => {:id => 'page-form'} do |f|
   .large-title
     = f.label :title, 'Page Title'
     = f.text_field :title

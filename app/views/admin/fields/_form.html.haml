@@ -1,0 +1,11 @@
+= form_for [:admin, :manage, association_chain, resource].flatten, :remote => true, :html => { 'data-type' => :html } do |f|
+  .large-title
+    = f.label :name
+    = f.text_field :name
+  %ol.fields
+    %li
+      = f.label :field_type_id
+      = f.select :field_type_id, options_from_collection_for_select(field_type_collection, :id, :name)
+  .actions
+    = link_to 'Cancel', '#cancel', :class => 'cancel'
+    = f.submit

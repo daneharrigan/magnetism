@@ -1,26 +1,30 @@
 #pages li li {
-	padding-left: 20px;
+  padding-left: 20px;
 }
 #homepage .page {
-	background: #FFD;
-	border: 1px solid #FC0;
+  background: #FFD;
+  border: 1px solid #FC0;
 }
 #homepage .page a:link,
 #homepage .page a:visited {
-	font-weight: bold;
+  font-weight: bold;
 }
 .page {
-	position: relative;
-	line-height: 40px;
-	padding: 0 10px;
+  position: relative;
+  line-height: 40px;
+  padding: 0 10px;
 }
 .page .actions {
-	position: absolute;
-	right: 10px;
-	top: 0;
+  position: absolute;
+  right: 10px;
+  top: 0;
 }
 .page .selector {
-	width: 120px;
+  width: 120px;
 }
 
-/* form fields */
+/* edit view */
+#page-form {
+  margin-right: 270px;
+  padding-left: 20px;
+}

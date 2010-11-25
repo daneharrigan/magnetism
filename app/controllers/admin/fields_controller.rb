@@ -1,8 +1,8 @@
 module Admin
   class FieldsController < MagnetismController
     actions :all, :except => [:index, :show]
-    layout_options :overlay => :new
     belongs_to :theme, :template
+    layout_options :overlay => [:edit, :new]
     helper_method :field_type_collection, :association_group
 
     def create
