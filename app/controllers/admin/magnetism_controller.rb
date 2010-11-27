@@ -1,52 +1,8 @@
-#require 'layout_options'
-
-module LayoutOptions
-  def self.included(controller)
-    controller.send(:extend, LayoutOptions::ClassMethods)
-    controller.send(:layout, :layout_options_selector)
-  end
-
-  def layout_options_selector
-    layout_options = LayoutOptions::Storage[controller_name] || {}
-    no_layout = layout_options.delete(:none) || []
-    no_layout = [no_layout] unless Array === no_layout
-    action = action_name.to_sym
-
-    layout_options.each do |key, values|
-      values = [values] unless Array === values
-      return key.to_s if values.include?(action)
-    end
-
-    return no_layout.include?(action) ? false : 'application'
-  end
-
-  module ClassMethods
-    def layout_options(args={})
-      LayoutOptions::Storage[controller_name] = args
-    end
-  end
-
-  class Storage
-    class << self
-      def[](key)
-        @storage ||= {}
-        @storage[key]
-      end
-
-      def []=(key, value)
-        @storage ||= {}
-        @storage[key] = value
-      end
-    end
-  end
-end
-
-######################################################
+require 'layout_options'
 
 module Admin
   class MagnetismController < InheritedResources::Base
     include Clearance::Authentication
-    include ::LayoutOptions
 
     before_filter :authenticate
     helper_method :current_site
