@@ -7,7 +7,7 @@ gem 'chronic', '0.2.3'
 gem 'clearance', '0.9.0.rc6'
 #gem 'devise', '1.1.2'
 gem 'inherited_resources', '1.1.2'
-gem 'layout_options', '~> 0.1'
+gem 'layout_options', '~> 0.2'
 
 group :development do
   gem 'mongrel', '1.2.0.pre2'

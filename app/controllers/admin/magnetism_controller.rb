@@ -1,5 +1,3 @@
-require 'layout_options'
-
 module Admin
   class MagnetismController < InheritedResources::Base
     include Clearance::Authentication
