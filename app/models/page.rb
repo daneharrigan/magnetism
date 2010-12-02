@@ -5,16 +5,17 @@ class Page < ActiveRecord::Base
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
 
   validates_presence_of :title, :site_id, :template_id
-  # validates_presence_of :publish_at # if the page is going active
   validates_uniqueness_of :title, :scope => [:site_id, :parent_id]
   validates_uniqueness_of :slug, :scope => [:site_id, :parent_id]
 
   before_save :generate_slug, :if => Proc.new { |p| !p.slug? }
   before_create :assign_parent, :if => Proc.new { |p| !p.parent_id? }
 
-  # belongs_to :template
+  delegate :fields, :to => :template
+
   # has_many :data_sets, :dependent => :destroy
 
+  # validates_presence_of :publish_at # if the page is going active
   # validates_presence_of :template_id
   # validates_format_of :uri_matcher, :with => /\A[a-z\/\-\:]+\z/, :allow_nil => true
 

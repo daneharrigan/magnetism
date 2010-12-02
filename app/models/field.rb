@@ -4,8 +4,14 @@ class Field < ActiveRecord::Base
 
   belongs_to :template
   belongs_to :field_type
+  has_many :data
 
   before_create :auto_position
+
+  def value
+    # will need to do Page.current or something like that
+    data.first(:conditions => { :page_id => 1 }).try(:value)
+  end
 
   private
     def auto_position

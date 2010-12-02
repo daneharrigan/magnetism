@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Field do
   it { should belong_to(:template) }
   it { should belong_to(:field_type) }
+  it { should have_many(:data) }
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:template_id) }
@@ -14,14 +15,19 @@ describe Field do
   end
 
   describe '#auto_position' do
-    let(:template) do
-      field = Factory(:field)
-      field.template
-    end
+    let(:template) { Factory(:field).template }
 
     it 'sets the position attribute to the total number of fields for that template' do
       field = Factory(:field, :template => template)
       field.position.should == template.fields.count
+    end
+  end
+
+  describe '#value' do
+    it 'returns the value of the entry, scoped to the page' do
+      field = Factory(:field)
+      debugger
+      ""
     end
   end
 end

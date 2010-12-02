@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101120064931) do
+ActiveRecord::Schema.define(:version => 20101202043941) do
+
+  create_table "data", :force => true do |t|
+    t.integer  "field_id"
+    t.integer  "page_id"
+    t.string   "entry_type"
+    t.integer  "entry_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "field_types", :force => true do |t|
     t.string   "name"
@@ -23,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20101120064931) do
     t.integer  "field_type_id"
     t.integer  "template_id"
     t.integer  "position"
+    t.string   "data_type"
+    t.integer  "data_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,6 +55,13 @@ ActiveRecord::Schema.define(:version => 20101120064931) do
     t.boolean  "production",  :default => false
     t.integer  "theme_id"
     t.integer  "homepage_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "string_data", :force => true do |t|
+    t.integer  "data_id"
+    t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
