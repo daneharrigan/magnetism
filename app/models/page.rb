@@ -1,4 +1,6 @@
 class Page < ActiveRecord::Base
+  include CurrentObject
+
   belongs_to :site
   belongs_to :parent, :class_name => 'Page'
   belongs_to :template

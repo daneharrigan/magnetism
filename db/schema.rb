@@ -32,8 +32,6 @@ ActiveRecord::Schema.define(:version => 20101202043941) do
     t.integer  "field_type_id"
     t.integer  "template_id"
     t.integer  "position"
-    t.string   "data_type"
-    t.integer  "data_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -61,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20101202043941) do
 
   create_table "string_data", :force => true do |t|
     t.integer  "data_id"
+    t.integer  "page_id"
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"

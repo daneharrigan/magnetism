@@ -10,7 +10,8 @@ class Field < ActiveRecord::Base
 
   def value
     # will need to do Page.current or something like that
-    data.first(:conditions => { :page_id => 1 }).try(:value)
+    entry = data.first(:conditions => { :page_id => Page.current.id }).try(:entry)
+    entry ? entry.value : nil
   end
 
   private

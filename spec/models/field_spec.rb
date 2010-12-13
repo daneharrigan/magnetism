@@ -25,9 +25,15 @@ describe Field do
 
   describe '#value' do
     it 'returns the value of the entry, scoped to the page' do
+      page = Factory(:page)
       field = Factory(:field)
-      debugger
-      ""
+      entry = Factory(:string_datum)
+
+      page.template.fields << field
+      field.data.create(:page => page, :entry => entry)
+
+      page.current!
+      field.value.should == entry.value
     end
   end
 end

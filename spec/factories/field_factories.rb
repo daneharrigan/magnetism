@@ -3,6 +3,3 @@ Factory.define :field do |f|
   f.association :template
   f.association :field_type
 end
-
-Factory.define :field_with_data, :parent => :field do |f|
-end
