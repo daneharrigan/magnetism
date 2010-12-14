@@ -14,17 +14,22 @@ module FieldHelper
     return 'textarea' if field.field_type == FieldType.large_text_field
   end
 
+  def field_test_it
+    "test-it"
+  end
+
   private
     def span_tag(field, tag_name)
       content_tag(:span, nil, :class => tag_name)
     end
 
     def input_tag(field, tag_name)
+      name = "page[field][#{field.input_name}]"
       case tag_name
         when :input
-          text_field_tag("page[field][#{field.field_name}]")
+          text_field_tag(name, field.value)
         when :textarea
-          text_area_tag(:something, :something2)
+          text_area_tag(name, field.value)
       end
     end
 end

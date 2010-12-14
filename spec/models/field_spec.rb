@@ -36,4 +36,11 @@ describe Field do
       field.value.should == entry.value
     end
   end
+
+  describe '#input_name' do
+    it 'downcases the Field#name value and replaces all spaces with underscores' do
+      field = Factory(:field)
+      field.input_name.should == field.name.downcase.gsub(/(\s|\-)/,'_'
+    end
+  end
 end

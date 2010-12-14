@@ -7,6 +7,11 @@ module Admin
     alias_method :show, :redirect_to_edit
     alias_method :destroy, :render_destroy_js
 
+    def edit
+      resource.current!
+      edit!
+    end
+
     def update
       update! do |success, failure|
         success.html { flash[:success] = 'Your page updated!' }

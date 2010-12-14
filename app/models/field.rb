@@ -9,9 +9,12 @@ class Field < ActiveRecord::Base
   before_create :auto_position
 
   def value
-    # will need to do Page.current or something like that
     entry = data.first(:conditions => { :page_id => Page.current.id }).try(:entry)
     entry ? entry.value : nil
+  end
+
+  def input_name
+    name.downcase.gsub(/(\s|\-)/,'_').gsub(/\./,'')
   end
 
   private

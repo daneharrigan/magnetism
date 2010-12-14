@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101202043941) do
+ActiveRecord::Schema.define(:version => 20101214050504) do
 
   create_table "data", :force => true do |t|
     t.integer  "field_id"
@@ -76,6 +76,13 @@ ActiveRecord::Schema.define(:version => 20101202043941) do
     t.integer  "template_type_id"
     t.integer  "theme_id"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "text_data", :force => true do |t|
+    t.integer  "data_id"
+    t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

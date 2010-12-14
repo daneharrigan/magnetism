@@ -69,7 +69,7 @@ describe Admin::PagesController do
     end
 
     it 'renders page/edit' do
-      response.should render_template('admin/pages/edit')        
+      response.should render_template('admin/pages/edit')
     end
 
     it 'renders layouts/application' do
@@ -92,7 +92,7 @@ describe Admin::PagesController do
       page = Factory(:page)
       @params = { :id => page.id, :format => 'js' }
     end
-  
+
     it 'renders pages/destroy' do
       delete :destroy, @params
       response.should render_template('admin/pages/destroy')
