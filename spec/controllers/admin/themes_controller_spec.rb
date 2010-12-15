@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Admin::ThemesController do
+  let(:theme) { Factory(:theme) }
+
   before(:each) { login_as Factory(:user) }
 
   describe '#new' do
@@ -16,13 +18,22 @@ describe Admin::ThemesController do
   end
 
   describe '#edit' do
-    it 'renders the themes/edit view'
-    it 'renders the layouts/overlay layout'
+    before(:each) do
+      @params = { :id => theme.id }
+      get :edit, @params
+    end
+
+    it 'renders the themes/edit view' do
+      response.should render_template('admin/themes/edit')
+    end
+
+    it 'renders the layouts/overlay layout' do
+      response.should render_template('layouts/overlay')
+    end
   end
 
   describe '#show' do
     before(:each) do
-      theme = Factory(:theme)
       @params = { :id => theme.id }
     end
 

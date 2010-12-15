@@ -21,6 +21,27 @@ class Page < ActiveRecord::Base
   # validates_presence_of :template_id
   # validates_format_of :uri_matcher, :with => /\A[a-z\/\-\:]+\z/, :allow_nil => true
 
+  def fields=(values)
+    fields.each do |field|
+      value = values[field.input_name]
+
+      if field.value.nil?
+        entry = case field.field_type
+          when FieldType.text_field
+            StringDatum.create(:value => value)
+          when FieldType.large_text_field
+            TextDatum.create(:value => value)
+        end
+
+        field.data.create(:page_id => id, :entry => entry)
+      else
+        entry = field.data.first(:page_id => id).entry
+        entry.value = value
+        entry.save!
+      end
+    end
+  end
+
   private
     def generate_slug
       slug = title.downcase.gsub(/[_\s]/,'-').gsub(/([^a-z0-9-])/,'')

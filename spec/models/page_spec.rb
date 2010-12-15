@@ -68,4 +68,39 @@ describe Page do
       end
     end
   end
+
+  describe '#fields=' do
+    before(:each) do
+      @page = Factory(:page)
+      @page.current!
+    end
+
+    context 'when a value is sent for a field that does not have a value' do
+      it 'creates a new entry in the string_data table' do
+        field = Factory(:field_with_text_field)
+        @page.template.fields << field
+        args = { "#{field.input_name}" => 'John Doe' }
+
+        lambda { @page.fields = args }.should change(StringDatum, :count).by(+1)
+      end
+
+      it 'creates a new entry in the text_data table' do
+        field = Factory(:field_with_large_text_field)
+        @page.template.fields << field
+        args = { "#{field.input_name}" => 'Lorem Ipsum' }
+
+        lambda { @page.fields = args }.should change(TextDatum, :count).by(+1)
+      end
+
+      it 'creates a new entry in the datetime_data table'
+      it 'creates a new entry in the boolean_data table'
+    end
+
+    context 'when a value is sent for a field that already has a value' do
+      it 'replaces the value in the string_data table'
+      it 'replaces the value in the text_data table'
+      it 'replaces the value in the datetime_data table'
+      it 'replaces the value in the boolean_data table'
+    end
+  end
 end

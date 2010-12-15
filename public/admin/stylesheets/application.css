@@ -228,6 +228,7 @@ a.new:active, a.new:hover {
 }
 #content textarea, span.textarea {
   height: 200px;
+  margin-left: 124px
 }
 .large-title .input,
 #overlay .large-title input,

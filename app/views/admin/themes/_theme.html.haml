@@ -1,1 +1,3 @@
-%li= link_to theme.name, admin_manage_theme_path(theme)
+%li
+  = link_to theme.name, admin_manage_theme_path(theme)
+  = link_to '(Edit)', edit_admin_manage_theme_path(theme), :remote => true, :method => :get, 'data-type' => :html

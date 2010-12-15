@@ -25,8 +25,8 @@ describe FieldHelper do
         field.data.create(:page => @page, :entry => entry)
         @page.template.fields << field
 
-        name = "page[field][#{field.input_name}]"
-        id = "page_field_#{field.input_name}"
+        name = "page[fields][#{field.input_name}]"
+        id = "page_fields_#{field.input_name}"
 
         helper.field_tag(field).should == %{<input id="#{id}" name="#{name}" type="text" value="#{field.value}" />}
       end
@@ -37,8 +37,8 @@ describe FieldHelper do
         field.data.create(:page => @page, :entry => entry)
         @page.template.fields << field
 
-        name = "page[field][#{field.input_name}]"
-        id = "page_field_#{field.input_name}"
+        name = "page[fields][#{field.input_name}]"
+        id = "page_fields_#{field.input_name}"
 
         helper.field_tag(field).should == %{<textarea id="#{id}" name="#{name}">#{field.value}</textarea>}
       end

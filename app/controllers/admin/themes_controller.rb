@@ -1,7 +1,7 @@
 module Admin
   class ThemesController < MagnetismController
     actions :all
-    layout_options :overlay => :new
+    layout_options :overlay => [:new, :edit]
     helper_method :template_collection, :snippet_collection,
       :stylesheet_collection, :javascript_collection
     resources_configuration[:self][:route_prefix] = 'admin/manage'

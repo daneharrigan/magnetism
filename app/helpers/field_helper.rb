@@ -24,7 +24,7 @@ module FieldHelper
     end
 
     def input_tag(field, tag_name)
-      name = "page[field][#{field.input_name}]"
+      name = "page[fields][#{field.input_name}]"
       case tag_name
         when :input
           text_field_tag(name, field.value)
