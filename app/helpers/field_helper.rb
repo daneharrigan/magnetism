@@ -14,10 +14,6 @@ module FieldHelper
     return 'textarea' if field.field_type == FieldType.large_text_field
   end
 
-  def field_test_it
-    "test-it"
-  end
-
   private
     def span_tag(field, tag_name)
       content_tag(:span, nil, :class => tag_name)

@@ -37,6 +37,54 @@ describe Field do
     end
   end
 
+  describe '#value=' do
+    before(:each) do
+      @page = Factory(:page)
+      @page.current!
+    end
+
+    context 'when a value is set for a field that does not have a value' do
+      it 'creates a new entry in the string_data table' do
+        field = Factory(:field_with_text_field)
+        @page.template.fields << field
+
+        lambda { field.value = 'John Doe' }.should change(StringDatum, :count).by(+1)
+      end
+
+      it 'creates a new entry in the text_data table' do
+        field = Factory(:field_with_large_text_field)
+        @page.template.fields << field
+
+        lambda { field.value = 'Lorem Ipsum' }.should change(TextDatum, :count).by(+1)
+      end
+
+      it 'creates a new entry in the datetime_data table'
+      it 'creates a new entry in the boolean_data table'
+    end
+
+    context 'when a value is sent for a field that already has a value' do
+      it 'replaces the value in the string_data table' do
+        field = Factory(:field_with_text_field)
+        @page.template.fields << field
+        field.value = 'Initial Value'
+        field.value = 'Overwritten Value'
+
+        field.value.should == 'Overwritten Value'
+      end
+
+      it 'replaces the value in the text_data table' do
+        field = Factory(:field_with_large_text_field, :template => @page.template)
+        field.value = 'Initial Value'
+        field.value = 'Overwritten Value'
+
+        field.value.should == 'Overwritten Value'
+      end
+
+      it 'replaces the value in the datetime_data table'
+      it 'replaces the value in the boolean_data table'
+    end
+  end
+
   describe '#input_name' do
     it 'downcases the Field#name value and replaces all spaces with underscores' do
       field = Factory(:field)

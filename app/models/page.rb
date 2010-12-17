@@ -23,22 +23,7 @@ class Page < ActiveRecord::Base
 
   def fields=(values)
     fields.each do |field|
-      value = values[field.input_name]
-
-      if field.value.nil?
-        entry = case field.field_type
-          when FieldType.text_field
-            StringDatum.create(:value => value)
-          when FieldType.large_text_field
-            TextDatum.create(:value => value)
-        end
-
-        field.data.create(:page_id => id, :entry => entry)
-      else
-        entry = field.data.first(:page_id => id).entry
-        entry.value = value
-        entry.save!
-      end
+      field.value = values[field.input_name]
     end
   end
 

@@ -1,7 +1,6 @@
 class CreateStringData < ActiveRecord::Migration
   def self.up
     create_table :string_data do |t|
-      t.integer :data_id
       t.string :value
 
       t.timestamps

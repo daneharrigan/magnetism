@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(:version => 20101214050504) do
 
   create_table "string_data", :force => true do |t|
     t.integer  "data_id"
-    t.integer  "page_id"
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"

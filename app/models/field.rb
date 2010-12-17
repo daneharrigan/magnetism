@@ -9,8 +9,27 @@ class Field < ActiveRecord::Base
   before_create :auto_position
 
   def value
-    entry = data.first(:conditions => { :page_id => Page.current.id }).try(:entry)
-    entry ? entry.value : nil
+    entry.try(:value)
+  end
+
+  def value=(val)
+    if value.nil?
+      datum = case field_type
+        when FieldType.text_field
+          StringDatum.create(:value => val)
+        when FieldType.large_text_field
+          TextDatum.create(:value => val)
+      end
+
+      data.create(:page => Page.current, :entry => datum)
+      return datum
+    else
+      # need to set entry to something because I cant update a value
+      # through a select action (eg: Datum.first, Datum.find)
+      datum = entry
+      datum.value = val
+      datum.save!
+    end
   end
 
   def input_name
@@ -20,5 +39,9 @@ class Field < ActiveRecord::Base
   private
     def auto_position
       write_attribute :position, template.fields.count + 1
+    end
+
+    def entry
+      data.first(:conditions => { :page_id => Page.current.id }).try(:entry)
     end
 end
