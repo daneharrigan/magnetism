@@ -68,6 +68,9 @@ describe Admin::PagesController do
       get :edit, params
     end
 
+    # need to clear the current page to treat each test as a new request
+    after(:each) { Page.clear_current! }
+
     it 'renders page/edit' do
       response.should render_template('admin/pages/edit')
     end
@@ -109,10 +112,22 @@ describe Admin::PagesController do
       @params = {}
       @params[:id] = @page.id
       @params[:page] = { :title => 'Page Title - Changed' }
+      @params[:page][:fields] = {}
+
+      field = Factory(:field_with_text_field, :template => @page.template)
+      @page.template.fields << field
+      @params[:page][:fields][field.input_name] = 'Changed Value'
+
+      field = Factory(:field_with_large_text_field, :template => @page.template)
+      @page.template.fields << field
+      @params[:page][:fields][field.input_name] = 'Changed Value - 2'
     end
 
+    # need to clear the current page to treat each test as a new request
+    after(:each) { Page.clear_current! }
+
     context 'when a page updates successfully' do
-      before(:each) { put :update, @params}
+      before(:each) { put :update, @params }
 
       it 'sets the flash[:success] message' do
         flash[:success].should_not be_nil

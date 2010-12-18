@@ -1,0 +1,12 @@
+h1. Magnetism
+
+Magnetism is an attempt at a website CMS/blog. Its currently under development and is not in a usable state.
+
+If you'd like to see the progress please do the following:
+
+1. Clone the repo
+2. bundle install
+3. rake db:migrate
+4. rake db:seed
+5. rails s
+6. Navigate to localhost:3000/admin

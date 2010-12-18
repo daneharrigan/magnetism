@@ -13,6 +13,7 @@ module Admin
     end
 
     def update
+      resource.current!
       update! do |success, failure|
         success.html { flash[:success] = 'Your page updated!' }
         failure.html { flash[:failure] = 'Is Broken' }
