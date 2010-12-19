@@ -3,6 +3,24 @@ require 'spec_helper'
 describe Admin::TemplatesController do
   before(:each) { login_as Factory(:user) }
 
+  describe '#new' do
+    before(:each) do
+      theme = Factory(:theme)
+      params = { :theme_id => theme.id }
+      params[:template_type_id] = Factory(:template_type_template).id
+
+      get :new, params
+    end
+
+    it 'renders the overlay layout' do
+      response.should render_template('layouts/overlay')
+    end
+
+    it 'renders templates/new' do
+      response.should render_template('admin/templates/new')
+    end
+  end
+
   describe '#edit' do
     describe '#association_group' do
       it 'returns an array of the theme, template and field' do

@@ -26,7 +26,7 @@
 }
 #tabs li {
   margin-right: 5px;
-  
+
 }
 #tabs a.active:link,
 #tabs a.active:visited,
@@ -66,4 +66,16 @@
   height: 25px;
   background: #eee;
   border: 1px dashed #aaa;
+}
+#new-template {
+  position: relative;
+  height: 30px;
+}
+#side-bar .selector {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+#new-template-selector {
+  width: 160px;
 }

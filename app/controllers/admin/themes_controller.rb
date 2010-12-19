@@ -27,5 +27,11 @@ module Admin
     def stylesheet_collection
       @stylesheet_collection ||= Template.stylesheets
     end
+
+#    def new_template_selector_collection
+#      [
+#        {:title => TemplateType.template.name, :link => '' }
+#      ]
+#    end
   end
 end

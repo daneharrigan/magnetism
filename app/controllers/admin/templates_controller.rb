@@ -1,7 +1,7 @@
 module Admin
   class TemplatesController < MagnetismController
     actions :all, :except => [:index, :show]
-    layout_options :none => :edit
+    layout_options :overlay => :new, :none => :edit
     belongs_to :theme
     helper_method :association_group
 
