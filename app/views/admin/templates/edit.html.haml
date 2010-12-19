@@ -10,13 +10,11 @@
 
       .actions
         = link_to 'Add Field', new_polymorphic_path([:admin, :manage, association_chain, resource, :field].flatten), :remote => true, :method => :get, 'data-type' => :html
-        |
-        = f.submit
   .code-content
     = form_for [:admin, :manage, association_chain, resource].flatten, :html => { :id => nil } do |f|
       = f.text_area :content
       .actions
-        = f.submit nil, :id => nil
+        = f.submit
 
   %ol.toggle-content.tab-collection
     %li= link_to 'Form View', '#form-view', :class => 'tab bottom active', 'data-view' => 'form'

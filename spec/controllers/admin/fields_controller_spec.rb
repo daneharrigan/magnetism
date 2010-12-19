@@ -91,4 +91,17 @@ describe Admin::FieldsController do
       response.should render_template('layouts/overlay')
     end
   end
+
+  describe '#update' do
+    before(:each) do
+      field = Factory(:field, :template => @template)
+      @params[:id] = field.id
+      @params[:field] = { :name => 'Changed Value' }
+      put :update, @params
+    end
+
+    it 'renders _span partial' do
+      response.should render_template('admin/fields/_span')
+    end
+  end
 end

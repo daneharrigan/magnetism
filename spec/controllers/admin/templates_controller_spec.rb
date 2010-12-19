@@ -46,5 +46,36 @@ describe Admin::TemplatesController do
         @template.fields[2].should == @field_1
       end
     end
+
+    context 'when the template content is posted' do
+      before(:each) do
+        @template = Factory(:template)
+        @content = '<h1>{{ site.name }}</h1>'
+        params = { :theme_id => @template.theme.id, :id => @template.id }
+        params[:template] = { :content => @content }
+
+        put :update, params
+      end
+
+      it 'updates the template conte field' do
+        # the content attribute is set when Factory runs, so a reload
+        # is needed to fetch the updated value
+        @template.reload
+        @template.content.should == @content
+      end
+
+      it 'redirects the user to the theme show view' do
+        response.should redirect_to admin_manage_theme_path(@template.theme)
+      end
+=begin
+      it 'returns a status of OK' do
+        response.status.should == 200
+      end
+
+      it 'does not render anything' do
+        response.body.strip.empty?.should == true
+      end
+=end
+    end
   end
 end

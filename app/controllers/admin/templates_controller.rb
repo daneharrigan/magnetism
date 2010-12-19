@@ -13,7 +13,9 @@ module Admin
 
         render :nothing => true
       else
-        update!
+        update! do |success, failure|
+          success.html { redirect_to admin_manage_theme_path(parent) }
+        end
       end
     end
 

@@ -38,6 +38,9 @@ var Template = {
   remove_field: function(link){
     $(link).parents('li:first').remove();
   },
+  update_field: function(selector, html){
+    $(selector).replaceWith(html);
+  },
   sort_fields: function(){
     var $ol = $(this),
         params = $ol.sortable('serialize', { key: 'position[]' }),
@@ -85,6 +88,12 @@ jQuery(function($){
 
   $('#new_field').live('ajax:success', function(el, html, status){
     Template.add_field(html);
+    $('#overlay').remove();
+  });
+
+  $('form[id^=edit_field]').live('ajax:success', function(el, html, status){
+    var id = this.id.match(/\d+$/);
+    Template.update_field('#field-'+id, html);
     $('#overlay').remove();
   });
 

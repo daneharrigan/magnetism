@@ -58,6 +58,16 @@ describe Admin::PagesController do
         controller.send(:parent_page).should == page
       end
     end
+
+    describe '#template_collection' do
+      it 'returns an array of templates' do
+        params = {}
+        session = { :site_id => @site.id }
+        template = Factory(:template, :theme => @site.theme)
+        get :new, params, session
+        controller.send(:template_collection).should == @site.theme.templates
+      end
+    end
   end
 
   describe '#edit' do

@@ -15,6 +15,12 @@ module Admin
       render :nothing => true
     end
 
+    def update
+      update! do |success, failure|
+        success.html { render :partial => 'span', :locals => {:field => resource} }
+      end
+    end
+
     def field_type_collection
       @field_type_collection ||= FieldType.all
     end
