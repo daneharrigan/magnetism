@@ -295,6 +295,21 @@ a.new:active, a.new:hover {
   text-align: center;
 }
 
+/* item index */
+.item {
+  position: relative;
+  line-height: 40px;
+  padding: 0 10px;
+}
+.item .actions {
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+.item .selector {
+  width: 120px;
+}
+
 /* extras */
 .clear {
   clear: both;

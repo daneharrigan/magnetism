@@ -74,4 +74,21 @@ describe Admin::ThemesController do
       end
     end
   end
+
+  describe '#update' do
+    before(:each) do
+      @params = { :id => theme.id, :theme => {} }
+      @params[:theme][:name] = 'Changed Value'
+      put :update, @params
+    end
+
+    it 'renders themes/_theme' do
+      response.should redirect_to admin_manage_path
+    end
+
+    it 'updates the theme name' do
+      theme.reload
+      theme.name.should == @params[:theme][:name]
+    end
+  end
 end

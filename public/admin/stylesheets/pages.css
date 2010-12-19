@@ -1,26 +1,13 @@
 #pages li li {
   padding-left: 20px;
 }
-#homepage .page {
+#homepage .item {
   background: #FFD;
   border: 1px solid #FC0;
 }
-#homepage .page a:link,
-#homepage .page a:visited {
+#homepage .item a:link,
+#homepage .item a:visited {
   font-weight: bold;
-}
-.page {
-  position: relative;
-  line-height: 40px;
-  padding: 0 10px;
-}
-.page .actions {
-  position: absolute;
-  right: 10px;
-  top: 0;
-}
-.page .selector {
-  width: 120px;
 }
 
 /* edit view */

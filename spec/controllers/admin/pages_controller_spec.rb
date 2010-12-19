@@ -139,10 +139,6 @@ describe Admin::PagesController do
     context 'when a page updates successfully' do
       before(:each) { put :update, @params }
 
-      it 'sets the flash[:success] message' do
-        flash[:success].should_not be_nil
-      end
-
       it 'redirects to the edit page' do
         response.should redirect_to edit_admin_page_path(@page)
       end
