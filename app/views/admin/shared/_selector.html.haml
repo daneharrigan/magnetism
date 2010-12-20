@@ -1,7 +1,7 @@
 .selector{ :id => defined?(id) ? id : nil, :class => defined?(open_direction) ? "open-#{open_direction}" : 'open-down' }
-  %h2
+  %h2.toggle-sibling
     %span= name
-  %ul
-    - if defined?(collection)
-      - collection.each do |item|
+  - if defined?(selector_collection)
+    %ul
+      - selector_collection.each do |item|
         %li= item

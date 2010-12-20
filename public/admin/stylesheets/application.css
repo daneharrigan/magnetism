@@ -198,7 +198,7 @@ a.new:active, a.new:hover {
   line-height: 25px;
 }
 .open-up ul {
-  bottom: 0;
+  bottom: -20px;
   border-radius: 20px;
   padding: 10px 0 40px;
 }

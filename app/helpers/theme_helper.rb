@@ -19,7 +19,9 @@ module ThemeHelper
 
   def new_template_collection
     @new_template_collection ||= TemplateType.all.map do |template_type|
-      link_to( template_type.name, new_polymorphic_path([:admin, :manage, resource, :template], :template_type_id => template_type.id) )
+      collection = [:admin, :manage, resource, :template]
+      url = new_polymorphic_path(collection, :template_type_id => template_type.id)
+      link_to(template_type.name, url)
     end
   end
 end

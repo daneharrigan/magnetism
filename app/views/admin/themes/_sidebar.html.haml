@@ -11,4 +11,4 @@
   %h2.toggle-sibling.blue-header JavaScripts
   %ul#javascripts= render :partial => 'admin/templates/item', :collection => javascript_collection, :as => :template, :locals => { :theme => resource }
 
-  #new-template= render :partial => 'admin/shared/selector', :locals => { :name => 'New Document', :id => 'new-template-selector', :open_direction => 'up', :collection => new_template_collection }
+  #new-template= render :partial => 'admin/shared/selector', :locals => { :name => 'New Document', :id => 'new-template-selector', :open_direction => 'up', :selector_collection => new_template_collection }
