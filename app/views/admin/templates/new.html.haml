@@ -1,0 +1,13 @@
+%h2 New Document
+= form_for [:admin, :manage, association_chain, resource].flatten do |f|
+  .large-title
+    = f.label :name
+    = f.text_field :name
+  %ol.fields
+    %li
+      = f.label :template_type_id
+      = f.hidden_field :template_type_id, :value => template_type.id
+      = template_type.name
+  .actions
+    = link_to 'Cancel', '#cancel', :class => 'cancel'
+    = f.submit

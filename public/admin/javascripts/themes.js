@@ -50,7 +50,7 @@ var Template = {
 };
 
 jQuery(function($){
-  $sidebar = $('#side-bar a');
+  $sidebar = $('#side-bar > ul a');
 
   $sidebar.bind('ajax:success',function(el, html, status){
     Template.load(this, html);

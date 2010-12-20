@@ -21,7 +21,7 @@ module ThemeHelper
     @new_template_collection ||= TemplateType.all.map do |template_type|
       collection = [:admin, :manage, resource, :template]
       url = new_polymorphic_path(collection, :template_type_id => template_type.id)
-      link_to(template_type.name, url)
+      link_to template_type.name, url, :remote => true, 'data-type' => :html
     end
   end
 end

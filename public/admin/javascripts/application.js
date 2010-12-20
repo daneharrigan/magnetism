@@ -27,4 +27,9 @@ jQuery(function($){
     var $sibling = $(this).next();
     $sibling.is(':hidden') ? $sibling.show() : $sibling.hide();
   });
+
+  $('div.selector a').click(function(){
+    var $parent = $(this).parents('div.selector');
+    $parent.find('ul').hide();
+  });
 });
