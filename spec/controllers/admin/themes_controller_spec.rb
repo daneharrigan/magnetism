@@ -42,37 +42,6 @@ describe Admin::ThemesController do
       response.should render_template('admin/themes/show')
     end
 
-    describe '#snippet_collection' do
-      it 'returns all of the templates of type "Snippet"' do
-        template = Factory(:snippet)
-        get :show, @params
-        controller.snippet_collection.should == [template]
-      end
-    end
-
-    describe '#javascript_collection' do
-      it 'returns all of the templates of type "JavaScript"' do
-        template = Factory(:javascript)
-        get :show, @params
-        controller.javascript_collection.should == [template]
-      end
-    end
-
-    describe '#stylesheet_collection' do
-      it 'returns all of the templates of type "Stylesheet"' do
-        template = Factory(:stylesheet)
-        get :show, @params
-        controller.stylesheet_collection.should == [template]
-      end
-    end
-
-    describe '#template_collection' do
-      it 'returns all of the templates of type "Template"' do
-        template = Factory(:template)
-        get :show, @params
-        controller.template_collection.should == [template]
-      end
-    end
   end
 
   describe '#update' do

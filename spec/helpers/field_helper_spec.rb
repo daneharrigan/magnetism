@@ -5,11 +5,11 @@ describe FieldHelper do
     context 'when passed a display type of :span' do
       it 'should return a span with the class input' do
         field = Factory(:field, :field_type => Factory(:field_type_text_field))
-        field_tag(field, :span).should == %{<span class="input"></span>}
+        field_tag(field, :span).should have_selector('span', :class => 'input')
       end
       it 'should return a span with the class textarea' do
         field = Factory(:field, :field_type => Factory(:field_type_large_text_field))
-        field_tag(field, :span).should == %{<span class="textarea"></span>}
+        field_tag(field, :span).should have_selector('span', :class => 'textarea')
       end
     end
 
@@ -28,7 +28,7 @@ describe FieldHelper do
         name = "page[fields][#{field.input_name}]"
         id = "page_fields_#{field.input_name}"
 
-        helper.field_tag(field).should == %{<input id="#{id}" name="#{name}" type="text" value="#{field.value}" />}
+        helper.field_tag(field).should have_selector('input', :id => id, :name => name, :type => 'text', :value => field.value)
       end
 
       it 'should return a textarea' do
@@ -40,7 +40,7 @@ describe FieldHelper do
         name = "page[fields][#{field.input_name}]"
         id = "page_fields_#{field.input_name}"
 
-        helper.field_tag(field).should == %{<textarea id="#{id}" name="#{name}">#{field.value}</textarea>}
+        helper.field_tag(field).should have_selector('textarea', :id => id, :name => name, :content => field.value)
       end
     end
   end

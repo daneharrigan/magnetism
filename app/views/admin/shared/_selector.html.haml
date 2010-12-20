@@ -2,5 +2,6 @@
   %h2
     %span= name
   %ul
-  / = render :partial => 'admin/sites/selector', :collection => Site.all, :as => :site
-  / %li= link_to 'Add another site', new_admin_manage_site_path, :remote => true, :method => :get
+    - if defined?(collection)
+      - collection.each do |item|
+        %li= item

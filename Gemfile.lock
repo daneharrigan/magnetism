@@ -74,6 +74,7 @@ GEM
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
       gem_plugin (~> 0.2.3)
+    nokogiri (1.4.4)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -123,6 +124,10 @@ GEM
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
+    webrat (0.7.2)
+      nokogiri (>= 1.2.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5.3)
     yamler (0.1.0)
 
 PLATFORMS
@@ -131,10 +136,10 @@ PLATFORMS
 DEPENDENCIES
   chronic (= 0.2.3)
   clearance (= 0.9.0.rc6)
-  cover_me (= 1.0.0.rc4)
+  cover_me (~> 1.0.0.rc4)
   current_object (~> 0.2)
-  database_cleaner (= 0.6.0)
-  factory_girl (= 1.3.2)
+  database_cleaner (~> 0.6.0)
+  factory_girl (~> 1.3.2)
   haml (= 3.0.23)
   inherited_resources (= 1.1.2)
   layout_options (~> 0.2)
@@ -146,3 +151,4 @@ DEPENDENCIES
   ruby-debug19
   shoulda (>= 2.11.3)
   sqlite3-ruby
+  webrat (~> 0.7.2)
