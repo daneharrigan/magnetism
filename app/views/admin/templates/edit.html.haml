@@ -11,7 +11,7 @@
       .actions
         = link_to 'Add Field', new_polymorphic_path([:admin, :manage, association_chain, resource, :field].flatten), :remote => true, :method => :get, 'data-type' => :html
   .code-content
-    = form_for [:admin, :manage, association_chain, resource].flatten, :html => { :id => nil } do |f|
+    = form_for [:admin, :manage, association_chain, resource].flatten, :html => { :id => nil, 'data-type' => 'json' }, :remote => true do |f|
       = f.text_area :content
       .actions
         = f.submit

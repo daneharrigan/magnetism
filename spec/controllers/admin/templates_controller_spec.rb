@@ -69,31 +69,40 @@ describe Admin::TemplatesController do
       before(:each) do
         @template = Factory(:template)
         @content = '<h1>{{ site.name }}</h1>'
-        params = { :theme_id => @template.theme.id, :id => @template.id }
-        params[:template] = { :content => @content }
-
-        put :update, params
+        @params = { :theme_id => @template.theme.id, :id => @template.id }
+        @params[:template] = { :content => @content }
+        @params[:format] = 'json'
       end
 
       it 'updates the template conte field' do
         # the content attribute is set when Factory runs, so a reload
         # is needed to fetch the updated value
+
+        put :update, @params
         @template.reload
         @template.content.should == @content
       end
 
-      it 'redirects the user to the theme show view' do
-        response.should redirect_to admin_manage_theme_path(@template.theme)
-      end
-=begin
-      it 'returns a status of OK' do
-        response.status.should == 200
+      context 'when the update is successful' do
+        it 'returns a json object of the success message' do
+          put :update, @params
+          response.body.should == {:notice => 'Template was successfully updated.'}.to_json
+        end
       end
 
-      it 'does not render anything' do
-        response.body.strip.empty?.should == true
+      context 'when the update fails' do
+        it 'returns a json object of the failure message' do
+          pending 'how the hell do i test this?'
+          mock(controller).should_receive(:update_resource).and_return(false)
+
+          put :update, @params
+          response.body.should == {:failure => 'Template could not be updated.'}.to_json
+        end
       end
-=end
+
+      #it 'redirects the user to the theme show view' do
+      #  response.should redirect_to admin_manage_theme_path(@template.theme)
+      #end
     end
   end
 end

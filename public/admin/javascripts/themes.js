@@ -100,4 +100,16 @@ jQuery(function($){
   $('a[data-method=delete]').live('ajax:success', function(el, html, status){
     Template.remove_field(this);
   });
+
+  $('div.code-content form').live('ajax:success', function(el, json, status){
+    var class_name = 'notice';
+    if(json.failure)
+      class_name = 'failure';
+
+    var message = json.failure ? json.failure : json.notice;
+    $('#content').prepend( $('<div />', { 'class': class_name}).text(message) );
+    setTimeout(function(){
+      $('div.notice, div.failure').fadeOut(500, function(){ $(this).remove() });
+    }, 5000);
+  });
 });
