@@ -74,7 +74,7 @@ describe Admin::TemplatesController do
         @params[:format] = 'json'
       end
 
-      it 'updates the template conte field' do
+      it 'updates the template content field' do
         # the content attribute is set when Factory runs, so a reload
         # is needed to fetch the updated value
 
@@ -93,7 +93,8 @@ describe Admin::TemplatesController do
       context 'when the update fails' do
         it 'returns a json object of the failure message' do
           pending 'how the hell do i test this?'
-          mock(controller).should_receive(:update_resource).and_return(false)
+          template = mock_model(Template, :update_attributes => false, :errors => {:fail => true} )
+          Template.stub(:find => template)
 
           put :update, @params
           response.body.should == {:failure => 'Template could not be updated.'}.to_json
@@ -103,6 +104,20 @@ describe Admin::TemplatesController do
       #it 'redirects the user to the theme show view' do
       #  response.should redirect_to admin_manage_theme_path(@template.theme)
       #end
+    end
+  end
+
+  describe '#create' do
+    it 'renders the templates/item partial' do
+      params = {}
+      params[:theme_id] = Factory(:theme).id
+      params[:template] = {
+        :name => 'Template Name',
+        :template_type_id => Factory(:template_type_template).id
+      }
+
+      post :create, params
+      response.should render_template('admin/templates/_item')
     end
   end
 end

@@ -1,7 +1,7 @@
 module Admin
   class TemplatesController < MagnetismController
     actions :all, :except => [:index, :show]
-    layout_options :overlay => :new, :none => [:edit, :update]
+    layout_options :overlay => :new, :none => [:edit, :update, :create]
     belongs_to :theme
     helper_method :association_group
 
@@ -17,6 +17,12 @@ module Admin
           success.json { render :json => {:notice => 'Template was successfully updated.'} }
           failure.json { render :json => {:failure => 'Template could not be updated.'} }
         end
+      end
+    end
+
+    def create
+      create! do |success, failure|
+        success.html { render :partial => 'item', :locals => { :template => resource, :theme => parent} }
       end
     end
 
