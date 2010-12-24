@@ -27,8 +27,19 @@ var Template = {
       '#template-content > li[data-template-id=' + link_id + ']').addClass('active');
   },
   close: function(link){
-    var link_id = $(link).attr('data-template-id');
+    var $link = $(link);
+    var $tab = $link.parents('li:first'),
+        link_id = $link.attr('data-template-id');
+    var $sibling = $tab.next().size() ? $tab.next() : $tab.prev();
+
     $('li[data-template-id='+link_id+']').remove();
+
+    if( !$('#tabs a.active').size() )
+    {
+      link = $sibling.find('a.tab')[0];
+      if(link)
+        Template.focus(link);
+    }
   },
   is_opened: function(link){
     var link_id = Template.link_id(link);
