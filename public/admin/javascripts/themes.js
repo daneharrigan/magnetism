@@ -38,7 +38,7 @@ var Template = {
     return link.href.match(/(\d+)+(\/edit)$/)[1];
   },
   add_field: function(html){
-    $('#template-content > li.active div.form-content ol.fields') .append(html);
+    $('#template-content > li.active div.form-content ol.fields').append(html);
   },
   remove_field: function(link){
     $(link).parents('li:first').remove();
@@ -54,24 +54,27 @@ var Template = {
   }
 };
 
-//jQuery(function ($) {
-$(function(){
-  $sidebar = $('#side-bar > ul a.open');
+/******************************************************************/
 
-  $sidebar.bind('ajax:success',function(el, html, status){
+jQuery(function($){
+  var $sidebar = $('#side-bar a.open');
+
+  $sidebar.live('ajax:success',function(el, html, status){
     Template.load(this, html);
     Template.focus(this);
   });
 
   $sidebar.live('click',function(e){
-    if(!Template.is_opened(this))
-      $(this).callRemote();
-    else
+    if(Template.is_opened(this))
       Template.focus(this);
+    else
+      $(this).callRemote();
 
     e.preventDefault();
   });
 
+
+  // template tabs
   $('#tabs a.tab').live('click',function(e){
     Template.focus(this);
     e.preventDefault();
@@ -82,6 +85,7 @@ $(function(){
     e.preventDefault();
   });
 
+  // form/code view tabs
   $('li.active ol.toggle-content a').live('click', function(e){
     var $li = $('#template-content > li.active');
     // activate tab
@@ -112,11 +116,11 @@ $(function(){
     var value = $('#template_template_type_id').attr('value');
     var template_type_id = '#template-type-' + value;
     var $ul = $(template_type_id);
-
     $ul.append(html);
     $('#overlay').remove();
 
-    $(html).find('a:last').trigger('click');
+    var $link = $(template_type_id).find('a.open:last');
+    $link.trigger('click');
   });
 
   $('a[data-method=delete]').live('ajax:success', function(el, html, status){

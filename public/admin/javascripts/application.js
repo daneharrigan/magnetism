@@ -28,5 +28,5 @@ jQuery(function($){
     $sibling.is(':hidden') ? $sibling.show() : $sibling.hide();
   });
 
-  //$('body').delegate('*', 'click', function(){ $('div.selector ul').hide() });
+  $('body').delegate('*', 'click', function(){ $('div.selector ul').hide() });
 });
