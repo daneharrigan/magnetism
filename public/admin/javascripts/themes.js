@@ -4,8 +4,9 @@ var Template = {
         title = $(link).text();
 
     var attributes = { href: link.href, 'class': 'tab' };
-    var $tab = $('<li />', { 'data-template-id': link_id })
+    var $tab = $('<li />', { id: 'tab-'+link_id, 'data-template-id': link_id })
       .append( $('<a />', attributes).text(title) );
+    $tab.append( $('<a />', { href: '#close', 'class': 'close', 'data-template-id': link_id }).text('Close') );
 
     $('#tabs').append($tab);
     $('#template-content').append(html);
@@ -24,6 +25,10 @@ var Template = {
     $('#tabs > li a, #template-content > li').removeClass('active');
     $('#tabs > li[data-template-id=' + link_id + '] a,' +
       '#template-content > li[data-template-id=' + link_id + ']').addClass('active');
+  },
+  close: function(link){
+    var link_id = $(link).attr('data-template-id');
+    $('li[data-template-id='+link_id+']').remove();
   },
   is_opened: function(link){
     var link_id = Template.link_id(link);
@@ -49,8 +54,9 @@ var Template = {
   }
 };
 
-jQuery(function($){
-  $sidebar = $('#side-bar > ul a');
+//jQuery(function ($) {
+$(function(){
+  $sidebar = $('#side-bar > ul a.open');
 
   $sidebar.bind('ajax:success',function(el, html, status){
     Template.load(this, html);
@@ -66,8 +72,13 @@ jQuery(function($){
     e.preventDefault();
   });
 
-  $('#tabs a').live('click',function(e){
+  $('#tabs a.tab').live('click',function(e){
     Template.focus(this);
+    e.preventDefault();
+  });
+
+  $('#tabs a.close').live('click', function(e){
+    Template.close(this);
     e.preventDefault();
   });
 
@@ -95,6 +106,17 @@ jQuery(function($){
     var id = this.id.match(/\d+$/);
     Template.update_field('#field-'+id, html);
     $('#overlay').remove();
+  });
+
+  $('#new_template').live('ajax:success', function(el, html, status){
+    var value = $('#template_template_type_id').attr('value');
+    var template_type_id = '#template-type-' + value;
+    var $ul = $(template_type_id);
+
+    $ul.append(html);
+    $('#overlay').remove();
+
+    $(html).find('a:last').trigger('click');
   });
 
   $('a[data-method=delete]').live('ajax:success', function(el, html, status){

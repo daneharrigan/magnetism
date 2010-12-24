@@ -1,7 +1,7 @@
 module Admin
   class TemplatesController < MagnetismController
     actions :all, :except => [:index, :show]
-    layout_options :overlay => :new, :none => [:edit, :update, :create]
+    layout_options :overlay => :new, :none => [:edit, :update, :create, :destroy]
     belongs_to :theme
     helper_method :association_group
 
@@ -24,6 +24,10 @@ module Admin
       create! do |success, failure|
         success.html { render :partial => 'item', :locals => { :template => resource, :theme => parent} }
       end
+    end
+
+    def destroy
+      resource.destroy
     end
 
     def association_group(field)

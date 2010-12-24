@@ -11,8 +11,15 @@
   margin-bottom: 20px;
 }
 #side-bar li {
+  position: relative;
   margin-bottom: 5px;
   padding: 0 20px;
+}
+#side-bar .delete:link,
+#side-bar .delete:visited {
+  position: absolute;
+  top: 0;
+  right: 10px;
 }
 #tabs {
   position: relative;
@@ -26,7 +33,24 @@
 }
 #tabs li {
   margin-right: 5px;
-
+  position: relative;
+}
+#tabs .tab:link,
+#tabs .tab:visited {
+  padding-left: 40px;
+}
+#tabs .close:link,
+#tabs .close:visited {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+  background: #198FD3;
+  overflow: hidden;
+  text-indent: -999px;
 }
 #tabs a.active:link,
 #tabs a.active:visited,
@@ -49,7 +73,7 @@
   text-align: right;
 }
 .bottom:link, .bottom:visited {
-  border-radius: 0 0 10px 10px;  
+  border-radius: 0 0 10px 10px;
   border: 2px solid #5bb4e7;
   border-top: none;
   position: relative;

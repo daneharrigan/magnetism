@@ -1,14 +1,14 @@
 #side-bar
   %h2.toggle-sibling.blue-header Templates
-  %ul#templates= render :partial => 'admin/templates/item', :collection => template_collection, :as => :template, :locals => { :theme => resource }
+  %ul{ :id => "template-type-#{TemplateType.template.id}" }= render :partial => 'admin/templates/item', :collection => template_collection, :as => :template, :locals => { :theme => resource }
 
   %h2.toggle-sibling.blue-header Snippets
-  %ul#snippets= render :partial => 'admin/templates/item', :collection => snippet_collection, :as => :template, :locals => { :theme => resource }
+  %ul{ :id => "template-type-#{TemplateType.snippet.id}" }= render :partial => 'admin/templates/item', :collection => snippet_collection, :as => :template, :locals => { :theme => resource }
 
   %h2.toggle-sibling.blue-header Stylesheets
-  %ul#stylesheets= render :partial => 'admin/templates/item', :collection => stylesheet_collection, :as => :template, :locals => { :theme => resource }
+  %ul{ :id => "template-type-#{TemplateType.stylesheet.id}" }= render :partial => 'admin/templates/item', :collection => stylesheet_collection, :as => :template, :locals => { :theme => resource }
 
   %h2.toggle-sibling.blue-header JavaScripts
-  %ul#javascripts= render :partial => 'admin/templates/item', :collection => javascript_collection, :as => :template, :locals => { :theme => resource }
+  %ul{ :id => "template-type-#{TemplateType.javascript.id}" }= render :partial => 'admin/templates/item', :collection => javascript_collection, :as => :template, :locals => { :theme => resource }
 
   #new-template= render :partial => 'admin/shared/selector', :locals => { :name => 'New Document', :id => 'new-template-selector', :open_direction => 'up', :selector_collection => new_template_collection }

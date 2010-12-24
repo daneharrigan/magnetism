@@ -1,1 +1,3 @@
-%li= link_to template.name, edit_admin_manage_theme_template_path(theme, template), 'data-type' => :html
+%li{ :id => "template-#{template.id}" }
+  = link_to template.name, edit_admin_manage_theme_template_path(theme, template), :class => 'open', 'data-type' => :html
+  = link_to 'Delete', admin_manage_theme_template_path(theme, template, :format => :js), :class => 'delete', :remote => true, :method => :delete, 'data-type' => :script

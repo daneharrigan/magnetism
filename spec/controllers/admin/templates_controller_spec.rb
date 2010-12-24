@@ -100,10 +100,6 @@ describe Admin::TemplatesController do
           response.body.should == {:failure => 'Template could not be updated.'}.to_json
         end
       end
-
-      #it 'redirects the user to the theme show view' do
-      #  response.should redirect_to admin_manage_theme_path(@template.theme)
-      #end
     end
   end
 
@@ -118,6 +114,18 @@ describe Admin::TemplatesController do
 
       post :create, params
       response.should render_template('admin/templates/_item')
+    end
+  end
+
+  describe '#destroy' do
+    it 'renders the templates/destroy.js template' do
+      template = Factory(:template)
+
+      params = { :theme_id => template.theme_id, :id => template.id }
+      params[:format] = 'js'
+
+      delete :destroy, params
+      response.should render_template('admin/templates/destroy')
     end
   end
 end

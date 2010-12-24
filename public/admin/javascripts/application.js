@@ -18,9 +18,9 @@ jQuery(function($){
       $('#overlay').remove();
   });
 
-  $('#overlay a.cancel').live('click',function(){
+  $('#overlay a.cancel').live('click',function(e){
     $('#overlay').remove();
-    return false;
+    e.preventDefault();
   });
 
   $('h2.toggle-sibling').live('click', function(){
@@ -28,5 +28,5 @@ jQuery(function($){
     $sibling.is(':hidden') ? $sibling.show() : $sibling.hide();
   });
 
-  $('body').delegate('*', 'click', function(){ $('div.selector ul').hide() });
+  //$('body').delegate('*', 'click', function(){ $('div.selector ul').hide() });
 });
