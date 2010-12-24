@@ -14,4 +14,6 @@ MagnetismCMS::Application.routes.draw do
 
   match '/admin' => 'admin/dashboard#show', :as => :dashboard
   match '/admin/logout' => 'admin/sessions#destroy', :as => :logout
+
+  match '/(*path)' => 'dispatch#show'
 end
