@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(:version => 20101214050504) do
     t.datetime "updated_at"
   end
 
+  add_index "pages", ["slug"], :name => "index_pages_on_slug"
+
   create_table "sites", :force => true do |t|
     t.string   "name"
     t.string   "domain"
@@ -58,7 +60,6 @@ ActiveRecord::Schema.define(:version => 20101214050504) do
   end
 
   create_table "string_data", :force => true do |t|
-    t.integer  "data_id"
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -80,7 +81,6 @@ ActiveRecord::Schema.define(:version => 20101214050504) do
   end
 
   create_table "text_data", :force => true do |t|
-    t.integer  "data_id"
     t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"

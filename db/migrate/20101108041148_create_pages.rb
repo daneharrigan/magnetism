@@ -13,6 +13,8 @@ class CreatePages < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :pages, :slug
   end
 
   def self.down

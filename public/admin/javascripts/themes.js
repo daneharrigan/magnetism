@@ -15,7 +15,8 @@ var Template = {
     $fields.sortable({
       handle: 'a.sort',
       placeholder: 'placeholder',
-      stop: Template.sort_fields
+      stop: Template.sort_fields,
+      axis: 'y'
     });
     $fields.disableSelection();
   },
