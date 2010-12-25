@@ -5,6 +5,6 @@ class DispatchController < ApplicationController
 
     render :text => page.template.content
   rescue
-      render :text => 'Page not found'
+      render :text => 'Page not found', :status => 404
   end
 end
