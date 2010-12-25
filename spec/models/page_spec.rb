@@ -90,4 +90,55 @@ describe Page do
       end
     end
   end
+
+  describe '#find_by_path' do
+    before(:each) do
+      @homepage = Factory(:page, :slug => '/')
+      @site = @homepage.site
+      @site.homepage = @homepage
+      @site.save!
+    end
+
+    it 'returns the homepage' do
+      Page.find_by_path('').should == @homepage
+    end
+
+    it 'returns a top level page' do
+      page = Factory(:page)
+      @homepage.pages << page
+      Page.find_by_path(page.slug).should == page
+    end
+
+    it 'returns a second level page' do
+      page_1 = Factory(:page)
+      page_2 = Factory(:page, :site => page_1.site, :template => page_1.template)
+
+      @homepage.pages << page_1
+      page_1.pages << page_2
+
+      uri = [page_1.slug, page_2.slug].join('/')
+
+      Page.find_by_path(uri).should == page_2
+    end
+
+    it 'returns a third level page' do
+      page_1 = Factory(:page)
+      page_2 = Factory(:page, :site => page_1.site, :template => page_1.template)
+      page_3 = Factory(:page, :site => page_1.site, :template => page_1.template)
+
+      @homepage.pages << page_1
+      page_1.pages << page_2
+      page_2.pages << page_3
+
+      uri = [page_1.slug, page_2.slug, page_3.slug].join('/')
+
+      Page.find_by_path(uri).should == page_3
+    end
+
+    context 'when a page cant be found' do
+      it 'returns nil' do
+        Page.find_by_path('does/not/exist').should be_nil
+      end
+    end
+  end
 end

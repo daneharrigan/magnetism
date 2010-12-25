@@ -27,6 +27,20 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def self.find_by_path(path)
+    path = path.split('/')
+    path.unshift '/'
+
+    page = first(:conditions => { :slug => path.shift })
+    return if page.nil?
+
+    until path.empty? || page.nil?
+      page = page.pages.first(:conditions => { :slug => path.shift })
+    end
+
+    page
+  end
+
   private
     def generate_slug
       slug = title.downcase.gsub(/[_\s]/,'-').gsub(/([^a-z0-9-])/,'')
