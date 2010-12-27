@@ -1,5 +1,7 @@
-PATH
-  remote: /Users/Dane/Projects/liquify
+GIT
+  remote: git://github.com/daneharrigan/liquify.git
+  revision: 84ed1bffdfe76744c7593538ddedc6223ad03b2e
+  branch: 1.0-alpha
   specs:
     liquify (0.2)
       liquid (>= 2.2.2)
