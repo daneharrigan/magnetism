@@ -1,0 +1,3 @@
+h1. Magnetism
+
+All work is done in the development branch. When stable points are eached they will be merged into master
