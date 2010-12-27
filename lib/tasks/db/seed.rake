@@ -38,6 +38,15 @@ namespace :db do
       :publish_at => 1.hour.ago,
       :template => homepage_template)
 
+    # adding content to homepage fields
+    homepage.current!
+    homepage.fields = {
+      'headline' => %{You're using Magnetism!},
+      'features' => %{Theres a lot in store. Stay tuned!},
+      'narrative' => %{It's a work-in-progress, but it'll get there.}
+    }
+    Page.clear_current!
+
     homepage.pages << site.pages.create(
       :title => 'Page Title - 1',
       :publish_at => 1.hour.ago,
@@ -73,6 +82,9 @@ namespace :db do
 <html>
 <body>
   <h1>Site Name - 1</h1>
+  <h2>{{ page.data.headline }}</h2>
+  <div id="features">{{ page.data.features }}</div>
+  <div id="narrative">{{ page.data.narrative }}</div>
 </body>
 </html>
     STR
