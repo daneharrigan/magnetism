@@ -1,6 +1,6 @@
 h1. Magnetism
 
-Magnetism is an attempt at a website CMS/blog. Its currently under development and is not in a usable state.
+Magnetism is an attempt at a website CMS/blog. Its currently under development and at this time is not meant for production *whatsoever*.
 
 If you'd like to see the progress please do the following:
 
