@@ -3,7 +3,9 @@ class DispatchController < ApplicationController
     page = Page.find_by_path(params[:path] || '')
     raise Magnetism::PageNotFound if page.nil?
 
-    render :text => page.template.content
+    page.current!
+    render :text => Liquify.render(page.template.content)
+
   rescue
       render :text => 'Page not found', :status => 404
   end

@@ -8,6 +8,10 @@ class Field < ActiveRecord::Base
 
   before_create :auto_position
 
+  def self.[](key)
+    all.detect { |field| field.input_name == key }.try(:value)
+  end
+
   def value
     entry.try(:value)
   end

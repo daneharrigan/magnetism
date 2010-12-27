@@ -14,6 +14,17 @@ describe Field do
     it { should validate_uniqueness_of(:name).scoped_to(:template_id) }
   end
 
+  describe '.[]' do
+    it 'returns the field value that matches the key' do
+      page = Factory(:page)
+      field = Factory(:field)
+      page.template.fields << field
+      page.current!
+
+      Field[field.input_name].should == field.value
+    end
+  end
+
   describe '#auto_position' do
     let(:template) { Factory(:field).template }
 

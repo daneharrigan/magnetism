@@ -1,5 +1,6 @@
 class Page < ActiveRecord::Base
   include CurrentObject
+  include Liquify::Methods
 
   belongs_to :site
   belongs_to :parent, :class_name => 'Page'
@@ -15,7 +16,7 @@ class Page < ActiveRecord::Base
 
   delegate :fields, :to => :template
 
-  # has_many :data_sets, :dependent => :destroy
+  liquify_method :title, :publish_at, :data => lambda { |page| DataDrop.new(page) }
 
   # validates_presence_of :publish_at # if the page is going active
   # validates_presence_of :template_id

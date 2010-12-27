@@ -9,6 +9,7 @@ gem 'clearance', '0.9.0.rc6'
 gem 'inherited_resources', '1.1.2'
 gem 'layout_options', '~> 0.2'
 gem 'current_object', '~> 0.2'
+gem 'liquify', :path => '/Users/Dane/Projects/liquify'
 
 group :development do
   gem 'mongrel', '1.2.0.pre2'
