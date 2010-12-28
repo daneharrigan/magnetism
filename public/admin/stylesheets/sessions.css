@@ -19,6 +19,9 @@ label {
 	display: block;
 	width: 100px;
 }
+#remember-me label {
+  display: inline;
+}
 input {
 	font-size: 30px;
 }

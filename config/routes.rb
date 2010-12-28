@@ -1,11 +1,13 @@
 MagnetismCMS::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :path => 'admin',
+    :path_names => { :sign_in => 'login', :sign_out => 'logout' },
+    :controllers => { :sessions => 'admin/sessions' }
 
   namespace :admin do
     resource :session
-    resources :users
     resources :pages
     resource :manage do
+      resources :users
       resources :themes do
         resources :templates do
             resources :fields
@@ -14,7 +16,7 @@ MagnetismCMS::Application.routes.draw do
     end
   end
 
-  match '/admin' => 'admin/dashboard#show', :as => :dashboard
+  match '/admin' => 'admin/dashboard#show', :as => :user_root
   match '/admin/logout' => 'admin/sessions#destroy', :as => :logout
 
   match '/(*path)' => 'dispatch#show'

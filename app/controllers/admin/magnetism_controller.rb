@@ -1,8 +1,6 @@
 module Admin
   class MagnetismController < InheritedResources::Base
-    include Clearance::Authentication
-
-    before_filter :authenticate
+    before_filter :authenticate_user!
     helper_method :current_site
     resources_configuration[:self][:route_prefix] = 'admin'
 
@@ -25,12 +23,5 @@ module Admin
     def render_destroy_js
       resource.destroy
     end
-
-    private
-      def deny_access(flash_message = nil)
-        store_location
-        flash[:failure] = flash_message if flash_message
-        redirect_to new_admin_session_path
-      end
   end
 end

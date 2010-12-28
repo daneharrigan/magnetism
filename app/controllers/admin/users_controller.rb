@@ -1,7 +1,9 @@
 module Admin
   class UsersController < MagnetismController
-    def new
-      @user = User.new
+    actions :all, :except => :index
+
+    def index
+      redirect_to admin_manage_path
     end
   end
 end
