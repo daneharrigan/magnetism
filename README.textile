@@ -4,7 +4,7 @@ Magnetism is an attempt at a website CMS/blog. Its currently under development a
 
 If you'd like to see the progress please do the following:
 
-*NOTE:* Drop the database if you have cloned this repository already. I have moved from Clearance to Devise.
+*NOTE: Drop the database if you have cloned this repository already. I have moved from Clearance to Devise.*
 
 1. Clone the repo
 2. bundle install
