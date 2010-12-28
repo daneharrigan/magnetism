@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::ManagesController do
   before(:each) do
-    login_as Factory(:user)
+    sign_in Factory(:user)
     Factory(:site)
 
     get :show

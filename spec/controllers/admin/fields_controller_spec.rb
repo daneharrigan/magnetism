@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::FieldsController do
   before(:each) do
-    login_as Factory(:user)
+    sign_in Factory(:user)
     @template = Factory(:template)
     @params = {
       :theme_id => @template.theme.id,

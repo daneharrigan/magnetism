@@ -3,12 +3,12 @@ require 'spec_helper'
 describe Admin::DashboardController do
   it 'sends a user that is not logged in to session/new' do
     get :show
-    response.should redirect_to new_admin_session_path
+    response.should redirect_to new_user_session_path
   end
 
   context 'when a user is logged in' do
     before(:each) do
-      login_as Factory(:user)
+     sign_in Factory(:user)
       get :show
     end
 

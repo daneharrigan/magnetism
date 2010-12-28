@@ -1,5 +1,0 @@
-module ControllerHelpers
-  def login_as(user)
-    controller.stub :current_user => user
-  end
-end

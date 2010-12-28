@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Admin::UsersController do
   describe '#new' do
     before(:each) do
-      login_as Factory(:user)
+      sign_in Factory(:user)
       get :new
     end
 

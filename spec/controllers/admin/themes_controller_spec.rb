@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Admin::ThemesController do
   let(:theme) { Factory(:theme) }
 
-  before(:each) { login_as Factory(:user) }
+  before(:each) { sign_in Factory(:user) }
 
   describe '#new' do
     before(:each) { get :new }

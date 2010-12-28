@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Admin::PagesController do
-  before(:each) { login_as Factory(:user) }
+  before(:each) { sign_in Factory(:user) }
 
   let(:site) { Factory(:site) }
 

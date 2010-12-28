@@ -2,9 +2,13 @@ module Admin
   class SessionsController < Devise::SessionsController
     layout 'sessions'
 
+    def show
+      redirect_to new_user_session_path
+    end
+
     protected
       def after_sign_out_path_for(resource)
-        sign_in_path
+        new_user_session_path
       end
   end
 end
