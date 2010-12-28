@@ -13,8 +13,7 @@ namespace :db do
       :name => 'Dane Harrigan',
       :email => 'dharrigan@example.com',
       :password => 'password',
-      :password_confirmation => 'password',
-      :email_confirmed => true)
+      :password_confirmation => 'password')
   end
 
   task :site => :theme do

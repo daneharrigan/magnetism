@@ -1,4 +1,6 @@
 MagnetismCMS::Application.routes.draw do
+  devise_for :users
+
   namespace :admin do
     resource :session
     resources :users
