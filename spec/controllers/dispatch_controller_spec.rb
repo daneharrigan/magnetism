@@ -18,9 +18,17 @@ describe DispatchController do
   end
 
   context 'when a page does not exist' do
+    before(:each) { Page.stub :find_by_path => nil }
+
     it 'raises a Magnetism::PageNotFound exception' do
-      Page.stub :find_by_path => nil
       lambda { get :show }.should raise_error(Magnetism::PageNotFound)
+    end
+
+    it 'returns a status of 404' do
+      lambda do
+        get :show
+        response.status.should == 404
+      end.should raise_error(Magnetism::PageNotFound)
     end
   end
 end
