@@ -1,5 +1,7 @@
 module Admin
   class MagnetismController < InheritedResources::Base
+    include LayoutOptions
+
     before_filter :authenticate_user!
     helper_method :current_site
     resources_configuration[:self][:route_prefix] = 'admin'

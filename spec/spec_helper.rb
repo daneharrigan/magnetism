@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'shoulda'
 require 'factory_girl' # no need for the factory_girl_rails gem
 require 'webrat'
+require 'magnetism/page_not_found' # rails required this by default, but rspec didnt
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 Dir[Rails.root.join("spec/factories/**/*.rb")].each {|f| require f}
