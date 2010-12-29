@@ -12,7 +12,6 @@ Dir[Rails.root.join("spec/factories/**/*.rb")].each {|f| require f}
 RSpec.configure do |config|
   config.mock_with :rspec
   config.include Webrat::Matchers, :type => [:controller, :helper, :view]
-  config.include ControllerHelpers
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
