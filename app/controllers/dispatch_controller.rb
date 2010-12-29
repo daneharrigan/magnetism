@@ -1,4 +1,6 @@
 class DispatchController < ApplicationController
+  layout nil
+
   def show
     page = Page.find_by_path(params[:path] || '')
     # params[:path] is nil when / is requested
@@ -8,6 +10,6 @@ class DispatchController < ApplicationController
     page.current!
     render :text => Liquify.render(page.template.content)
   rescue
-      render :text => 'Page not found', :status => 404
+    render :file => "#{Rails.root}/public/404.html", :status => 404
   end
 end
