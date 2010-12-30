@@ -9,7 +9,7 @@ class DispatchController < ApplicationController
 
     page.current!
     render :text => Liquify.render(page.template.content)
-  rescue
-    render :file => "#{Rails.root}/public/404.html", :status => 404
+  rescue Magnetism::PageNotFound
+    render :text => '404: Page Not Found', :status => 404
   end
 end
