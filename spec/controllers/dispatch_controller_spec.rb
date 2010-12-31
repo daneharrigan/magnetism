@@ -28,7 +28,6 @@ describe DispatchController do
     end
 
     it 'returns the 404 page' do
-      debugger
       response.body.should_not be_empty
     end
   end
