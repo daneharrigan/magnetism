@@ -1,9 +1,14 @@
-%h2 Sites
+%h2.toggle-sibling Sites
+%section
+  %ol#sites= render :partial => 'admin/sites/site', :collection => site_collection, :as => :site
+  = link_to 'New Site', '#', :class => 'new', :remote => true, :method => :get, 'data-type' => :html
 
-%ol#sites= render :partial => 'admin/sites/site', :collection => site_collection, :as => :site
+%h2.toggle-sibling Themes
+%section
+  %ol#themes= render :partial => 'admin/themes/theme', :collection => theme_collection, :as => :theme
+  = link_to 'New Theme', new_admin_manage_theme_path, :class => 'new', :remote => true, :method => :get, 'data-type' => :html
 
-%h2 Themes
-
-%ol#themes= render :partial => 'admin/themes/theme', :collection => theme_collection, :as => :theme
-
-= link_to 'New Theme', new_admin_manage_theme_path, :class => 'new', :remote => true, :method => :get, 'data-type' => :html
+%h2.toggle-sibling Users
+%section
+  %ol#users= render :partial => 'admin/users/user', :collection => user_collection, :as => :user
+  = link_to 'New User', new_admin_manage_user_path, :class => 'new', :remote => true, :method => :get, 'data-type' => :html

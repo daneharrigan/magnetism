@@ -1,5 +1,25 @@
+%h2 New User
 = form_for [:admin, :manage, resource] do |f|
+  .large-title
+    = f.label :login
+    = f.text_field :login
+  %ol.fields
+    %li
+      = f.label :name, 'Full Name'
+      = f.text_field :name
+    %li
+      = f.label :email
+      = f.text_field :email
   %fieldset
-    = f.label :email
-    = f.text_field :email
-  = f.submit 'Create'
+    %ol.fields
+      %li
+        = f.label :password
+        = f.password_field :password
+        %p.note 6 characters or longer. Including at least one number is good practice.
+      %li
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation
+
+  .actions
+    = link_to 'Cancel', '#cancel', :class => 'cancel'
+    = f.submit 'Create'

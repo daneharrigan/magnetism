@@ -25,6 +25,9 @@ label {
 input {
 	font-size: 30px;
 }
+#user_email, #user_login, #user_password {
+  width: 430px;
+}
 div {
 	text-align: right;
 }

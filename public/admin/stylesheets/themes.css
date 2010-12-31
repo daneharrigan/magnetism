@@ -86,6 +86,9 @@
 .code-active .code-content {
   display: block;
 }
+#content .code-content textarea {
+  height: 500px;
+}
 .fields .placeholder {
   height: 25px;
   background: #eee;

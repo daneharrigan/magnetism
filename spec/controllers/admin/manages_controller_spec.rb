@@ -20,4 +20,8 @@ describe Admin::ManagesController do
     Factory(:theme)
     controller.send(:theme_collection).should == Theme.all
   end
+
+  it 'has a user_collection helper that returns all users' do
+    controller.send(:user_collection).should == User.all
+  end
 end

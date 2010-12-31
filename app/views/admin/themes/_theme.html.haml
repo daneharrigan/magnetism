@@ -1,6 +1,6 @@
 %li.item
   = link_to theme.name, admin_manage_theme_path(theme)
   .actions
-    = link_to 'Delete Page', admin_manage_theme_path(theme, :format => :js), :remote => true, :method => :delete
+    = link_to 'Delete Theme', admin_manage_theme_path(theme, :format => :js), :remote => true, :method => :delete
     |
     = link_to 'Change Theme Name', edit_admin_manage_theme_path(theme), :remote => true, :method => :get, 'data-type' => :html
