@@ -317,7 +317,10 @@ fieldset .fields label {
 .try-again {
   text-align: center;
 }
-
+.cancel:link, .cancel:visited {
+  color: #9c0a0a;
+  margin-right: 20px;
+}
 /* item index */
 .item {
   position: relative;
