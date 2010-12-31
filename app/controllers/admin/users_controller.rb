@@ -7,5 +7,11 @@ module Admin
     def index
       redirect_to admin_manage_path
     end
+
+    def create
+      create! do |success, failure|
+        success.html { redirect_to admin_manage_path }
+      end
+    end
   end
 end

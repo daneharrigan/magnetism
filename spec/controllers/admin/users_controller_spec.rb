@@ -13,12 +13,28 @@ describe Admin::UsersController do
   describe '#new' do
     before(:each) { get :new }
 
-    it 'sets @user as a User instance' do
-      assigns(:user).class.should == User
+    it 'renders users/new' do
+      response.should render_template('admin/users/new')
     end
 
-    it 'sets @user as a new record' do
-      assigns(:user).new_record?.should == true
+    it 'renders layouts/overlay' do
+      response.should render_template('layouts/overlay')
+    end
+  end
+
+  describe '#create' do
+    it 'redirects the user back to admin/manage' do
+      params = {}
+      params[:user] = {
+        :name => 'John Smith',
+        :email => 'john.smith@example.com',
+        :login => 'jsmith',
+        :password => 'foobar1',
+        :password_confirmation => 'foobar1'
+      }
+
+      post :create, params
+      response.should redirect_to admin_manage_path
     end
   end
 end
