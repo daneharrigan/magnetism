@@ -38,18 +38,20 @@ describe Admin::TemplatesController do
   end
 
   describe '#update' do
+    before(:each) do
+      @template = Factory(:template)
+      @params = { :theme_id => @template.theme.id, :id => @template.id }
+    end
     context 'when the position of the fields are posted' do
       before(:each) do
-        @template = Factory(:template)
         @field_1 = Factory(:field, :template => @template)
         field_type = @field_1.field_type
         @field_2 = Factory(:field, :template => @template, :field_type => field_type)
         @field_3 = Factory(:field, :template => @template, :field_type => field_type)
 
-        params = { :theme_id => @template.theme.id, :id => @template.id }
-        params[:position] = [@field_3.id, @field_2.id, @field_1.id]
+        @params[:position] = [@field_3.id, @field_2.id, @field_1.id]
 
-        put :update, params
+        put :update, @params
       end
 
       it 'reorders field_3 in position 1' do
@@ -67,9 +69,7 @@ describe Admin::TemplatesController do
 
     context 'when the template content is posted' do
       before(:each) do
-        @template = Factory(:template)
         @content = '<h1>{{ site.name }}</h1>'
-        @params = { :theme_id => @template.theme.id, :id => @template.id }
         @params[:template] = { :content => @content }
         @params[:format] = 'json'
       end
@@ -92,9 +92,13 @@ describe Admin::TemplatesController do
 
       context 'when the update fails' do
         it 'returns a json object of the failure message' do
-          pending 'how the hell do i test this?'
-          template = mock_model(Template, :update_attributes => false, :errors => {:fail => true} )
-          Template.stub(:find => template)
+          @template.stub :update_attributes => false, :errors => { :fail => true }
+          templates = [@template]
+          theme = @template.theme
+
+          templates.stub :find => @template
+          theme.stub :templates => templates
+          Theme.stub :find => theme
 
           put :update, @params
           response.body.should == {:failure => 'Template could not be updated.'}.to_json
@@ -120,8 +124,7 @@ describe Admin::TemplatesController do
   describe '#destroy' do
     it 'renders the templates/destroy.js template' do
       template = Factory(:template)
-
-      params = { :theme_id => template.theme_id, :id => template.id }
+      params = { :theme_id => template.theme.id, :id => template.id }
       params[:format] = 'js'
 
       delete :destroy, params

@@ -65,16 +65,29 @@ describe Admin::UsersController do
   end
 
   describe '#update' do
-    it 'redirects the user to /admin/manage' do
-      params = { :id => user.id }
-      params[:user] = {
+    before(:each) do
+      @params = { :id => user.id }
+      @params[:user] = {
         :name => 'Foo Bar',
         :password => '',
         :password_confirmation => ''
       }
-
-      put :update, params
+    end
+    it 'redirects the user to /admin/manage' do
+      put :update, @params
       response.should redirect_to admin_manage_path
+    end
+
+    context 'when the update fails' do
+      it 'sets the flash failure message' do
+        user.stub :update_attributes => false, :errors => { :fail => true }
+        # user.stub :update_attribute => false
+        #User.stub :update => false
+        User.stub :find => user
+
+        put :update, @params
+        flash[:failure].should_not be_nil
+      end
     end
   end
 end

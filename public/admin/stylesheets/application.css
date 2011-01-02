@@ -17,6 +17,12 @@ html, body {
 fieldset {
   border: none;
 }
+fieldset legend {
+  position: absolute;
+  margin: -10px 0 0 5px;
+  background: #fff;
+  padding: 0 5px;
+}
 ul, ol {
   list-style: none;
 }

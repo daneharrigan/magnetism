@@ -20,8 +20,13 @@ module Admin
       end
 
       update! do |success, failure|
-        success.html { redirect_to admin_manage_path }
+        success.html { }
+        failure.html do
+          flash[:failure] = 'User could not be updated.'
+        end
       end
+
+      redirect_to admin_manage_path
     end
 
     alias :destroy :render_destroy_js
