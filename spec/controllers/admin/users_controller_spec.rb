@@ -63,4 +63,18 @@ describe Admin::UsersController do
       response.should render_template('admin/users/edit')
     end
   end
+
+  describe '#update' do
+    it 'redirects the user to /admin/manage' do
+      params = { :id => user.id }
+      params[:user] = {
+        :name => 'Foo Bar',
+        :password => '',
+        :password_confirmation => ''
+      }
+
+      put :update, params
+      response.should redirect_to admin_manage_path
+    end
+  end
 end

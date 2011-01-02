@@ -14,6 +14,16 @@ module Admin
       end
     end
 
+    def update
+      [:password, :password_confirmation].each do |key|
+        params[:user].delete(key) if params[:user][key].empty?
+      end
+
+      update! do |success, failure|
+        success.html { redirect_to admin_manage_path }
+      end
+    end
+
     alias :destroy :render_destroy_js
   end
 end
