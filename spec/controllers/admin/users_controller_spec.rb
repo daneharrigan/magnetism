@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Admin::UsersController do
-  before(:each) { sign_in Factory(:user) }
+  let(:user) { Factory(:user) }
+  before(:each) { sign_in user }
 
   describe '#index' do
     it 'redirects to admin/manage' do
@@ -35,6 +36,31 @@ describe Admin::UsersController do
 
       post :create, params
       response.should redirect_to admin_manage_path
+    end
+  end
+
+  describe '#destroy' do
+    it 'renders users/destroy' do
+      params = { :id => user.id }
+      params[:format] = 'js'
+
+      delete :destroy, params
+      response.should render_template('admin/users/destroy')
+    end
+  end
+
+  describe '#edit' do
+    before(:each) do
+      params = { :id => user.id }
+      get :edit, params
+    end
+
+    it 'renders layouts/overlay' do
+      response.should render_template('layouts/overlay')
+    end
+
+    it 'renders users/edit' do
+      response.should render_template('admin/users/edit')
     end
   end
 end

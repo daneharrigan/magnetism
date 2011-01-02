@@ -1,0 +1,26 @@
+= form_for [:admin, :manage, resource] do |f|
+  .large-title
+    = f.label :name, 'Full Name'
+    = f.text_field :name
+  %ol.fields
+    %li
+      = f.label :email
+      = f.text_field :email
+    %li Role: ---
+  %fieldset
+    %legend Credentials
+    %ol.fields
+      %li
+        = f.label :login
+        = f.text_field :login
+      %li
+        = f.label :password
+        = f.password_field :password
+        %p.note 6 characters or longer. Including at least one number is good practice.
+      %li
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation
+
+  .actions
+    = link_to 'Cancel', '#cancel', :class => 'cancel'
+    = f.submit

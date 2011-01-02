@@ -1,7 +1,7 @@
 module Admin
   class UsersController < MagnetismController
     actions :all, :except => :index
-    layout_options :overlay => :new
+    layout_options :overlay => [:new, :edit], :none => :destroy
     resources_configuration[:self][:route_prefix] = 'admin/manage'
 
     def index
@@ -13,5 +13,7 @@ module Admin
         success.html { redirect_to admin_manage_path }
       end
     end
+
+    alias :destroy :render_destroy_js
   end
 end
