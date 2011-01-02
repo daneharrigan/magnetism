@@ -30,7 +30,7 @@ describe Admin::SessionsController do
       user = Factory(:user)
       params = {}
       params[:user] = {
-        :email => user.email,
+        :login => user.login,
         :password => 'password'
       }
       post :create, params

@@ -1,17 +1,19 @@
 %h2 New User
 = form_for [:admin, :manage, resource] do |f|
   .large-title
-    = f.label :login
-    = f.text_field :login
+    = f.label :name, 'Full Name'
+    = f.text_field :name
   %ol.fields
-    %li
-      = f.label :name, 'Full Name'
-      = f.text_field :name
     %li
       = f.label :email
       = f.text_field :email
+    %li Role: ---
   %fieldset
+    %legend Credentials
     %ol.fields
+      %li
+        = f.label :login
+        = f.text_field :login
       %li
         = f.label :password
         = f.password_field :password
