@@ -146,10 +146,15 @@ describe Admin::PagesController do
 
     context 'when a page does not update successfully' do
       before(:each) do
-        pending 'might not be able to test this. could be an inherited resources thing.'
-
         site = @page.site
+        @page.stub :update_attributes => false, :errors => { :fail => true }
+
         pages = [@page]
+        pages.stub :find => @page
+
+        site.stub :pages => pages
+        Site.stub :first => site
+
         put :update, @params
       end
 

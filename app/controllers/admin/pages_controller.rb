@@ -15,8 +15,11 @@ module Admin
     def update
       resource.current!
       update! do |success, failure|
-        success.html { redirect_to edit_admin_page_path(resource) }
+        success.html { }
+        failure.html { flash[:failure] = 'Page could not be updated.' }
       end
+
+      redirect_to edit_admin_page_path(resource)
     end
 
     protected
