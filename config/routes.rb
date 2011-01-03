@@ -6,11 +6,13 @@ MagnetismCMS::Application.routes.draw do
   namespace :admin do
     resource :session
     resources :pages
+    resources :settings
     resource :manage do
       resources :users
+      resources :sites
       resources :themes do
         resources :templates do
-            resources :fields
+          resources :fields
         end
       end
     end

@@ -3,7 +3,7 @@
     %h1 Magnetism
     %ul#settings
       %li= link_to current_user.name, '#'
-      %li= link_to 'Settings', '#'
+      %li= link_to 'Settings', admin_settings_path
       %li= link_to 'Logout', logout_path
   #mainNav
     .container
@@ -12,4 +12,6 @@
         %li= link_to 'Pages', admin_pages_path, :class => 'tab'
         %li= link_to 'Assets', '#', :class => 'tab'
         %li= link_to 'Manage', admin_manage_path, :class => 'tab'
-      = render :partial => 'admin/shared/selector', :locals => { :id => 'site-selector', :name => current_site.name }
+      = render :partial => 'admin/shared/selector', :locals => { :id => 'site-selector',
+        :name => current_site.name,
+        :selector_collection => site_selector_collection }

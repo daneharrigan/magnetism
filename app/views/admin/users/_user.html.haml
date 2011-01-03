@@ -1,4 +1,6 @@
 %li{ :id => "user-#{user.id}", :class => 'item' }
   = link_to user.name, edit_admin_manage_user_path(user), :remote => true, 'data-type' => :html
   .actions
+    = link_to 'Edit User', edit_admin_manage_user_path(user), :remote => true, 'data-type' => :html
+    |
     = link_to 'Delete User', admin_manage_user_path(user, :format => :js), :remote => true, :method => :delete
