@@ -9,6 +9,8 @@ gem 'inherited_resources', '1.1.2'
 gem 'layout_options', '~> 0.2'
 gem 'current_object', '~> 0.2'
 gem 'liquify', :git => 'git://github.com/daneharrigan/liquify.git', :branch => '1.0-alpha'
+gem 'fog', '~> 0.3.34'
+gem 'carrierwave', '~> 0.5.1'
 
 group :development do
   gem 'mongrel', '1.2.0.pre2'

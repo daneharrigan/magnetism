@@ -10,11 +10,5 @@ describe MagnetismHelper do
           :content => site.name)
       end
     end
-
-    it 'contains a link to make a new site' do
-      site_selector_collection.last.should have_selector('a',
-        :href => new_admin_manage_site_path,
-        :content => 'New Site')
-    end
   end
 end

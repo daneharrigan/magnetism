@@ -4,9 +4,6 @@ module Admin
     helper_method :homepage, :parent_page, :template_collection
     layout_options :overlay => :new, :none => :destroy
 
-    alias_method :show, :redirect_to_edit
-    alias_method :destroy, :render_destroy_js
-
     def edit
       resource.current!
       edit!
@@ -22,8 +19,11 @@ module Admin
       redirect_to edit_admin_page_path(resource)
     end
 
+    alias :show :redirect_to_edit
+    alias :destroy :render_destroy_js
+
     protected
-      alias_method :begin_of_association_chain, :current_site
+      alias :begin_of_association_chain :current_site
 
       def homepage
         @homepage ||= begin_of_association_chain.homepage

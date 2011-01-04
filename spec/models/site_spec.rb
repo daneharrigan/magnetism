@@ -9,26 +9,10 @@ describe Site do
   it { should allow_value(false).for(:production) }
 
   it { should have_many(:pages) }
+  it { should have_many(:assets) }
 
   it { should belong_to(:homepage) }
   it { should belong_to(:theme) }
-
-  describe '.current' do
-    context 'when #current! is not triggered' do
-      it 'returns nil' do
-        pending 'might not be necessary'
-        Site.current.should be_nil
-      end
-
-      it 'returns a site' do
-        pending 'might not be necessary'
-        site = Factory(:site)
-        site.current!
-
-        Site.current.should == site
-      end
-    end
-  end
 
   context 'when a site exists' do
     before(:each) { Factory(:site) }
@@ -36,5 +20,10 @@ describe Site do
     it { should validate_uniqueness_of(:domain) }
   end
 
-  # it { should have_many(:redirects) }  
+  describe '#key' do
+    it 'returns an md5 sum of the site id' do
+      site = Factory(:site)
+      site.key.should == Digest::MD5.new(site.id).to_s
+    end
+  end
 end

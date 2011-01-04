@@ -1,3 +1,5 @@
+require 'magnetism/page_not_found'
+
 class DispatchController < ApplicationController
   layout nil
 

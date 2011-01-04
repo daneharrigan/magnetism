@@ -1,4 +1,8 @@
+require 'digest/md5'
+
 class Site < ActiveRecord::Base
+  include CurrentObject
+
   validates_presence_of :name, :domain, :theme_id
   validates_uniqueness_of :name, :domain
   validates_inclusion_of :production, :in => [true, false]
@@ -7,15 +11,12 @@ class Site < ActiveRecord::Base
   attr_accessible :name, :domain, :production, :theme_id
 
   has_many :pages, :dependent => :destroy
+  has_many :assets, :dependent => :destroy
 
   belongs_to :homepage, :class_name => 'Page'
   belongs_to :theme
 
-  # def self.current
-  #   Thread.current[:site]
-  # end
-  # 
-  # def current!
-  #   Thread.current[:site] = self
-  # end
+  def key
+    Digest::MD5.new(id).to_s
+  end
 end

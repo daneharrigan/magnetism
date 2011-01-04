@@ -11,6 +11,7 @@
         %li= link_to 'Pages', admin_pages_path, :class => 'tab'
         %li= link_to 'Assets', '#', :class => 'tab'
         %li= link_to 'Manage', admin_manage_path, :class => 'tab'
-      = render :partial => 'admin/shared/selector', :locals => { :id => 'site-selector',
-        :name => current_site.name,
-        :selector_collection => site_selector_collection }
+      - if Site.count > 1
+        = render :partial => 'admin/shared/selector', :locals => { :id => 'site-selector',
+          :name => current_site.name,
+          :selector_collection => site_selector_collection }
