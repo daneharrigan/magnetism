@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Asset do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:site) }
+  it { should validate_presence_of(:site_id) }
+  it { should validate_presence_of(:file) }
 end

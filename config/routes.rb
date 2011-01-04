@@ -6,6 +6,7 @@ MagnetismCMS::Application.routes.draw do
   namespace :admin do
     resource :session
     resources :pages
+    resources :assets
     resource :manage do
       resources :users
       resources :sites

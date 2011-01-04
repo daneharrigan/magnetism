@@ -1,4 +1,4 @@
-#side-bar
+%aside
   %h2.toggle-sibling.blue-header Templates
   %ul{ :id => "template-type-#{TemplateType.template.id}" }= render :partial => 'admin/templates/item', :collection => template_collection, :as => :template, :locals => { :theme => resource }
 

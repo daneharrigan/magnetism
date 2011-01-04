@@ -1,0 +1,9 @@
+%h2
+  Assets for
+  = current_site.name
+= render 'sidebar'
+%ul#assets
+  - 20.times do |i|
+    %li= "Image #{i}"
+.clear
+

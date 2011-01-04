@@ -1,5 +1,5 @@
 /* html5 elements */
-header, footer, section {
+header, footer, section, aside {
   display: block;
 }
 
@@ -13,6 +13,7 @@ html, body {
   font: 14px/16px Helvetica, Arial, sans-serif;
   text-align: center;
   min-width: 900px;
+  height: 100%;
 }
 fieldset {
   border: none;
@@ -48,7 +49,6 @@ h2.blue-header {
   padding: 10px 20px;  
 }
 .container {
-/*  width: 800px; */
   margin: 0 auto;
   text-align: left;
   position: relative;
@@ -218,7 +218,7 @@ a.new:active, a.new:hover {
 #site-selector {
   position: absolute;
   right: 20px;
-  top: 10px;  
+  top: 10px;
   width: 160px;
 }
 
@@ -327,6 +327,7 @@ fieldset .fields label {
   color: #9c0a0a;
   margin-right: 20px;
 }
+
 /* item index */
 .item {
   position: relative;
@@ -340,6 +341,26 @@ fieldset .fields label {
 }
 .item .selector {
   width: 120px;
+}
+
+/* side bar */
+aside {
+  float: right;
+  width: 250px;
+  height: 100%;
+  background: #FFF;
+}
+#content aside h2 {
+  font-size: 14px;
+  cursor: pointer;
+}
+aside ul {
+  margin-bottom: 20px;
+}
+aside li {
+  position: relative;
+  margin-bottom: 5px;
+  padding: 0 20px;
 }
 
 /* extras */
