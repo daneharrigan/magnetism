@@ -75,7 +75,7 @@ var Template = {
 /******************************************************************/
 
 jQuery(function($){
-  var $sidebar = $('#side-bar a.open');
+  var $sidebar = $('aside a.open');
 
   $sidebar.live('ajax:success',function(el, html, status){
     Template.load(this, html);

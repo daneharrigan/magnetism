@@ -1,21 +1,23 @@
-%li.form-active{ 'data-template-id' => resource.id }
-  .form-content
-    = form_for [:admin, :manage, association_chain, resource].flatten, :html => { :id => nil } do |f|
-      .large-title
-        %label.title Page Title
-        %span.input
+%li{ 'data-template-id' => resource.id, :class => (page_template? ? 'form' : 'code') << '-active' }
+  - if page_template?
+    .form-content
+      = form_for [:admin, :manage, association_chain, resource].flatten, :html => { :id => nil } do |f|
+        .large-title
+          %label.title Page Title
+          %span.input
 
-      %ol.fields
-        = render :partial => 'admin/fields/span', :collection => resource.fields, :as => :field
+        %ol.fields
+          = render :partial => 'admin/fields/span', :collection => resource.fields, :as => :field
 
-      .actions
-        = link_to 'Add Field', new_polymorphic_path([:admin, :manage, association_chain, resource, :field].flatten), :remote => true, :method => :get, 'data-type' => :html
+        .actions
+          = link_to 'Add Field', new_polymorphic_path([:admin, :manage, association_chain, resource, :field].flatten), :remote => true, :method => :get, 'data-type' => :html
   .code-content
     = form_for [:admin, :manage, association_chain, resource].flatten, :html => { :id => nil, 'data-type' => 'json' }, :remote => true do |f|
       = f.text_area :content
       .actions
         = f.submit
 
-  %ol.toggle-content.tab-collection
-    %li= link_to 'Form View', '#form-view', :class => 'tab bottom active', 'data-view' => 'form'
-    %li= link_to 'Code View', '#code-view', :class => 'tab bottom', 'data-view' => 'code'
+  - if page_template?
+    %ol.toggle-content.tab-collection
+      %li= link_to 'Form View', '#form-view', :class => 'tab bottom active', 'data-view' => 'form'
+      %li= link_to 'Code View', '#code-view', :class => 'tab bottom', 'data-view' => 'code'
