@@ -7,7 +7,7 @@ describe Admin::TemplatesController do
     before(:each) do
       theme = Factory(:theme)
       params = { :theme_id => theme.id }
-      params[:template_type_id] = Factory(:template_type_template).id
+      params[:template_type_id] = Factory(:template_type_page).id
 
       get :new, params
     end
@@ -113,7 +113,7 @@ describe Admin::TemplatesController do
       params[:theme_id] = Factory(:theme).id
       params[:template] = {
         :name => 'Template Name',
-        :template_type_id => Factory(:template_type_template).id
+        :template_type_id => Factory(:template_type_page).id
       }
 
       post :create, params

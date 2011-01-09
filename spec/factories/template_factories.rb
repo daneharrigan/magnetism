@@ -1,7 +1,7 @@
 Factory.define :template do |f|
   f.sequence(:name) { |n| "Template Name - #{n}"}
   f.association :theme
-  f.association :template_type, :factory => :template_type_template
+  f.association :template_type, :factory => :template_type_page
 end
 
 Factory.define :template_with_generic_template_type, :parent => :template do |f|

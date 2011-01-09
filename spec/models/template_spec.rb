@@ -20,7 +20,7 @@ describe Template do
   describe '.templates' do
     it 'returns all of the templates of type "Template"' do
       template = Factory(:template)
-      Template.templates.should == [template]
+      Template.pages.should == [template]
     end
   end
 

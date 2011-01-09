@@ -116,6 +116,7 @@ GEM
       thor (~> 0.14.0)
     rake (0.8.7)
     responders (0.6.2)
+    rmagick (2.13.1)
     rspec (2.1.0)
       rspec-core (~> 2.1.0)
       rspec-expectations (~> 2.1.0)
@@ -169,6 +170,7 @@ DEPENDENCIES
   liquify!
   mongrel (= 1.2.0.pre2)
   rails (= 3.0.1)
+  rmagick
   rspec (>= 2.1.0)
   rspec-rails (>= 2.1.0)
   ruby-debug19

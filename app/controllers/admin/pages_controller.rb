@@ -38,7 +38,7 @@ module Admin
       end
 
       def template_collection
-        @template_collection ||= current_site.theme.templates
+        @template_collection ||= current_site.theme.templates.pages
       end
   end
 end

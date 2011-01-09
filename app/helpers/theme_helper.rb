@@ -1,8 +1,8 @@
 # TODO: Revisit view and controller code to determine if these methods are only
 #       being called once. If they're only called once we dont need to do the ||=
 module ThemeHelper
-  def template_collection
-    @template_collection ||= Template.templates
+  def page_collection
+    @page_collection ||= Template.pages
   end
 
   def snippet_collection

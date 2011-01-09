@@ -28,6 +28,17 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def permalink
+    slugs = []
+    page = self
+
+    begin
+      slugs << page.slug unless page == site.homepage
+    end while page = page.parent
+
+    "http://#{site.domain}/#{slugs.reverse.join('/')}"
+  end
+
   def self.find_by_path(path)
     path = path.split('/')
     path.unshift '/'

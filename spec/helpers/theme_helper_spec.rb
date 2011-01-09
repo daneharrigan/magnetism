@@ -25,13 +25,13 @@ describe ThemeHelper do
   describe '#template_collection' do
     it 'returns all of the templates of type "Template"' do
       template = Factory(:template)
-      helper.template_collection.should == [template]
+      helper.page_collection.should == [template]
     end
   end
 
   describe '#new_template_collection' do
     it 'returns an array of links to create new templates' do
-      Factory(:template_type_template)
+      Factory(:template_type_page)
       Factory(:template_type_snippet)
       Factory(:template_type_javascript)
       Factory(:template_type_stylesheet)

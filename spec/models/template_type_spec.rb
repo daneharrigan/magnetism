@@ -10,9 +10,9 @@ describe TemplateType do
 
   describe '.template' do
     it 'returns the "Template" template type' do
-      Factory(:template_type_template) # can be read as Template Type: Template
-      template_type = TemplateType.first(:conditions => { :name => 'Template' })
-      TemplateType.template.should === template_type
+      Factory(:template_type_page) # can be read as Template Type: Page
+      template_type = TemplateType.first(:conditions => { :name => 'Page' })
+      TemplateType.page.should === template_type
     end
   end
 

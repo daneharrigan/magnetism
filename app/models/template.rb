@@ -8,7 +8,7 @@ class Template < ActiveRecord::Base
   has_many :fields, :order => 'position ASC'
   has_many :pages
 
-  scope :templates, lambda { where(:template_type_id => TemplateType.template.id) }
+  scope :pages, lambda { where(:template_type_id => TemplateType.page.id) }
   scope :snippets, lambda { where(:template_type_id => TemplateType.snippet.id) }
   scope :javascripts, lambda { where(:template_type_id => TemplateType.javascript.id) }
   scope :stylesheets, lambda { where(:template_type_id => TemplateType.stylesheet.id) }

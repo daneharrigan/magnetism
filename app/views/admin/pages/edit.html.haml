@@ -3,6 +3,9 @@
   .large-title
     = f.label :title, 'Page Title'
     = f.text_field :title
+  %p#permalink
+    = resource.parent.permalink
+    %span= resource.slug
   %ol.fields
     = render :partial => 'admin/fields/item', :collection => resource.template.fields, :as => :field
   .actions

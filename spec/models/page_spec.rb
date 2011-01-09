@@ -141,4 +141,39 @@ describe Page do
       end
     end
   end
+
+  describe '#permalink' do
+    it 'returns the full URL to the homepage' do
+      homepage = Factory(:homepage)
+      site = homepage.site
+      site.homepage = homepage
+
+      homepage.permalink.should == "http://#{site.domain}/"
+    end
+
+    it 'returns the full URL to the top level page' do
+      homepage = Factory(:homepage)
+      site = homepage.site
+      site.homepage = homepage
+      site.save!
+
+      page = Factory(:page, :site => site, :parent => homepage)
+
+      page.permalink.should == "http://#{site.domain}/#{page.slug}"
+    end
+
+    it 'returns the full URL to the sub page' do
+      homepage = Factory(:homepage)
+      site = homepage.site
+      site.homepage = homepage
+      site.save!
+
+      page_1 = Factory(:page, :site => site, :parent => homepage)
+      page_2 = Factory(:page, :site => site, :parent => page_1)
+
+      page_2.permalink.should == "http://#{site.domain}/#{page_1.slug}/#{page_2.slug}"
+    end
+
+    it 'returns the full URL to the blog post'
+  end
 end

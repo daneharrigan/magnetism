@@ -90,12 +90,12 @@ namespace :db do
 
     homepage = theme.templates.create(
       :name => 'Homepage',
-      :template_type => TemplateType.template,
+      :template_type => TemplateType.page,
       :content => content)
 
     page = theme.templates.create(
       :name => 'Single Page',
-      :template_type => TemplateType.template,
+      :template_type => TemplateType.page,
       :content => content)
 
     # homepage fields
@@ -114,7 +114,7 @@ namespace :db do
   end
 
   task :template_types do
-    TemplateType.create(:name => 'Template')
+    TemplateType.create(:name => 'Page')
     TemplateType.create(:name => 'Snippet')
     TemplateType.create(:name => 'JavaScript')
     TemplateType.create(:name => 'Stylesheet')

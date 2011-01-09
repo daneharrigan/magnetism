@@ -65,7 +65,7 @@ describe Admin::PagesController do
         session = { :site_id => @site.id }
         template = Factory(:template, :theme => @site.theme)
         get :new, params, session
-        controller.send(:template_collection).should == @site.theme.templates
+        controller.send(:template_collection).should == @site.theme.templates.pages
       end
     end
   end

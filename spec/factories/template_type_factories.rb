@@ -2,8 +2,8 @@ Factory.define :template_type do |f|
   f.sequence(:name) { |n| "Template Type - #{n}" }
 end
 
-Factory.define :template_type_template, :parent => :template_type do |f|
-  f.name 'Template'
+Factory.define :template_type_page, :parent => :template_type do |f|
+  f.name 'Page'
 end
 
 Factory.define :template_type_snippet, :parent => :template_type do |f|

@@ -4,7 +4,7 @@ class TemplateType < ActiveRecord::Base
 
   has_many :templates
 
-  %W(Template Snippet JavaScript Stylesheet).each do |template_type|
+  %W(Page Snippet JavaScript Stylesheet).each do |template_type|
     class_eval <<-STR
       def self.#{template_type.downcase}
         first(:conditions => { :name => "#{template_type}"})
