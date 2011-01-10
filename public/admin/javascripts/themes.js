@@ -19,8 +19,9 @@ var Template = {
 
     var $fields = $('ol.fields');
     $fields.sortable({
-      handle: 'a.sort',
+      handle: 'a.sort, ol.fields label',
       placeholder: 'placeholder',
+      opacity: 0.8,
       stop: Template.sort_fields,
       axis: 'y'
     });

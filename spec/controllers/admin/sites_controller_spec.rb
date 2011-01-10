@@ -19,4 +19,12 @@ describe Admin::SitesController do
       response.should redirect_to admin_pages_path
     end
   end
+
+  describe '#theme_collection' do
+    it 'returns all of the themes' do
+      theme = Factory(:theme)
+      get :new
+      controller.theme_collection.should == [theme]
+    end
+  end
 end

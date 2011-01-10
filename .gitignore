@@ -7,3 +7,5 @@ tmp/**/*
 *.tmproj
 coverage*
 *.swp
+public/uploads
+public/assets

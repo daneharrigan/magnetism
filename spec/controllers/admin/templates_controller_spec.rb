@@ -22,6 +22,9 @@ describe Admin::TemplatesController do
   end
 
   describe '#edit' do
+    before(:each) do
+    end
+
     describe '#association_group' do
       it 'returns an array of the theme, template and field' do
         field = Factory(:field)

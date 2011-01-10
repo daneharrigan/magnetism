@@ -9,4 +9,11 @@ describe TemplateHelper do
       helper.template_type.should == template_type
     end
   end
+
+  describe '#page_template?' do
+    it 'returns true when the resource has the template type of Page' do
+      helper.stub :resource => Factory(:template)
+      helper.page_template?.should == true
+    end
+  end
 end

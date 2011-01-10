@@ -33,9 +33,5 @@ module Admin
     def association_group(field)
       [association_chain, resource, field].flatten
     end
-
-    def page_template?
-      resource.template_type == TemplateType.page
-    end
   end
 end
