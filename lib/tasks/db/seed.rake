@@ -123,5 +123,6 @@ namespace :db do
   task :field_types do
     FieldType.create(:name => 'Text field')
     FieldType.create(:name => 'Large text field')
+    FieldType.create(:name => 'Asset')
   end
 end

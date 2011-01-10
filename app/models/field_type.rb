@@ -4,7 +4,7 @@ class FieldType < ActiveRecord::Base
 
   has_many :fields
 
-  %W(Text\ field Large\ text\ field).each do |field_type|
+  %W(Text\ field Large\ text\ field Asset).each do |field_type|
     class_eval <<-STR
       def self.#{field_type.parameterize('_')}
         first(:conditions => { :name => "#{field_type}"})

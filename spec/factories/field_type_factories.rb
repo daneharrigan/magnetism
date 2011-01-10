@@ -9,3 +9,7 @@ end
 Factory.define :field_type_large_text_field, :class => FieldType do |f|
   f.name 'Large text field'
 end
+
+Factory.define :field_type_asset, :class => FieldType do |f|
+  f.name 'Asset'
+end

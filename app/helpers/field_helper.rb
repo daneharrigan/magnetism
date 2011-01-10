@@ -5,6 +5,8 @@ module FieldHelper
         :input
       when FieldType.large_text_field
         :textarea
+      when FieldType.asset
+        :asset
     end
 
     display_type ? span_tag(field, tag_name) : input_tag(field, tag_name)
@@ -26,6 +28,8 @@ module FieldHelper
           text_field_tag(name, field.value)
         when :textarea
           text_area_tag(name, field.value)
+        when :asset
+          file_field_tag(name)
       end
     end
 end

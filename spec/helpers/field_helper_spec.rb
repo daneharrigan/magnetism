@@ -7,9 +7,15 @@ describe FieldHelper do
         field = Factory(:field, :field_type => Factory(:field_type_text_field))
         field_tag(field, :span).should have_selector('span', :class => 'input')
       end
+
       it 'should return a span with the class textarea' do
         field = Factory(:field, :field_type => Factory(:field_type_large_text_field))
         field_tag(field, :span).should have_selector('span', :class => 'textarea')
+      end
+
+      it 'should return a span with the class asset' do
+        field = Factory(:field, :field_type => Factory(:field_type_asset))
+        field_tag(field, :span).should have_selector('span', :class => 'asset')
       end
     end
 
@@ -41,6 +47,20 @@ describe FieldHelper do
         id = "page_fields_#{field.input_name}"
 
         helper.field_tag(field).should have_selector('textarea', :id => id, :name => name, :content => field.value)
+      end
+
+      it 'should return an asset uploader field' do
+        @page.site.current!
+        field = Factory(:field_with_asset)
+        entry = Factory(:asset_with_file)
+        field.data.create(:page => @page, :entry => entry)
+        @page.template.fields << field
+
+        name = "page[fields][#{field.input_name}]"
+        id = "page_fields_#{field.input_name}"
+
+        helper.field_tag(field).should have_selector('input', :id => id, :name => name)
+        Site.clear_current!
       end
     end
   end

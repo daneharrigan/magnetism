@@ -3,7 +3,7 @@ module Admin
     actions :all, :except => [:index, :show]
     layout_options :overlay => :new, :none => [:edit, :update, :create, :destroy]
     belongs_to :theme
-    helper_method :association_group, :page_template?
+    helper_method :association_group
 
     def update
       if params[:position]

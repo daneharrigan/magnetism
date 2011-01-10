@@ -228,7 +228,7 @@ a.new:active, a.new:hover {
 #content input[type=password],
 #overlay input[type=password],
 
-#content textarea, span.textarea, .input {
+#content textarea, span.textarea, .input, .asset {
   font: 14px/16px Helvetica, Arial, sans-serif;
   padding: 2px 4px;
   width: 72%;
@@ -240,6 +240,9 @@ a.new:active, a.new:hover {
 #content textarea, span.textarea {
   height: 200px;
   margin-left: 124px
+}
+.asset {
+  width: 30%;
 }
 .large-title .input,
 #overlay .large-title input,
