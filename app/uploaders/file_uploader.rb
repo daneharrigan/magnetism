@@ -7,7 +7,7 @@ class FileUploader < CarrierWave::Uploader::Base
 
 
   def store_dir
-    "public/assets/#{Site.current.key}/uploads/"
+    "assets/#{Site.current.key}/uploads/"
   end
 
   # DH: will come back to this
