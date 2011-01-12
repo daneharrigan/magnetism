@@ -19,6 +19,26 @@ describe Page do
     it { should validate_uniqueness_of(:slug).scoped_to(:site_id, :parent_id) }
   end
 
+  describe '#homepage?' do
+    context 'when the page is the homepage' do
+      it 'returns true' do
+        page = Factory(:page)
+        site = page.site
+        site.homepage = page
+        site.save!
+
+        page.homepage?.should be_true
+      end
+    end
+
+    context 'when the page is not the homepage' do
+      it 'returns false' do
+        page = Factory(:page)
+        page.homepage?.should be_false
+      end
+    end
+  end
+
   describe '#generate_slug' do
     let(:site) { Factory(:site) }
     let(:template) { Factory(:template) }

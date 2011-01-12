@@ -2,11 +2,14 @@ require 'digest/md5'
 
 class Site < ActiveRecord::Base
   include CurrentObject
+  include Liquify::Methods
 
   validates_presence_of :name, :domain, :theme_id
   validates_uniqueness_of :name, :domain
   validates_inclusion_of :production, :in => [true, false]
   validates_numericality_of :theme_id
+
+  liquify_method :name, :homepage
 
   attr_accessible :name, :domain, :production, :theme_id
 

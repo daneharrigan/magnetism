@@ -28,6 +28,10 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def homepage?
+    site.homepage == self
+  end
+
   def permalink
     slugs = []
     page = self

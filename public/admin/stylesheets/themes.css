@@ -74,7 +74,7 @@ aside .delete:visited {
 }
 .fields .placeholder {
   height: 25px;
-  background: #eee;
+  background: #efefef;
   border: 1px dashed #aaa;
 }
 #new-template {
@@ -88,4 +88,9 @@ aside .delete:visited {
 }
 #new-template-selector {
   width: 160px;
+}
+.buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

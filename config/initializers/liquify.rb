@@ -1,5 +1,9 @@
 Liquify.setup do |config|
+  config.register_drop :site, lambda { Site.current }
+  config.register_drop :navigation, lambda { Site.current.homepage.pages }
   config.register_drop :page, lambda { Page.current }
+  config.register_drop :parent, lambda { Page.current.parent }
+
   # A tag is a class that inherits from Liquify::Tag or Liquid::Tag
   # config.register_tag :tag_name, TagClass
 

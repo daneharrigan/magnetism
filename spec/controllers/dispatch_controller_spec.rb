@@ -5,13 +5,17 @@ describe DispatchController do
     it 'outputs the rendered liquid template' do
       template = mock_model(Template, :content => '{{ page.title }}')
       page = mock_model(Page,
-        :template => template,
         :current! => true,
+        :template => template,
+        :pages => [],
+        :parent => nil,
         :to_liquid => { 'title' => 'Foo Title' })
+      pages = []
+      pages.stub :find_by_path => page
 
-      Page.stub :find_by_path => page, :current => page
-      request.request_uri = '/'
-
+      site = mock_model(Site, :current! => true, :pages => pages, :homepage => page)
+      Site.stub :first => site, :current => site
+      Page.stub :current => page
       get :show
       response.body.should == 'Foo Title'
     end
@@ -19,7 +23,11 @@ describe DispatchController do
 
   context 'when a page does not exist' do
     before(:each) do
-      Page.stub :find_by_path => nil
+      pages = []
+      pages.stub :find_by_path => nil
+
+      site = mock_model(Site, :current! => true, :pages => pages, :homepage => nil)
+      Site.stub :first => site, :current => site
       get :show
     end
 
