@@ -15,3 +15,24 @@
   margin-right: 270px;
   padding-left: 20px;
 }
+#permalink {
+  padding-left: 124px;
+  line-height: 30px;
+  margin-bottom: 0;
+}
+#content #permalink input {
+  display: none;
+}
+#content p.edit input#page_slug {
+  display: inline;
+  width: 100px;
+}
+#content p.edit span {
+  display: none;
+}
+#edit-permalink:link,
+#edit-permalink:visited {
+  margin-left: 10px;
+  font-size: 12px;
+  font-style: italic;
+}

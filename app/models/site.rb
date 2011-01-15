@@ -9,6 +9,8 @@ class Site < ActiveRecord::Base
   validates_inclusion_of :production, :in => [true, false]
   validates_numericality_of :theme_id
 
+  before_create :assign_key
+
   liquify_method :name, :homepage
 
   attr_accessible :name, :domain, :production, :theme_id
@@ -19,7 +21,8 @@ class Site < ActiveRecord::Base
   belongs_to :homepage, :class_name => 'Page'
   belongs_to :theme
 
-  def key
-    Digest::MD5.new(id).to_s
-  end
+  private
+    def assign_key
+      write_attribute :key, Digest::MD5.new(id).to_s
+    end
 end

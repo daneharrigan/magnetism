@@ -168,7 +168,7 @@ describe Page do
       site = homepage.site
       site.homepage = homepage
 
-      homepage.permalink.should == "http://#{site.domain}/"
+      homepage.permalink.should == '/'
     end
 
     it 'returns the full URL to the top level page' do
@@ -179,7 +179,7 @@ describe Page do
 
       page = Factory(:page, :site => site, :parent => homepage)
 
-      page.permalink.should == "http://#{site.domain}/#{page.slug}"
+      page.permalink.should == "/#{page.slug}"
     end
 
     it 'returns the full URL to the sub page' do
@@ -191,7 +191,7 @@ describe Page do
       page_1 = Factory(:page, :site => site, :parent => homepage)
       page_2 = Factory(:page, :site => site, :parent => page_1)
 
-      page_2.permalink.should == "http://#{site.domain}/#{page_1.slug}/#{page_2.slug}"
+      page_2.permalink.should == "/#{page_1.slug}/#{page_2.slug}"
     end
 
     it 'returns the full URL to the blog post'

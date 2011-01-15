@@ -69,6 +69,19 @@ describe Field do
         lambda { field.value = 'Lorem Ipsum' }.should change(TextDatum, :count).by(+1)
       end
 
+      it 'creates a new entry in the assets table' do
+        site = Factory(:site)
+        site.current!
+
+        field = Factory(:field_with_asset)
+        fpo_file_path = File.expand_path(File.dirname(__FILE__) + '/../support/carrierwave')
+        field.value = File.open("#{fpo_file_path}/fpo.gif")
+
+        field.value.url.should =~ /_fpo\.gif$/
+
+        Site.clear_current!
+      end
+
       it 'creates a new entry in the datetime_data table'
       it 'creates a new entry in the boolean_data table'
     end
@@ -89,6 +102,20 @@ describe Field do
         field.value = 'Overwritten Value'
 
         field.value.should == 'Overwritten Value'
+      end
+
+      it 'replaces the file attached to the asset' do
+        site = Factory(:site)
+        site.current!
+        field = Factory(:field_with_asset)
+        fpo_file_path = File.expand_path(File.dirname(__FILE__) + '/../support/carrierwave')
+
+        field.value = File.open("#{fpo_file_path}/fpo.gif")
+        field.value = File.open("#{fpo_file_path}/fpo_2.gif")
+
+        field.value.url.should =~ /_fpo_2\.gif$/
+
+        Site.clear_current!
       end
 
       it 'replaces the value in the datetime_data table'

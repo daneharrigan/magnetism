@@ -3,4 +3,7 @@ class Asset < ActiveRecord::Base
 
   belongs_to :site
   validates_presence_of :site_id
+
+  alias :value= :file=
+  alias :value :file
 end

@@ -4,6 +4,10 @@ Liquify.setup do |config|
   config.register_drop :page, lambda { Page.current }
   config.register_drop :parent, lambda { Page.current.parent }
 
+  config.register_tag :snippet, SnippetTag
+
+  config.register_filters HTMLHelpers
+
   # A tag is a class that inherits from Liquify::Tag or Liquid::Tag
   # config.register_tag :tag_name, TagClass
 

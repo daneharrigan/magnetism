@@ -23,12 +23,14 @@ class Field < ActiveRecord::Base
           StringDatum.create(:value => val)
         when FieldType.large_text_field
           TextDatum.create(:value => val)
+        when FieldType.asset
+          Asset.create(:site => Site.current, :file => val)
       end
 
       data.create(:page => Page.current, :entry => datum)
       return datum
     else
-      # need to set entry to something because I cant update a value
+      # DH: need to set entry to something because I cant update a value
       # through a select action (eg: Datum.first, Datum.find)
       datum = entry
       datum.value = val

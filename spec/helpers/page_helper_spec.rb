@@ -23,12 +23,18 @@ describe PageHelper do
     end
 
     context 'when the page is the homepage' do
-      it 'returns the domain' do
-        page = Factory(:page)
-        page.site.stub :homepage => page
-        html = helper.editable_permalink(page)
+      before(:each) do
+        @page = Factory(:homepage)
+        @page.site.stub :homepage => @page
+        @html = helper.editable_permalink(@page)
+      end
 
-        html.should have_selector('span#permalink-prefix', :content => page.permalink)
+      it 'returns the domain' do
+        @html.should have_selector('span#permalink-slug', :content => @page.permalink)
+      end
+
+      it 'does not have a permalink prefix' do
+        @html.should_not have_selector('span#permalink-prefix')
       end
     end
   end

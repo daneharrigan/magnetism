@@ -28,8 +28,9 @@ module FieldHelper
           text_field_tag(name, field.value)
         when :textarea
           text_area_tag(name, field.value)
-        when :asset
-          file_field_tag(name)
+        #when :asset
+        #  html = file_field_tag(name)
+        #  html = "#{image_tag(field.value.thumbnail.url)} #{html}" if field.file?
       end
     end
 end

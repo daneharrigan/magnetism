@@ -16,7 +16,7 @@ class Page < ActiveRecord::Base
 
   delegate :fields, :to => :template
 
-  liquify_method :title, :publish_at, :data => lambda { |page| DataDrop.new(page) }
+  liquify_method :title, :publish_at, :permalink, :data => lambda { |page| DataDrop.new(page) }
 
   # validates_presence_of :publish_at # if the page is going active
   # validates_presence_of :template_id
@@ -40,7 +40,7 @@ class Page < ActiveRecord::Base
       slugs << page.slug unless page == site.homepage
     end while page = page.parent
 
-    "http://#{site.domain}/#{slugs.reverse.join('/')}"
+    '/' + slugs.reverse.join('/')
   end
 
   def self.find_by_path(path)

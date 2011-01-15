@@ -1,11 +1,11 @@
 %h2 Edit Page
-= form_for [:admin, resource], :html => {:id => 'page-form'} do |f|
+= form_for [:admin, resource], :html => {:id => 'page-form', :multipart => true} do |f|
   .large-title
     = f.label :title, 'Page Title'
     = f.text_field :title
-  %p#permalink
+  %p#permalink<
+    = "http://#{current_site.domain}/"
     = editable_permalink(resource)
-    %span= resource.slug
   %ol.fields
     = render :partial => 'admin/fields/item', :collection => resource.template.fields, :as => :field
   .actions

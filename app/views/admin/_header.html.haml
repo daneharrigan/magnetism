@@ -9,7 +9,7 @@
       %ul.tab-collection
         %li= link_to 'Dashboard', user_root_path, :class => 'tab'
         %li= link_to 'Pages', admin_pages_path, :class => 'tab'
-        %li= link_to 'Assets', admin_assets_path, :class => 'tab'
+        /%li= link_to 'Assets', admin_assets_path, :class => 'tab'
         %li= link_to 'Manage', admin_manage_path, :class => 'tab'
       - if Site.count > 1
         = render :partial => 'admin/shared/selector', :locals => { :id => 'site-selector',

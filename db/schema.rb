@@ -63,9 +63,12 @@ ActiveRecord::Schema.define(:version => 20110104042454) do
     t.boolean  "production",  :default => false
     t.integer  "theme_id"
     t.integer  "homepage_id"
+    t.string   "key"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "sites", ["key"], :name => "index_sites_on_key"
 
   create_table "string_data", :force => true do |t|
     t.string   "value"

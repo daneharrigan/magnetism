@@ -6,9 +6,12 @@ class CreateSites < ActiveRecord::Migration
       t.boolean :production, :default => false
       t.integer :theme_id
       t.integer :homepage_id
+      t.string :key
 
       t.timestamps
     end
+
+    add_index :sites, :key
   end
 
   def self.down
