@@ -27,7 +27,7 @@
   display: inline;
   width: 100px;
 }
-#content p.edit span {
+#content p.edit span#permalink-slug {
   display: none;
 }
 #edit-permalink:link,
