@@ -42,12 +42,12 @@ class Field < ActiveRecord::Base
     name.downcase.gsub(/(\s|\-)/,'_').gsub(/\./,'')
   end
 
+  def entry
+    @entry ||= data.first(:conditions => { :page_id => Page.current.id }).try(:entry)
+  end
+
   private
     def auto_position
       write_attribute :position, template.fields.count + 1
-    end
-
-    def entry
-      data.first(:conditions => { :page_id => Page.current.id }).try(:entry)
     end
 end

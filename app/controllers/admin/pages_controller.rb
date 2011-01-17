@@ -5,12 +5,15 @@ module Admin
     layout_options :overlay => :new, :none => :destroy
 
     def edit
+      current_site.current!
       resource.current!
       edit!
     end
 
     def update
+      current_site.current!
       resource.current!
+
       update! do |success, failure|
         success.html { }
         failure.html { flash[:failure] = 'Page could not be updated.' }

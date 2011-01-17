@@ -166,5 +166,20 @@ describe Admin::PagesController do
         response.should redirect_to edit_admin_page_path(@page)
       end
     end
+
+    context 'when uploading an asset to a page' do
+      before(:each) do
+        pending
+        field = Factory(:field_with_asset, :template => @page.template)
+
+        #file = ActionController::TestUploadedFile.new support_image_path('carrierwave/fpo.gif'), 'image/gif'
+        #@params[:page][:fields][field.input_name] = file
+        put :update, @params
+      end
+
+      it 'redirects to the edit page' do
+        response.should redirect_to edit_admin_page_path(@page)
+      end
+    end
   end
 end
