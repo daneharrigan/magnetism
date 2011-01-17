@@ -74,8 +74,7 @@ describe Field do
         site.current!
 
         field = Factory(:field_with_asset)
-        fpo_file_path = File.expand_path(File.dirname(__FILE__) + '/../support/carrierwave')
-        field.value = File.open("#{fpo_file_path}/fpo.gif")
+        field.value = File.open(support_image_path('carrierwave/fpo.gif'))
 
         field.value.url.should =~ /_fpo\.gif$/
 
@@ -108,10 +107,9 @@ describe Field do
         site = Factory(:site)
         site.current!
         field = Factory(:field_with_asset)
-        fpo_file_path = File.expand_path(File.dirname(__FILE__) + '/../support/carrierwave')
 
-        field.value = File.open("#{fpo_file_path}/fpo.gif")
-        field.value = File.open("#{fpo_file_path}/fpo_2.gif")
+        field.value = File.open(support_image_path('carrierwave/fpo.gif'))
+        field.value = File.open(support_image_path('carrierwave/fpo.gif'))
 
         field.value.url.should =~ /_fpo_2\.gif$/
 

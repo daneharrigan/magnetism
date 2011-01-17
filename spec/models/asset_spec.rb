@@ -9,8 +9,7 @@ describe Asset do
 
   describe '#file' do
     before(:each) do
-      fpo_file_path = File.expand_path(File.dirname(__FILE__) + '/../support/carrierwave')
-      file = File.open("#{fpo_file_path}/fpo.gif")
+      file = File.open(support_image_path('carrierwave/fpo.gif'))
 
       site = Factory(:site)
       site.current!

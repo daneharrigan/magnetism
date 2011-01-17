@@ -169,16 +169,19 @@ describe Admin::PagesController do
 
     context 'when uploading an asset to a page' do
       before(:each) do
-        pending
+        site = Factory(:site)
+        site.current!
+
         field = Factory(:field_with_asset, :template => @page.template)
 
-        #file = ActionController::TestUploadedFile.new support_image_path('carrierwave/fpo.gif'), 'image/gif'
-        #@params[:page][:fields][field.input_name] = file
-        put :update, @params
+        file = File.open(support_image_path('carrierwave/fpo.gif'))
+        @params[:page][:fields][field.input_name] = file
       end
 
-      it 'redirects to the edit page' do
-        response.should redirect_to edit_admin_page_path(@page)
+      after(:each) { Site.clear_current! }
+
+      it 'creates a new asset' do
+        lambda { put :update, @params }.should change(Asset, :count).by(+1)
       end
     end
   end
