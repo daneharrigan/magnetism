@@ -15,8 +15,8 @@ describe Page do
       Factory(:page)
     end
 
-    it { should validate_uniqueness_of(:title).scoped_to(:site_id, :parent_id) }
-    it { should validate_uniqueness_of(:slug).scoped_to(:site_id, :parent_id) }
+    it { should validate_uniqueness_of(:title).scoped_to(:parent_id) }
+    it { should validate_uniqueness_of(:slug).scoped_to(:parent_id) }
   end
 
   describe '#homepage?' do

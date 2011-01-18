@@ -17,6 +17,11 @@ class Field < ActiveRecord::Base
   end
 
   def value=(val)
+    # kill the asset when you're replacing it
+    if FieldType.asset == field_type && entry
+      entry.destroy
+    end
+
     if value.nil?
       datum = case field_type
         when FieldType.text_field
@@ -24,7 +29,10 @@ class Field < ActiveRecord::Base
         when FieldType.large_text_field
           TextDatum.create(:value => val)
         when FieldType.asset
-          Asset.create(:site => Site.current, :file => val)
+          asset = Asset.create(:site => Site.current)
+          asset.file = val
+          asset.save!
+          asset
       end
 
       data.create(:page => Page.current, :entry => datum)
@@ -43,7 +51,7 @@ class Field < ActiveRecord::Base
   end
 
   def entry
-    @entry ||= data.first(:conditions => { :page_id => Page.current.id }).try(:entry)
+    data.first(:conditions => { :page_id => Page.current.id }).try(:entry)
   end
 
   private

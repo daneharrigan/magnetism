@@ -8,8 +8,8 @@ class Page < ActiveRecord::Base
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
 
   validates_presence_of :title, :site_id, :template_id
-  validates_uniqueness_of :title, :scope => [:site_id, :parent_id]
-  validates_uniqueness_of :slug, :scope => [:site_id, :parent_id]
+  validates_uniqueness_of :title, :scope => :parent_id
+  validates_uniqueness_of :slug, :scope => :parent_id
 
   before_save :generate_slug, :if => Proc.new { |p| !p.slug? }
   before_create :assign_parent, :if => Proc.new { |p| !p.parent_id? }

@@ -169,19 +169,30 @@ describe Admin::PagesController do
 
     context 'when uploading an asset to a page' do
       before(:each) do
-        site = Factory(:site)
+        site = @page.site
+
         site.current!
+        @page.current!
 
-        field = Factory(:field_with_asset, :template => @page.template)
-
+        @field = Factory(:field_with_asset, :template => @page.template)
         file = File.open(support_image_path('carrierwave/fpo.gif'))
-        @params[:page][:fields][field.input_name] = file
+        @params[:page][:fields][@field.input_name] = file
       end
 
-      after(:each) { Site.clear_current! }
+      after(:each) do
+        Site.clear_current!
+        Page.clear_current!
+      end
 
       it 'creates a new asset' do
         lambda { put :update, @params }.should change(Asset, :count).by(+1)
+      end
+
+      context 'when the asset field already has a file attached to it' do
+        it 'does not create additional asset records' do
+          @field.value =  File.open(support_image_path('carrierwave/fpo_2.gif'))
+          lambda { put :update, @params }.should_not change(Asset, :count)
+        end
       end
     end
   end
