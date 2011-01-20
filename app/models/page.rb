@@ -24,7 +24,8 @@ class Page < ActiveRecord::Base
 
   def fields=(values)
     fields.each do |field|
-      field.value = values[field.input_name]
+      index = field.input_name
+      field.value = values[index] if values[index].present?
     end
   end
 

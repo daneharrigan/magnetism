@@ -1,3 +1,11 @@
+var Magnetism = {
+  hide_flash: function(){
+    setTimeout(function(){
+      $('div.notice, div.failure').animate({ height: 0, opacity: 0 }, 500, function(){ $(this).remove() });
+    }, 5000);
+  }
+};
+
 jQuery(function($){
   var match_length = 0;
   $('a[href]').each(function(){
@@ -30,3 +38,5 @@ jQuery(function($){
 
   $('body').delegate('*', 'click', function(){ $('div.selector ul').hide() });
 });
+
+jQuery(window).load(function(){ Magnetism.hide_flash() });

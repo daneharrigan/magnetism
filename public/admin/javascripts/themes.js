@@ -153,8 +153,6 @@ jQuery(function($){
 
     var message = json.failure ? json.failure : json.notice;
     $('#content').prepend( $('<div />', { 'class': class_name}).text(message) );
-    setTimeout(function(){
-      $('div.notice, div.failure').fadeOut(500, function(){ $(this).remove() });
-    }, 5000);
+    Magnetism.hide_flash();
   });
 });
