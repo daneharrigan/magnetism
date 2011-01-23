@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "magnetism"
   s.version     = Magnetism::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = "Dane Harrigan"
+  s.email       = "dane.harrigan@gmail.com"
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{A website content management system}
+  s.description = %q{A website content management system}
 
   s.rubyforge_project = "magnetism"
 
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'fog', '~> 0.3.34'
   s.add_dependency 'mini_magick', '~> 3.2'
   s.add_dependency 'carrierwave', '~> 0.5.1'
+  # will need to add liquify in here...
 
   s.add_development_dependency 'shoulda', '~> 2.11.3'
   s.add_development_dependency 'rspec', '~> 2.4.0'

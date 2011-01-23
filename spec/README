@@ -1,0 +1,12 @@
+Magnetism is a Rails engine. To properly test it, it needs to be part of a Rails application.
+
+The "app_root" is a stock Rails app with the magnetism gem required. All spec files and factories
+live within "app_root/spec"
+
+All migrations/schema are kept within Magnetism so to prep your test database please do the following:
+
+  $ RAILS_ENV=test rake magnetism:schema
+
+Once your test database is ready, you can run the specs as you normally would:
+
+  $ rspec spec

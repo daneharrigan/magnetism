@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'magnetism', :path => '../../'
 gem 'liquify', :git => 'git://github.com/daneharrigan/liquify.git', :branch => '1.0-alpha'
 
