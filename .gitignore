@@ -9,3 +9,5 @@ coverage*
 *.swp
 public/uploads
 public/assets
+spec/app_root/public/assets
+spec/app_root/public/uploads

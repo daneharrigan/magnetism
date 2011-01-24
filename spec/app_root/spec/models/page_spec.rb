@@ -22,10 +22,9 @@ describe Page do
   describe '#homepage?' do
     context 'when the page is the homepage' do
       it 'returns true' do
-        page = Factory(:page)
-        site = page.site
+        site = Factory.build(:site)
+        page = Factory.build(:page, :site => site)
         site.homepage = page
-        site.save!
 
         page.homepage?.should be_true
       end
@@ -33,7 +32,8 @@ describe Page do
 
     context 'when the page is not the homepage' do
       it 'returns false' do
-        page = Factory(:page)
+        site = Factory.build(:site)
+        page = Factory.build(:page, :site => site)
         page.homepage?.should be_false
       end
     end

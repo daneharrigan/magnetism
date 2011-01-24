@@ -123,7 +123,7 @@ describe Field do
 
   describe '#input_name' do
     it 'downcases the Field#name value and replaces all spaces with underscores' do
-      field = Factory(:field)
+      field = Factory.build(:field)
       field.input_name.should == field.name.downcase.gsub(/(\s|\-)/,'_')
     end
   end
