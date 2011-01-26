@@ -40,11 +40,12 @@ require 'carrierwave'
 # end
 
 module Magnetism
-  def self.storage
-  end
-
   def self.setup
     yield(self)
+  end
+
+  def self.root
+    File.expand_path(File.dirname(__FILE__) + '/..')
   end
 end
 

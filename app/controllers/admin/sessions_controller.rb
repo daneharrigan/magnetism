@@ -1,6 +1,7 @@
 module Admin
   class SessionsController < Devise::SessionsController
     layout 'sessions'
+    helper :magnetism
 
     def show
       redirect_to new_user_session_path
