@@ -1,13 +1,12 @@
-Due for v0.1 release:
+Release: 0.1
+  User management
+  Multiple site support
+  Page caching (eg: static files, varnish)
 
-Sorting to the PagesController#index
-Asset management
-User management
-Add additional sites
+Release 0.2
+  Asset manager
+  Sass templates
+  Support multiple markups (eg: textile, markdown)
 
-
-Future releases:
-
-Add Sass
-Add no eval Haml
-
+Release 0.x
+  Non-evaluating Haml templates

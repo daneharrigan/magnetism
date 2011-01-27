@@ -1,7 +1,8 @@
 module Admin
   class UsersController < MagnetismController
+    before_filter :allow_user?, :only => [:edit, :update]
     actions :all, :except => :index
-    layout_options :overlay => [:new, :edit], :none => :destroy
+    layout_options :none => :destroy
     resources_configuration[:self][:route_prefix] = 'admin/manage'
 
     def index
@@ -30,5 +31,12 @@ module Admin
     end
 
     alias :destroy :render_destroy_js
+
+    private
+      def allow_user?
+        return true if resource == current_user
+        flash[:error] = %{You are not permitted to view that user account}
+        redirect_to user_root_path 
+      end
   end
 end

@@ -20,9 +20,11 @@ fieldset {
 }
 fieldset legend {
   position: absolute;
-  margin: -10px 0 0 5px;
+  margin: -25px 0 0;
+  padding-right: 5px;
   background: #fff;
-  padding: 0 5px;
+  z-index: 2;
+  font-weight: bold;
 }
 ul, ol {
   list-style: none;
@@ -242,8 +244,14 @@ a.new:active, a.new:hover {
   height: 200px;
   margin-left: 124px
 }
-#indented {
-  margin-left: 120x;
+.indent {
+  margin-left: 120px;
+}
+.with-legend {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  width: 75%;
 }
 .asset {
   width: 30%;

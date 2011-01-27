@@ -11,4 +11,4 @@
 %h2.toggle-sibling Users
 %section
   %ol#users= render :partial => 'admin/users/user', :collection => user_collection, :as => :user
-  = link_to 'New User', new_admin_manage_user_path, :class => 'new', :remote => true, :method => :get, 'data-type' => :html
+  = link_to 'New User', new_admin_manage_user_path, :class => 'new'

@@ -17,10 +17,6 @@ describe Admin::UsersController do
     it 'renders users/new' do
       response.should render_template('admin/users/new')
     end
-
-    it 'renders layouts/overlay' do
-      response.should render_template('layouts/overlay')
-    end
   end
 
   describe '#create' do
@@ -50,17 +46,31 @@ describe Admin::UsersController do
   end
 
   describe '#edit' do
-    before(:each) do
-      params = { :id => user.id }
-      get :edit, params
+    context 'when the user is viewing their own profile' do
+      it 'renders users/edit' do
+        params = { :id => user.id }
+        get :edit, params
+
+        response.should render_template('admin/users/edit')
+      end
     end
 
-    it 'renders layouts/overlay' do
-      response.should render_template('layouts/overlay')
-    end
+    context 'when a user tries to view someone elses profile' do
+      before(:each) do
+        mock_user = mock_model(User)
+        User.should_receive(:find).with(mock_user.id).and_return(mock_user)
+        User.should_receive(:find).and_return(user)
 
-    it 'renders users/edit' do
-      response.should render_template('admin/users/edit')
+        get :edit, { :id => mock_user.id }
+      end
+
+      it 'redirects them to /admin' do
+        response.should redirect_to user_root_path
+      end
+
+      it 'gives them a flash error' do
+        flash[:error].should_not be_nil
+      end
     end
   end
 
@@ -73,6 +83,7 @@ describe Admin::UsersController do
         :password_confirmation => ''
       }
     end
+
     it 'redirects the user to /admin/manage' do
       put :update, @params
       response.should redirect_to admin_manage_path

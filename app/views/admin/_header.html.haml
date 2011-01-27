@@ -2,7 +2,7 @@
   .container
     %h1 Magnetism
     %ul#settings
-      %li= link_to current_user.name, '#'
+      %li= link_to current_user.name, edit_admin_manage_user_path(current_user)
       %li= link_to 'Logout', logout_path
   #mainNav
     .container
