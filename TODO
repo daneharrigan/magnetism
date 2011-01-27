@@ -1,9 +1,7 @@
 Due for v0.1 release:
 
 Sorting to the PagesController#index
-Flash notice to TemplatesController#update when you sort the fields
 Asset management
-Pull out Clearence and put Devise back in
 User management
 Add additional sites
 
