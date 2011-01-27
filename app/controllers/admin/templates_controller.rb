@@ -4,6 +4,7 @@ module Admin
     layout_options :overlay => :new, :none => [:edit, :update, :create, :destroy]
     belongs_to :theme
     helper_method :association_group
+    helper :template, :field
 
     def update
       if params[:position]

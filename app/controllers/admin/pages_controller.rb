@@ -2,6 +2,7 @@ module Admin
   class PagesController < MagnetismController
     actions :all
     helper_method :homepage, :parent_page, :template_collection
+    helper :page, :field
     layout_options :overlay => :new, :none => :destroy
 
     def edit
