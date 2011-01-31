@@ -1,15 +1,34 @@
 h1. Magnetism
 
-Magnetism is an attempt at a website CMS/blog. Its currently under development and at this time is not meant for production *whatsoever*.
+Magnetism is a website CMS. Its currently under heavy development and is not yet production ready.
 
-If you'd like to see the progress please do the following:
+For those that have been watching Magnetism, it has been converted into a gem. To get it up and
+running please do the following:
 
-*NOTE: Drop the database if you have cloned this repository already. I have moved from Clearance to Devise.*
+  # make a new rails instance
+  $ rails new magnetism_demo
 
-1. Clone the repo
-2. bundle install
-3. rake db:migrate
-4. rake db:seed
-5. rails s
-6. Navigate to localhost:3000/admin
+  # add two gems to your Gemfile
+  gem 'magnetism', :git => 'git://github.com/daneharrigan/magnetism.git', :branch => 'development'
+  gem 'liquify', :git => 'git://github.com/daneharrigan/liquify.git', :branch => '1.0-alpha'
 
+  # bundle everything up
+  $ bundle install
+
+  # setup magnetism
+  $ rake m:setup
+
+You can now launch the rails server and navigate to localhost:3000/admin
+
+h3. Well I already did the setup. What about updates?
+
+  # have bundler update the gems
+  $ bundle update
+
+  # update magnetism
+  $ rake m:update
+
+h3. Magnetism and Liquify?
+
+Liquify is a wrapper to the popular Liquid templating engine. It's being developed at the same time
+as Magnetism so updates for both happen frequently.
