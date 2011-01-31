@@ -9,5 +9,6 @@
   %ol.fields
     = render :partial => 'admin/fields/item', :collection => resource.template.fields, :as => :field
   .actions
-    = link_to 'Back to Pages', admin_pages_path
-    = f.submit
+    .action-buttons
+      = link_to 'Back to Pages', admin_pages_path
+      = f.submit

@@ -14,7 +14,7 @@ class DispatchController < ApplicationController
     raise Magnetism::PageNotFound if page.nil?
 
     page.current!
-    render :text => Liquify.render(page.template.content)
+    render :text => Liquify.invoke(page.template.content)
   rescue Magnetism::PageNotFound
     render :text => '404: Page Not Found', :status => 404
   end

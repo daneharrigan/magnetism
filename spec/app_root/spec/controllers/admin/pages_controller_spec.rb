@@ -19,8 +19,8 @@ describe Admin::PagesController do
       response.should render_template('admin/pages/index')
     end
 
-    it 'renders layouts/application.haml' do
-      response.should render_template('layouts/application')
+    it 'renders layouts/magnetism' do
+      response.should render_template('layouts/magnetism')
     end
 
     it 'has begin_of_association_chain returning the current site' do
@@ -85,8 +85,8 @@ describe Admin::PagesController do
       response.should render_template('admin/pages/edit')
     end
 
-    it 'renders layouts/application' do
-      response.should render_template('layouts/application')
+    it 'renders layouts/magnetism' do
+      response.should render_template('layouts/magnetism')
     end
   end
 

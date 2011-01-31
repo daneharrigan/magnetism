@@ -5,6 +5,7 @@ describe Page do
   it { should belong_to(:parent) }
   it { should belong_to(:template) }
   it { should have_many(:pages) }
+  it { should have_one(:blog) }
 
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:site_id) }
@@ -41,7 +42,7 @@ describe Page do
 
   describe '#generate_slug' do
     let(:site) { Factory(:site) }
-    let(:template) { Factory(:template) }
+    let(:template) { mock_model(Template) }
 
     context 'when a page is created without a slug' do
       it 'generates a slug from based on the page title' do
@@ -163,37 +164,83 @@ describe Page do
   end
 
   describe '#permalink' do
-    it 'returns the full URL to the homepage' do
-      homepage = Factory(:homepage)
-      site = homepage.site
-      site.homepage = homepage
+    before(:each) do
+      @homepage = Factory(:homepage)
+      @site = @homepage.site
 
-      homepage.permalink.should == '/'
+      @site.homepage = @homepage
+      @site.save!
+    end
+
+    it 'returns the full URL to the homepage' do
+      @homepage.permalink.should == '/'
     end
 
     it 'returns the full URL to the top level page' do
-      homepage = Factory(:homepage)
-      site = homepage.site
-      site.homepage = homepage
-      site.save!
-
-      page = Factory(:page, :site => site, :parent => homepage)
-
+      page = Factory(:page, :site => @site, :parent => @homepage)
       page.permalink.should == "/#{page.slug}"
     end
 
     it 'returns the full URL to the sub page' do
-      homepage = Factory(:homepage)
-      site = homepage.site
-      site.homepage = homepage
-      site.save!
-
-      page_1 = Factory(:page, :site => site, :parent => homepage)
-      page_2 = Factory(:page, :site => site, :parent => page_1)
+      page_1 = Factory(:page, :site => @site, :parent => @homepage)
+      page_2 = Factory(:page, :site => @site, :parent => page_1)
 
       page_2.permalink.should == "/#{page_1.slug}/#{page_2.slug}"
     end
 
-    it 'returns the full URL to the blog post'
+    context 'when the uri_format is :year/:month/:day/:slug' do
+      it 'returns the full URL to the blog post' do
+        @homepage.update_attributes(:blog_section => true,
+          :uri_format => ':year/:month/:day/:slug')
+
+        page = Factory(:page, :parent => @homepage)
+        page.permalink.should == "/#{page.publish_at.strftime('%Y/%m/%d')}/#{page.slug}"
+      end
+    end
+
+    context 'when the uri_format is :year/:month/:slug' do
+      it 'returns the full URL to the blog post' do
+        @homepage.update_attributes(:blog_section => true,
+          :uri_format => ':year/:month/:slug')
+
+        page = Factory(:page, :parent => @homepage)
+        page.permalink.should == "/#{page.publish_at.strftime('%Y/%m')}/#{page.slug}"
+      end
+    end
+
+    context 'when the uri_format is :id/:slug' do
+      it 'returns the full URL to the blog post' do
+        @homepage.update_attributes(:blog_section => true, :uri_format => ':id/:slug')
+
+        page = Factory(:page, :parent => @homepage)
+        page.permalink.should == "/#{page.id}/#{page.slug}"
+      end
+    end
+
+    context 'when the uri_format is :id-:slug' do
+      it 'returns the full URL to the blog post' do
+        @homepage.update_attributes(:blog_section => true, :uri_format => ':id-:slug')
+
+        page = Factory(:page, :parent => @homepage)
+        page.permalink.should == "/#{page.id}-#{page.slug}"
+      end
+    end
+  end
+
+  describe '#publish_at' do
+    context 'when there is no publish_at value' do
+      it 'returns Time.now' do
+        time = Time.now
+        Time.stub :now => time
+        Page.new.publish_at.should == Time.now
+      end
+    end
+
+    context 'when there is a publish_at value' do
+      it 'gets returned' do
+        publish_at = 2.days.ago
+        Page.new(:publish_at => publish_at).publish_at.should == publish_at
+      end
+    end
   end
 end

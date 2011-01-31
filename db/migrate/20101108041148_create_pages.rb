@@ -7,9 +7,9 @@ class CreatePages < ActiveRecord::Migration
       t.integer :parent_id
       t.integer :template_id
       t.datetime :publish_at
-      # t.boolean :blog, :default => false
-      # t.string :uri_matcher
-      # t.boolean :active, :default => false
+      t.boolean :blog_section, :default => false
+      t.string :uri_format
+      t.boolean :publish, :default => false
 
       t.timestamps
     end

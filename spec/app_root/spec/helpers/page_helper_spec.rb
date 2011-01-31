@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe PageHelper do
   describe '#editable_permalink' do
+    let(:site) { Factory.build(:site) }
+
     context 'when the page has a parent' do
       before(:each) do
-        @parent = Factory(:page)
-        @page = Factory(:page, :parent => @parent, :site => @parent.site)
+        @parent = Factory.build(:page, :slug => 'section', :site => site)
+        @page = Factory.build(:page, :slug => 'subection', :parent => @parent, :site => @parent.site)
         @html = helper.editable_permalink(@page)
       end
 
@@ -24,7 +26,7 @@ describe PageHelper do
 
     context 'when the page is the homepage' do
       before(:each) do
-        @page = Factory(:homepage)
+        @page = Factory.build(:homepage, :slug => '/', :site => site)
         @page.site.stub :homepage => @page
         @html = helper.editable_permalink(@page)
       end

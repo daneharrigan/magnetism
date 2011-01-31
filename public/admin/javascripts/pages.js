@@ -5,6 +5,7 @@ jQuery(function($){
   });
 
   $('#page_slug').keyup(function(){
-    $('#permalink span').text( $(this).val() )
+    this.value = this.value.replace(/[^A-z0-9\-\_]+/,'');
+    $('#permalink-slug').text(this.value);
   });
 });

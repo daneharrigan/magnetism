@@ -1,7 +1,12 @@
 Release: 0.1
   User management
+    Permissisons/Roles
+    Edit form needs some love
   Multiple site support
   Page caching (eg: static files, varnish)
+  Blog component
+    Comments (scan with defenseo)
+    Trackbacks
 
 Release 0.2
   Asset manager

@@ -1,19 +1,12 @@
 module PageHelper
   def editable_permalink(page)
-    html = page.parent.try(:permalink) || ''.html_safe
+    slug = content_tag(:span, page.slug, :id => 'permalink-slug')
+    return slug if page.homepage?
 
-    unless page.homepage?
-      html = content_tag(:span, html, :id => 'permalink-prefix')
-      html << '/' unless page.parent.homepage?
-    end
+    prefix = page.permalink.sub(/#{page.slug}$/,'')
+    prefix = content_tag(:span, prefix, :id => 'permalink-prefix')
 
-    html << content_tag(:span, page.slug, :id => 'permalink-slug')
-
-    unless page.homepage?
-      html << text_field_tag('page[slug]', page.slug)
-      html << link_to('Edit', '#edit', :id => 'edit-permalink')
-    end
-
-    html
+    html = prefix + slug + text_field_tag('page[slug]', page.slug)
+    html << link_to('Edit', '#edit', :id => 'edit-permalink')
   end
 end

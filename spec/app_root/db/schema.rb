@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110104042454) do
+ActiveRecord::Schema.define(:version => 20110129011618) do
 
   create_table "assets", :force => true do |t|
     t.integer  "site_id"
@@ -18,6 +18,13 @@ ActiveRecord::Schema.define(:version => 20110104042454) do
     t.string   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "blogs", :force => true do |t|
+    t.integer "page_id"
+    t.integer "author_id"
+    t.text    "excerpt"
+    t.text    "article"
   end
 
   create_table "data", :force => true do |t|
@@ -51,6 +58,9 @@ ActiveRecord::Schema.define(:version => 20110104042454) do
     t.integer  "parent_id"
     t.integer  "template_id"
     t.datetime "publish_at"
+    t.boolean  "blog_section", :default => false
+    t.string   "uri_format"
+    t.boolean  "publish",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

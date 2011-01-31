@@ -284,9 +284,16 @@ fieldset .fields label {
 #overlay input[type=password] {
   width: 360px;
 }
+.checkbox {
+  padding-left: 124px;
+}
 .actions {
   line-height: 50px;
   text-align: right;
+}
+.action-buttons {
+  width: 75%;
+  margin-left: 124px;
 }
 .note {
   font-size: 11px;

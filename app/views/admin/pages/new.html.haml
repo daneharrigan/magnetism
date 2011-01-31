@@ -7,13 +7,15 @@
     = f.label :title, 'Page Title'
     = f.text_field :title
   %ol.fields
+    - unless parent_page.try(:blog_section?)
+      %li.checkbox
+        = f.check_box :blog_section
+        = f.label :blog_section, 'Is this a blog?'
     %li
       = f.label :template_id
       = f.select :template_id, options_from_collection_for_select(template_collection, :id, :name)
-  /   - unless @parent.try(:blog?)
-  /     %li
-  /       = f.label :blog, 'Is this a blog section?'
-  /       = f.check_box :blog
+  %fieldset#advanced
+    = f.hidden_field :uri_format, :value => ':year/:month/:slug'
   .actions
     = link_to 'Cancel', '#cancel', :class => 'cancel'
     = f.submit

@@ -16,9 +16,9 @@ describe Admin::DashboardController do
       response.should render_template('admin/dashboard/show') 
     end
 
-    it 'renders layouts/application' do
+    it 'renders layouts/magnetism' do
       get :show
-      response.should render_template('layouts/application') 
+      response.should render_template('layouts/magnetism') 
     end
 
     describe '#current_site' do

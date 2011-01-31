@@ -21,5 +21,6 @@
         = f.password_field :password_confirmation
 
   .actions
-    = link_to 'Cancel', '#cancel', :class => 'cancel'
-    = f.submit
+    .action-buttons
+      = link_to 'Cancel', admin_manage_path, :class => 'cancel'
+      = f.submit
