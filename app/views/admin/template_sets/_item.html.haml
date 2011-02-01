@@ -1,0 +1,3 @@
+%li{ :id => "template-set-#{template_set.id}" }
+  %h4= template_set.name
+    %ul= render :partial => 'admin/templates/item', :collection => template_set.templates, :as => :template, :locals => { :theme => theme }

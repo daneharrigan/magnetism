@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110129011618) do
+ActiveRecord::Schema.define(:version => 20110201004404) do
 
   create_table "assets", :force => true do |t|
     t.integer  "site_id"
@@ -86,6 +86,10 @@ ActiveRecord::Schema.define(:version => 20110129011618) do
     t.datetime "updated_at"
   end
 
+  create_table "template_sets", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "template_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -95,6 +99,7 @@ ActiveRecord::Schema.define(:version => 20110129011618) do
   create_table "templates", :force => true do |t|
     t.string   "name"
     t.integer  "template_type_id"
+    t.integer  "template_set_id"
     t.integer  "theme_id"
     t.text     "content"
     t.datetime "created_at"

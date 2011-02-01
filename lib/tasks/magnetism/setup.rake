@@ -1,6 +1,6 @@
 namespace :m do
   desc 'Initial database setup and copying dependent files'
-  task :setup => [:schema_load, :seed, :javascript]
+  task :setup => [:schema_load, :seed, :javascript, :demo]
 
   desc 'Used to apply schema changes and update dependent files'
   task :update => [:migrate, :javascript]
@@ -12,7 +12,16 @@ namespace :m do
     load schema_rb
   end
 
-  task :seed => 'db:seed'
+  task :seed do
+    TemplateType.create(:name => 'Page')
+    TemplateType.create(:name => 'Snippet')
+    TemplateType.create(:name => 'JavaScript')
+    TemplateType.create(:name => 'Stylesheet')
+
+    FieldType.create(:name => 'Text field')
+    FieldType.create(:name => 'Large text field')
+    FieldType.create(:name => 'Asset')
+  end
 
   task :javascript do
     FileUtils.cp_r "#{Magnetism.root}/public/admin", "#{Rails.root}/public"

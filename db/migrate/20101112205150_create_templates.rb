@@ -3,6 +3,7 @@ class CreateTemplates < ActiveRecord::Migration
     create_table :templates do |t|
       t.string :name
       t.integer :template_type_id
+      t.integer :template_set_id
       t.integer :theme_id
       t.text :content
 

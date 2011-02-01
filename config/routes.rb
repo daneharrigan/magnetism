@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         resources :templates do
           resources :fields
         end
+        resources :template_sets
       end
     end
   end

@@ -11,4 +11,7 @@
   %h2.toggle-sibling.blue-header JavaScripts
   %ul{ :id => "template-type-#{TemplateType.javascript.id}" }= render :partial => 'admin/templates/item', :collection => javascript_collection, :as => :template, :locals => { :theme => resource }
 
+  %h2.toggle-sibling.blue-header Blogs
+  %ul{ :id => "template-sets" }= render :partial => 'admin/template_sets/item', :collection => blog_collection, :as => :template_set, :locals => { :theme => resource }
+
   #new-template= render :partial => 'admin/shared/selector', :locals => { :name => 'New Template', :id => 'new-template-selector', :open_direction => 'up', :selector_collection => new_template_collection }

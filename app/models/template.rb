@@ -5,6 +5,7 @@ class Template < ActiveRecord::Base
 
   belongs_to :theme
   belongs_to :template_type
+  belongs_to :template_set
   has_many :fields, :order => 'position ASC'
   has_many :pages
 

@@ -30,21 +30,31 @@ describe ThemeHelper do
   end
 
   describe '#new_template_collection' do
-    it 'returns an array of links to create new templates' do
+    before(:each) do
       Factory(:template_type_page)
       Factory(:template_type_snippet)
       Factory(:template_type_javascript)
       Factory(:template_type_stylesheet)
-      theme = Factory(:theme)
+      @theme = mock_model(Theme) #Factory.build(:theme)
 
-      helper.stub :resource => theme
+      helper.stub :resource => @theme
+    end
 
-      helper.new_template_collection.each_with_index do |link, index|
-        template_type = TemplateType.all[index]
+    it 'returns an array of links to create new templates' do
+      TemplateType.all.each_with_index do |template_type, index|
+        link = helper.new_template_collection[index]
+
         link.should have_selector('a',
-          :href => new_admin_manage_theme_template_path(theme, :template_type_id => template_type.id),
+          :href => new_admin_manage_theme_template_path(@theme, :template_type_id => template_type.id),
           :content => template_type.name)
       end
+    end
+
+    it 'returns a final link to create a blog template set' do
+      link = helper.new_template_collection.last
+
+      link.should have_selector('a',
+        :href => new_admin_manage_theme_template_set_path(@theme), :content => 'Blog')
     end
   end
 end

@@ -8,6 +8,7 @@ describe Template do
   it { should validate_numericality_of(:theme_id) }
 
   it { should belong_to(:template_type) }
+  it { should belong_to(:template_set) }
   it { should belong_to(:theme) }
   it { should have_many(:fields) }
   it { should have_many(:pages) }
