@@ -87,7 +87,8 @@ ActiveRecord::Schema.define(:version => 20110201004404) do
   end
 
   create_table "template_sets", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "theme_id"
   end
 
   create_table "template_types", :force => true do |t|

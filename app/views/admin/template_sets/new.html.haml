@@ -1,0 +1,8 @@
+%h2 New Blog
+= form_for [:admin, :manage, association_chain, resource].flatten, :remote => true, :html => { 'data-type' => :html } do |f|
+  .large-title
+    = f.label :name
+    = f.text_field :name
+  .actions
+    = link_to 'Cancel', '#cancel', :class => 'cancel'
+    = f.submit

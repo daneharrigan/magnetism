@@ -3,4 +3,5 @@ class Theme < ActiveRecord::Base
   validates_uniqueness_of :name
   has_many :sites
   has_many :templates
+  has_many :template_sets
 end
