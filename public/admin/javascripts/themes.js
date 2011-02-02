@@ -142,6 +142,12 @@ jQuery(function($){
     $link.trigger('click');
   });
 
+  $('#new_template_set').live('ajax:success', function(el, html, status){
+    debugger
+    $('#template-sets').append(html);
+    $('#overlay').remove();
+  });
+
   $('a[data-method=delete]').live('ajax:success', function(el, html, status){
     Template.remove_field(this);
   });

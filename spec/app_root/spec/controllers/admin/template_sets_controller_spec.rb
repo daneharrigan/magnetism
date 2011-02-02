@@ -18,4 +18,15 @@ describe Admin::TemplateSetsController do
       response.should render_template('admin/template_sets/new')
     end
   end
+
+  describe '#create' do
+    it 'renders the template_sets/item partial' do
+      params = {}
+      params[:theme_id] = Factory(:theme).id
+      params[:template_set] = { :name => 'Template Set Name' }
+
+      post :create, params
+      response.should render_template('admin/template_sets/_item')
+    end
+  end
 end
