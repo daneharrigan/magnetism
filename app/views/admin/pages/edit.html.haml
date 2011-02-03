@@ -6,8 +6,11 @@
   %p#permalink<
     = "http://#{current_site.domain}"
     = editable_permalink(resource)
-  %ol.fields
-    = render :partial => 'admin/fields/item', :collection => resource.template.fields, :as => :field
+  - if resource.blog_entry?
+    = render 'blog'
+  - unless resource.fields.empty?
+    %ol.fields
+      = render :partial => 'admin/fields/item', :collection => resource.template.fields, :as => :field
   .actions
     .action-buttons
       = link_to 'Back to Pages', admin_pages_path

@@ -143,7 +143,6 @@ jQuery(function($){
   });
 
   $('#new_template_set').live('ajax:success', function(el, html, status){
-    debugger
     $('#template-sets').append(html);
     $('#overlay').remove();
   });

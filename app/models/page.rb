@@ -54,7 +54,7 @@ class Page < ActiveRecord::Base
 
     begin
       unless page.homepage?
-        slugs << (page.parent.try(:blog_section?) ? format_blog_slug(page) : page.slug)
+        slugs << (page.blog_entry? ? format_blog_slug(page) : page.slug)
       end
     end while page = page.parent
 
@@ -63,6 +63,10 @@ class Page < ActiveRecord::Base
 
   def publish_at
     read_attribute(:publish_at) || Time.now
+  end
+
+  def blog_entry?
+    parent.try(:blog_section?)
   end
 
   private

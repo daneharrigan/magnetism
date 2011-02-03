@@ -9,3 +9,11 @@ end
 Factory.define :homepage, :parent => :page do |f|
   f.slug '/'
 end
+
+Factory.define :blog_section, :parent => :page do |f|
+  f.blog_section true
+end
+
+Factory.define :blog_entry, :parent => :page do |f|
+  f.association :parent, :factory => :blog_section
+end

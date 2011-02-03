@@ -3,7 +3,7 @@ namespace :m do
   task :setup => [:schema_load, :seed, :javascript, :demo]
 
   desc 'Used to apply schema changes and update dependent files'
-  task :update => [:migrate, :javascript]
+  task :update => :javascript
 
   # these tasks are all "private." They should not be called
   # independently.
@@ -27,8 +27,8 @@ namespace :m do
     FileUtils.cp_r "#{Magnetism.root}/public/admin", "#{Rails.root}/public"
   end
 
-  task :migrate => :environment do
-    ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
-    ActiveRecord::Migrator.migrate("#{Magnetism.root}/db/migrate/", ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
-  end
+  #task :migrate => :environment do
+  #  ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
+  #  ActiveRecord::Migrator.migrate("#{Magnetism.root}/db/migrate/", ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
+  #end
 end

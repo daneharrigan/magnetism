@@ -42,13 +42,12 @@ describe Page do
 
   describe '#generate_slug' do
     let(:site) { Factory(:site) }
-    let(:template) { mock_model(Template) }
 
     context 'when a page is created without a slug' do
       it 'generates a slug from based on the page title' do
         page = site.pages.create(:title => 'Page Title',
           :publish_at => 1.hour.ago,
-          :template => template)
+          :template => mock_template)
         page.slug.should == 'page-title'
       end
     end
@@ -59,7 +58,7 @@ describe Page do
           :title => 'Page Title',
           :slug => 'specific-page-title',
           :publish_at => 1.hour.ago,
-          :template => template)
+          :template => mock_template)
 
         page.slug.should == 'specific-page-title'
       end
@@ -68,7 +67,7 @@ describe Page do
 
   describe '#assign_parent' do
     before(:each) do
-      @homepage = Factory(:page)
+      @homepage = Factory(:page, :template => mock_template)
       @site = @homepage.site
       @site.homepage = @homepage
       @site.save!
@@ -76,15 +75,18 @@ describe Page do
 
     context 'when a page is created without a parent specified' do
       it 'gets assigned as a top-level page' do
-        page = Factory(:page, :site => @site, :parent_id => nil)
+        page = Factory(:page, :site => @site,
+          :parent_id => nil,
+          :template => mock_template)
         page.parent.should == @homepage
       end
     end
 
     context 'when a page is created with a parent specified' do
       it 'does not override the specified parent' do
-        parent = Factory(:page, :site => @site)
-        page = Factory(:page, :site => @site, :parent_id => parent.id)
+        parent = Factory(:page, :site => @site, :template => mock_template)
+        page = Factory(:page, :site => @site,
+          :parent_id => parent.id, :template => mock_template)
         page.parent.should == parent
       end
     end
@@ -92,7 +94,7 @@ describe Page do
 
   describe '#fields=' do
     it 'calls Field#field= on each of the fields in the collection' do
-      page = Factory(:page)
+      page = Factory(:page, :template => mock_template)
       page.current!
       args = {}
 
@@ -112,9 +114,9 @@ describe Page do
     end
   end
 
-  describe '#find_by_path' do
+  describe '.find_by_path' do
     before(:each) do
-      @homepage = Factory(:page, :slug => '/')
+      @homepage = Factory(:page, :slug => '/', :template => mock_template)
       @site = @homepage.site
       @site.homepage = @homepage
       @site.save!
@@ -125,14 +127,14 @@ describe Page do
     end
 
     it 'returns a top level page' do
-      page = Factory(:page)
+      page = Factory(:page, :template => mock_template, :site => @site)
       @homepage.pages << page
       Page.find_by_path(page.slug).should == page
     end
 
     it 'returns a second level page' do
-      page_1 = Factory(:page)
-      page_2 = Factory(:page, :site => page_1.site, :template => page_1.template)
+      page_1 = Factory(:page, :template => mock_template, :site => @site)
+      page_2 = Factory(:page, :template => mock_template, :site => @site)
 
       @homepage.pages << page_1
       page_1.pages << page_2
@@ -143,13 +145,11 @@ describe Page do
     end
 
     it 'returns a third level page' do
-      page_1 = Factory(:page)
-      page_2 = Factory(:page, :site => page_1.site, :template => page_1.template)
-      page_3 = Factory(:page, :site => page_1.site, :template => page_1.template)
-
-      @homepage.pages << page_1
-      page_1.pages << page_2
-      page_2.pages << page_3
+      page_1 = Factory(:page, :site => @site, :template => mock_template)
+      page_2 = Factory(:page, :site => @site,
+        :template => mock_template, :parent => page_1)
+      page_3 = Factory(:page, :site => @site,
+        :template => mock_template, :parent => page_2)
 
       uri = [page_1.slug, page_2.slug, page_3.slug].join('/')
 
@@ -165,7 +165,7 @@ describe Page do
 
   describe '#permalink' do
     before(:each) do
-      @homepage = Factory(:homepage)
+      @homepage = Factory(:homepage, :template => mock_template)
       @site = @homepage.site
 
       @site.homepage = @homepage
@@ -177,13 +177,16 @@ describe Page do
     end
 
     it 'returns the full URL to the top level page' do
-      page = Factory(:page, :site => @site, :parent => @homepage)
+      page = Factory(:page, :site => @site,
+        :parent => @homepage, :template => mock_template)
       page.permalink.should == "/#{page.slug}"
     end
 
     it 'returns the full URL to the sub page' do
-      page_1 = Factory(:page, :site => @site, :parent => @homepage)
-      page_2 = Factory(:page, :site => @site, :parent => page_1)
+      page_1 = Factory(:page, :site => @site,
+        :parent => @homepage, :template => mock_template)
+      page_2 = Factory(:page, :site => @site,
+         :parent => page_1, :template => mock_template)
 
       page_2.permalink.should == "/#{page_1.slug}/#{page_2.slug}"
     end
@@ -240,6 +243,22 @@ describe Page do
       it 'gets returned' do
         publish_at = 2.days.ago
         Page.new(:publish_at => publish_at).publish_at.should == publish_at
+      end
+    end
+  end
+
+  describe '#blog_entry?' do
+    context 'when the parent is a blog section' do
+      it 'returns true' do
+        page = Page.new :parent => Page.new(:blog_section => true)
+        page.blog_entry?.should == true
+      end
+    end
+
+    context 'when the parent is not a blog section' do
+      it 'returns false' do
+        page = Page.new
+        page.blog_entry?.should be_nil 
       end
     end
   end
