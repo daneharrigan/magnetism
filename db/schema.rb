@@ -57,10 +57,11 @@ ActiveRecord::Schema.define(:version => 20110201004404) do
     t.integer  "site_id"
     t.integer  "parent_id"
     t.integer  "template_id"
+    t.integer  "template_set_id"
     t.datetime "publish_at"
-    t.boolean  "blog_section", :default => false
+    t.boolean  "blog_section",    :default => false
     t.string   "uri_format"
-    t.boolean  "publish",      :default => false
+    t.boolean  "publish",         :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

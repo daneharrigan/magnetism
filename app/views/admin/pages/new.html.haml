@@ -11,11 +11,14 @@
       %li.checkbox
         = f.check_box :blog_section
         = f.label :blog_section, 'Is this a blog?'
-    %li
+    %li#template-selector
       = f.label :template_id
       = f.select :template_id, options_from_collection_for_select(template_collection, :id, :name)
+    %li#template-set-selector
+      = f.label :template_set_id
+      = f.select :template_set_id, options_from_collection_for_select(template_set_collection, :id, :name)
   %fieldset#advanced
-    = f.hidden_field :uri_format, :value => ':year/:month/:slug'
+    = f.hidden_field :uri_format, :value => ':year/:month/:slug', :disabled => true
   .actions
     = link_to 'Cancel', '#cancel', :class => 'cancel'
     = f.submit

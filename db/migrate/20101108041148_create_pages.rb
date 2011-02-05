@@ -6,6 +6,7 @@ class CreatePages < ActiveRecord::Migration
       t.integer :site_id
       t.integer :parent_id
       t.integer :template_id
+      t.integer :template_set_id
       t.datetime :publish_at
       t.boolean :blog_section, :default => false
       t.string :uri_format

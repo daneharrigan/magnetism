@@ -48,26 +48,6 @@ describe Admin::PagesController do
       get :new
       response.should render_template('layouts/overlay')
     end
-
-    context 'when a parent_id parameter is passed' do
-      it 'returns the parent page from the parent_page helper' do
-        page = Factory(:page, :site => @site)
-        params = { :parent_id => page.id }
-
-        get :new, params
-        controller.send(:parent_page).should == page
-      end
-    end
-
-    describe '#template_collection' do
-      it 'returns an array of templates' do
-        params = {}
-        session = { :site_id => @site.id }
-        template = Factory(:template, :theme => @site.theme)
-        get :new, params, session
-        controller.send(:template_collection).should == @site.theme.templates.pages
-      end
-    end
   end
 
   describe '#edit' do

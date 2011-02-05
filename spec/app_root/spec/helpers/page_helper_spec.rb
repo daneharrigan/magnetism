@@ -40,4 +40,50 @@ describe PageHelper do
       end
     end
   end
+
+  describe '#parent_page' do
+    it 'returns the page whose id matches parent_id' do
+      current_site = mock_site
+      parent_page = mock_page
+      pages = [parent_page]
+
+      pages.stub :find => parent_page
+      current_site.stub :pages => pages
+
+      helper.stub :current_site => current_site
+      helper.stub :params => { :parent_id => parent_page.id }
+      helper.parent_page.should == parent_page
+    end
+  end
+
+  describe '#template_collection' do
+    it 'returns all of the page templates in the theme of the current site' do
+      current_site = mock_site
+      theme = mock_theme
+      template = mock_template
+      templates = [template]
+
+      templates.stub :pages => templates
+      theme.stub :templates => templates
+      current_site.stub :theme => theme
+
+      helper.stub :current_site => current_site
+      helper.template_collection.should == templates
+    end
+  end
+
+  describe '#template_set_collection' do
+    it 'returns all of the template sets in the theme of the current site' do
+      current_site = mock_site
+      theme = mock_theme
+      template_set = mock_template_set
+      template_sets = [template_set]
+
+      theme.stub :template_sets => template_sets
+      current_site.stub :theme => theme
+
+      helper.stub :current_site => current_site
+      helper.template_set_collection.should == template_sets
+    end
+  end
 end

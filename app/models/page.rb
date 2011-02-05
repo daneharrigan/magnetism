@@ -5,6 +5,7 @@ class Page < ActiveRecord::Base
   belongs_to :site
   belongs_to :parent, :class_name => 'Page'
   belongs_to :template
+  belongs_to :template_set
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
   has_one :blog
 

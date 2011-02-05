@@ -27,8 +27,8 @@ namespace :m do
     FileUtils.cp_r "#{Magnetism.root}/public/admin", "#{Rails.root}/public"
   end
 
-  #task :migrate => :environment do
-  #  ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
-  #  ActiveRecord::Migrator.migrate("#{Magnetism.root}/db/migrate/", ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
-  #end
+  task :migrate => :environment do
+    ActiveRecord::Migration.verbose = ENV["VERBOSE"] ? ENV["VERBOSE"] == "true" : true
+    ActiveRecord::Migrator.migrate("#{Magnetism.root}/db/migrate/", ENV["VERSION"] ? ENV["VERSION"].to_i : nil)
+  end
 end
