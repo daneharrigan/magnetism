@@ -15,10 +15,10 @@ describe Template do
 
   context 'when a template exists' do
     before(:each) { Factory(:template) }
-    it { should validate_uniqueness_of(:name).scoped_to(:theme_id, :template_type_id) }
+    it { should validate_uniqueness_of(:name).scoped_to(:theme_id, :template_type_id, :template_set_id) }
   end
 
-  describe '.templates' do
+  describe '.pages' do
     it 'returns all of the templates of type "Template"' do
       template = Factory(:template)
       Template.pages.should == [template]
@@ -43,6 +43,22 @@ describe Template do
     it 'returns all of the templates of type "Stylesheet"' do
       template = Factory(:stylesheet)
       Template.stylesheets.should == [template]
+    end
+  end
+
+  describe '#destroy?' do
+    context 'when the template is part of a template set' do
+      it 'returns false' do
+        template = Template.new(:template_set => mock_template_set)
+        template.destroy?.should == false
+      end
+    end
+
+    context 'when the template is not part of a template set' do
+      it 'returns true' do
+        template = Template.new
+        template.destroy?.should == true 
+      end
     end
   end
 end

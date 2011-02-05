@@ -29,4 +29,22 @@ describe Admin::TemplateSetsController do
       response.should render_template('admin/template_sets/_item')
     end
   end
+
+  describe '#destroy' do
+    it 'renders the template_sets/destroy.js template' do
+      theme = mock_theme
+      template_set = Factory(:template_set, :theme => theme)
+      template_sets = [template_set]
+
+      template_sets.stub :find => template_set
+      theme.stub :template_sets => template_sets
+      Theme.stub :find => theme
+
+      params = { :theme_id => theme.id, :id => template_set.id }
+      params[:format] = 'js'
+
+      delete :destroy, params
+      response.should render_template('admin/template_sets/destroy')
+    end
+  end
 end

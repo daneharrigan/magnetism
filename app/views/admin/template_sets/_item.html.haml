@@ -1,3 +1,5 @@
-%li{ :id => "template-set-#{template_set.id}" }
-  %h4= template_set.name
-  %ul= render :partial => 'admin/templates/item', :collection => template_set.templates, :as => :template, :locals => { :theme => theme }
+%h2.toggle-sibling.blue-header
+  = template_set.name
+  = link_to 'Delete', admin_manage_theme_template_set_path(theme, template_set, :format => :js), :class => 'delete', :remote => true, :method => :delete, 'data-type' => :script
+%ul{ :id => "template-set-#{template_set.id}" }
+  = render :partial => 'admin/templates/item', :collection => template_set.templates, :as => :template, :locals => { :theme => theme }

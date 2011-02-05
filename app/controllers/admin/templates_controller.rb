@@ -23,16 +23,17 @@ module Admin
 
     def create
       create! do |success, failure|
-        success.html { render :partial => 'item', :locals => { :template => resource, :theme => parent} }
+        success.html do
+          flash.delete :notice
+          render :partial => 'item', :locals => { :template => resource, :theme => parent}
+        end
       end
-    end
-
-    def destroy
-      resource.destroy
     end
 
     def association_group(field)
       [association_chain, resource, field].flatten
     end
+
+    alias :destroy :render_destroy_js
   end
 end

@@ -5,6 +5,6 @@ module TemplateHelper
   end
 
   def page_template?
-    resource.template_type == TemplateType.page
+    resource.template_type == TemplateType.page && resource.template_set.nil?
   end
 end

@@ -147,7 +147,7 @@ jQuery(function($){
     $('#overlay').remove();
   });
 
-  $('a[data-method=delete]').live('ajax:success', function(el, html, status){
+  $('li a[data-method=delete]').live('ajax:success', function(el, html, status){
     Template.remove_field(this);
   });
 

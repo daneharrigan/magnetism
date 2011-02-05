@@ -6,8 +6,13 @@ module Admin
 
     def create
       create! do |success, failure|
-        success.html { render :partial => 'item', :locals => { :template_set => resource, :theme => parent} }
+        success.html do
+          flash.delete :notice
+          render :partial => 'item', :locals => { :template_set => resource, :theme => parent}
+        end
       end
     end
+
+    alias :destroy :render_destroy_js
   end
 end

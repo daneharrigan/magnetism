@@ -45,10 +45,12 @@ h1 {
 #overlay h2,
 #content > h2,
 h2.blue-header {
-  font-size: 18px;
-  margin-bottom: 20px;
   background: #e2f1f9;
-  padding: 10px 20px;  
+  font-size: 18px;
+  line-height: 35px;
+  margin-bottom: 20px;
+  padding: 0 20px;  
+  position: relative;
 }
 .container {
   margin: 0 auto;
