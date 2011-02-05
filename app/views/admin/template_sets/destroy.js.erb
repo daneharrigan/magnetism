@@ -1,5 +1,5 @@
 var $template_set = $('#template-set-<%= resource.id %>');
-    $template_set.prev('h2').remove();
-    $template_set.remove();
-
-    // will need to close any open tabs
+$('<%= resource.templates.map { |t| "a.close[data-template-id=#{t.id}]" }.join(',') %>')
+  .each(function(){ Template.close(this) });
+$('#template-set-header-<%= resource.id %>').remove();
+$template_set.remove();

@@ -29,6 +29,13 @@ describe ThemeHelper do
     end
   end
 
+  describe '#blog_collection' do
+    it 'returns all of the "template sets"' do
+      template_set = Factory(:template_set)
+      helper.blog_collection.should == [template_set]
+    end
+  end
+
   describe '#new_template_collection' do
     before(:each) do
       Factory(:template_type_page)

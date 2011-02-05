@@ -1,4 +1,4 @@
-%h2.toggle-sibling.blue-header
+%h2{ :id => "template-set-header-#{template_set.id}", :class => 'toggle-sibling blue-header' }
   = template_set.name
   = link_to 'Delete', admin_manage_theme_template_set_path(theme, template_set, :format => :js), :class => 'delete', :remote => true, :method => :delete, 'data-type' => :script
 %ul{ :id => "template-set-#{template_set.id}" }
