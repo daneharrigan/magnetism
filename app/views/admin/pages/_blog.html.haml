@@ -1,1 +1,8 @@
-%h2 blog
+= f.fields_for :blog do |blog|
+  %ol.fields
+    %li.textarea
+      = blog.label :excerpt
+      = blog.text_area :excerpt
+    %li.textarea
+      = blog.label :article
+      = blog.text_area :article

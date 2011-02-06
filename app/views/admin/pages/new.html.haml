@@ -6,19 +6,19 @@
   .large-title
     = f.label :title, 'Page Title'
     = f.text_field :title
-  %ol.fields
-    - unless parent_page.try(:blog_section?)
+  - unless parent_page.try(:blog_section?)
+    %ol.fields
       %li.checkbox
         = f.check_box :blog_section
         = f.label :blog_section, 'Is this a blog?'
-    %li#template-selector
-      = f.label :template_id
-      = f.select :template_id, options_from_collection_for_select(template_collection, :id, :name)
-    %li#template-set-selector
-      = f.label :template_set_id, 'Blog Template'
-      = f.select :template_set_id, options_from_collection_for_select(template_set_collection, :id, :name), {}, :disabled => true
-  %fieldset#advanced
-    = f.hidden_field :uri_format, :value => ':year/:month/:slug', :disabled => true
+      %li#template-selector
+        = f.label :template_id
+        = f.select :template_id, options_from_collection_for_select(template_collection, :id, :name)
+      %li#template-set-selector
+        = f.label :template_set_id, 'Blog Template'
+        = f.select :template_set_id, options_from_collection_for_select(template_set_collection, :id, :name), {}, :disabled => true
+    %fieldset#advanced
+      = f.hidden_field :uri_format, :value => ':year/:month/:slug', :disabled => true
   .actions
     = link_to 'Cancel', '#cancel', :class => 'cancel'
     = f.submit

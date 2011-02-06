@@ -7,7 +7,7 @@
     = "http://#{current_site.domain}"
     = editable_permalink(resource)
   - if resource.blog_entry?
-    = render 'blog'
+    = render :partial => 'blog', :locals => { :f => f, :resource => resource }
   - unless resource.fields.empty?
     %ol.fields
       = render :partial => 'admin/fields/item', :collection => resource.template.fields, :as => :field

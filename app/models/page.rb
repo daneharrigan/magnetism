@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   belongs_to :template
   belongs_to :template_set
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
-  has_one :blog
+  has_one :blog, :dependent => :destroy
 
   validates_presence_of :title, :site_id
   validates_presence_of :template_id, :unless => Proc.new { |p| p.blog_section? || p.blog_entry? }
@@ -17,6 +17,9 @@ class Page < ActiveRecord::Base
   before_save :generate_slug, :if => Proc.new { |p| !p.slug? }
   before_create :assign_parent, :if => Proc.new { |p| !p.parent_id? }
   before_create :assign_template, :if => Proc.new { |p| p.blog_section? || p.blog_entry? }
+  after_create :create_blog, :if => Proc.new { |p| p.blog_entry? }
+
+  accepts_nested_attributes_for :blog
 
   delegate :fields, :to => :template
 
