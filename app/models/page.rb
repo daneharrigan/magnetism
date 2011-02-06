@@ -9,12 +9,14 @@ class Page < ActiveRecord::Base
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
   has_one :blog
 
-  validates_presence_of :title, :site_id, :template_id
+  validates_presence_of :title, :site_id
+  validates_presence_of :template_id, :unless => Proc.new { |p| p.blog_section? || p.blog_entry? }
   validates_uniqueness_of :title, :scope => :parent_id
   validates_uniqueness_of :slug, :scope => :parent_id
 
   before_save :generate_slug, :if => Proc.new { |p| !p.slug? }
   before_create :assign_parent, :if => Proc.new { |p| !p.parent_id? }
+  before_create :assign_template, :if => Proc.new { |p| p.blog_section? || p.blog_entry? }
 
   delegate :fields, :to => :template
 
@@ -83,6 +85,16 @@ class Page < ActiveRecord::Base
       if site.homepage_id?
         write_attribute :parent_id, site.homepage_id
       end
+    end
+
+    def assign_template
+      template = if blog_section?
+        template_set.templates.first(:conditions => { :name => 'Index' })
+      else
+        parent.template_set.templates.first(:conditions => { :name => 'Post' })
+      end
+
+      write_attribute :template_id, template.id
     end
 
     def format_blog_slug(page)

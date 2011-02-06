@@ -15,8 +15,8 @@
       = f.label :template_id
       = f.select :template_id, options_from_collection_for_select(template_collection, :id, :name)
     %li#template-set-selector
-      = f.label :template_set_id
-      = f.select :template_set_id, options_from_collection_for_select(template_set_collection, :id, :name)
+      = f.label :template_set_id, 'Blog Template'
+      = f.select :template_set_id, options_from_collection_for_select(template_set_collection, :id, :name), {}, :disabled => true
   %fieldset#advanced
     = f.hidden_field :uri_format, :value => ':year/:month/:slug', :disabled => true
   .actions

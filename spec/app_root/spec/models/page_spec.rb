@@ -4,6 +4,7 @@ describe Page do
   it { should belong_to(:site) }
   it { should belong_to(:parent) }
   it { should belong_to(:template) }
+  it { should belong_to(:template_set) }
   it { should have_many(:pages) }
   it { should have_one(:blog) }
 
@@ -92,6 +93,35 @@ describe Page do
     end
   end
 
+  describe '#assign_template' do
+    before(:each) do
+      @template_set = Factory(:template_set)
+      @blog_index = Factory(:template, :name => 'Index',
+        :theme => @template_set.theme,
+        :template_set_id => @template_set.id)
+    end
+
+    context 'when a blog section is created' do
+      it 'gets assigned the "Index" template' do
+        page = Factory(:blog_section, :template_set => @template_set, :template => nil)
+        page.template.should == @blog_index
+      end
+    end
+
+    context 'when a blog post is created' do
+      it 'gets assigned the "Post" template' do
+        blog_post = Factory(:template, :name => 'Post',
+          :theme => @template_set.theme,
+          :template_set => @template_set,
+          :template_type => @blog_index.template_type)
+        parent = Factory(:blog_section, :template_set => @template_set, :template => nil)
+        page = Factory(:blog_entry, :parent => parent, :site => parent.site, :template => nil)
+
+        page.template.should == blog_post
+      end
+    end
+  end
+
   describe '#fields=' do
     it 'calls Field#field= on each of the fields in the collection' do
       page = Factory(:page, :template => mock_template)
@@ -165,7 +195,10 @@ describe Page do
 
   describe '#permalink' do
     before(:each) do
-      @homepage = Factory(:homepage, :template => mock_template)
+      template_set = Factory(:template_set)
+      Factory(:template, :name => 'Post', :theme => template_set.theme, :template_set_id => template_set.id)
+
+      @homepage = Factory(:homepage, :template => mock_template, :template_set => template_set)
       @site = @homepage.site
 
       @site.homepage = @homepage
