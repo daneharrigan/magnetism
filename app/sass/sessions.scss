@@ -1,3 +1,6 @@
+html, body {
+  background: #ccc;
+}
 h2 {
 	background: #e2f1f9;
 	line-height: 40px;
@@ -8,9 +11,11 @@ h2, .message {
 form {
 	background: #fff;
 	width: 520px;
-	margin: 100px auto;
+	margin: 150px auto 0;
 	text-align: left;
 	padding: 40px 0;
+  border: 2px solid #198FD3;
+  -webkit-box-shadow: 0 0 15px #555;
 }
 fieldset, div, h2, p {
 	padding: 10px 40px;
