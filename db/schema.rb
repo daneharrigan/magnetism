@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20110218005635) do
     t.boolean  "blog_section",    :default => false
     t.string   "uri_format"
     t.boolean  "publish",         :default => false
+    t.datetime "cached_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

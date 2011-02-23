@@ -1,6 +1,6 @@
 namespace :m do
   desc 'Initial database setup and copying dependent files'
-  task :setup => [:schema_load, :seed, :javascript, :demo]
+  task :setup => [:schema_load, :seed, :javascript, :page_cache, :demo]
 
   desc 'Used to apply schema changes and update dependent files'
   task :update => :javascript
@@ -25,6 +25,13 @@ namespace :m do
 
   task :javascript do
     FileUtils.cp_r "#{Magnetism.root}/public/admin", "#{Rails.root}/public"
+  end
+
+  task :page_cache do
+    if Magnetism.cache == :file_system
+      FileUtils.mkdir_p "#{Rails.public_path}/cache"
+      # will need to copy over .htaccess file
+    end
   end
 
   task :migrate => :environment do

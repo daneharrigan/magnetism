@@ -1,6 +1,8 @@
 require 'magnetism/page_not_found'
 
 class DispatchController < ApplicationController
+  include Magnetism::Cache
+
   layout nil
   after_filter :clear_current
 
@@ -16,7 +18,7 @@ class DispatchController < ApplicationController
     page.current!
     render :text => Liquify.invoke(page.template.content)
   rescue Magnetism::PageNotFound
-    render :text => '404: Page Not Found', :status => 404
+    render :nothing => true, :status => 404
   end
 
   private

@@ -11,6 +11,7 @@ class CreatePages < ActiveRecord::Migration
       t.boolean :blog_section, :default => false
       t.string :uri_format
       t.boolean :publish, :default => false
+      t.datetime :cached_at
 
       t.timestamps
     end
