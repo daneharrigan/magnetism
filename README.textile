@@ -5,6 +5,7 @@ Magnetism is a website CMS. Its currently under heavy development and is not yet
 For those that have been watching Magnetism, it has been converted into a gem. To get it up and
 running please do the following:
 
+<code><pre>
   # make a new rails instance
   $ rails new magnetism_demo
 
@@ -17,16 +18,18 @@ running please do the following:
 
   # setup magnetism
   $ rake m:setup
-
+</pre></code>
 You can now launch the rails server and navigate to localhost:3000/admin
 
 h3. Well I already did the setup. What about updates?
 
+<code><pre>
   # have bundler update the gems
   $ bundle update
 
   # update magnetism
   $ rake m:update
+</pre></code>
 
 h3. Magnetism and Liquify?
 
