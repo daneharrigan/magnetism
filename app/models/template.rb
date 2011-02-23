@@ -13,6 +13,7 @@ class Template < ActiveRecord::Base
   scope :snippets, lambda { where(:template_type_id => TemplateType.snippet.id) }
   scope :javascripts, lambda { where(:template_type_id => TemplateType.javascript.id) }
   scope :stylesheets, lambda { where(:template_type_id => TemplateType.stylesheet.id) }
+  scope :by_name, lambda { |name| where(:name => name) }
 
   def destroy?
     !template_set_id?

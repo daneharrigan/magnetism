@@ -1,13 +1,5 @@
-GIT
-  remote: git://github.com/daneharrigan/liquify.git
-  revision: e6f50d9f1bf1b1124724359013d9cf9c31f197d5
-  branch: 1.0-alpha
-  specs:
-    liquify (0.2)
-      liquid (>= 2.2.2)
-
 PATH
-  remote: ../../
+  remote: .
   specs:
     magnetism (0.1)
       carrierwave (~> 0.5.1)
@@ -18,7 +10,7 @@ PATH
       inherited_resources (~> 1.1.2)
       layout_options (~> 0.2.1)
       mini_magick (~> 3.2)
-      rails (~> 3.0.4)
+      rails (~> 3.0.3)
       sass (~> 3.1.0.alpha.30)
 
 GEM
@@ -51,21 +43,18 @@ GEM
       activemodel (= 3.0.4)
       activesupport (= 3.0.4)
     activesupport (3.0.4)
-    archive-tar-minitar (0.5.2)
     arel (2.0.8)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
     carrierwave (0.5.1)
       activesupport (~> 3.0)
-    columnize (0.3.2)
     configatron (2.6.4)
       yamler (>= 0.1.0)
     cover_me (1.0.0.rc5)
       configatron
       hashie
     current_object (0.2)
-    daemons (1.0.10)
-    database_cleaner (0.6.0)
+    database_cleaner (0.6.3)
     devise (1.1.7)
       bcrypt-ruby (~> 2.1.2)
       warden (~> 1.0.2)
@@ -84,10 +73,9 @@ GEM
       nokogiri (>= 1.4.4)
       ruby-hmac
     formatador (0.0.16)
-    gem_plugin (0.2.3)
     haml (3.0.25)
     has_scope (0.5.0)
-    hashie (0.4.0)
+    hashie (1.0.0)
     i18n (0.5.0)
     inherited_resources (1.1.2)
       has_scope (~> 0.5.0)
@@ -95,9 +83,6 @@ GEM
     json (1.5.1)
     layout_options (0.2.1)
       rails (~> 3.0.1)
-    linecache19 (0.5.11)
-      ruby_core_source (>= 0.1.4)
-    liquid (2.2.2)
     mail (2.2.15)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
@@ -106,9 +91,6 @@ GEM
     mime-types (1.16)
     mini_magick (3.2)
       subexec (~> 0.0.4)
-    mongrel (1.2.0.pre2)
-      daemons (~> 1.0.10)
-      gem_plugin (~> 0.2.3)
     net-ssh (2.1.0)
     nokogiri (1.4.4)
     polyglot (0.3.1)
@@ -132,33 +114,22 @@ GEM
       thor (~> 0.14.4)
     rake (0.8.7)
     responders (0.6.2)
-    rspec (2.5.0)
-      rspec-core (~> 2.5.0)
-      rspec-expectations (~> 2.5.0)
-      rspec-mocks (~> 2.5.0)
-    rspec-core (2.5.1)
-    rspec-expectations (2.5.0)
+    rspec (2.4.0)
+      rspec-core (~> 2.4.0)
+      rspec-expectations (~> 2.4.0)
+      rspec-mocks (~> 2.4.0)
+    rspec-core (2.4.0)
+    rspec-expectations (2.4.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.5.0)
-    rspec-rails (2.5.0)
+    rspec-mocks (2.4.0)
+    rspec-rails (2.4.1)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
       railties (~> 3.0)
-      rspec (~> 2.5.0)
-    ruby-debug-base19 (0.11.24)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby_core_source (>= 0.1.4)
-    ruby-debug19 (0.11.6)
-      columnize (>= 0.3.1)
-      linecache19 (>= 0.5.11)
-      ruby-debug-base19 (>= 0.11.19)
+      rspec (~> 2.4.0)
     ruby-hmac (0.4.0)
-    ruby_core_source (0.1.4)
-      archive-tar-minitar (>= 0.5.2)
     sass (3.1.0.alpha.221)
     shoulda (2.11.3)
-    sqlite3-ruby (1.3.2)
     subexec (0.0.4)
     thor (0.14.6)
     treetop (1.4.9)
@@ -176,16 +147,21 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  carrierwave (~> 0.5.1)
   cover_me (~> 1.0.0.rc4)
+  current_object (~> 0.2)
   database_cleaner (~> 0.6.0)
+  devise (~> 1.1.5)
   factory_girl (~> 1.3.2)
-  linecache19
-  liquify!
+  fog (~> 0.3.34)
+  haml (~> 3.0.23)
+  inherited_resources (~> 1.1.2)
+  layout_options (~> 0.2.1)
   magnetism!
-  mongrel (= 1.2.0.pre2)
-  rspec (>= 2.5.0)
-  rspec-rails (>= 2.5.0)
-  ruby-debug19
-  shoulda (>= 2.11.3)
-  sqlite3-ruby
+  mini_magick (~> 3.2)
+  rails (~> 3.0.3)
+  rspec (~> 2.4.0)
+  rspec-rails (~> 2.4.1)
+  sass (~> 3.1.0.alpha.30)
+  shoulda (~> 2.11.3)
   webrat (~> 0.7.2)

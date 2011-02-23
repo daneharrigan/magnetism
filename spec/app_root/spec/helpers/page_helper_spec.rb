@@ -86,4 +86,29 @@ describe PageHelper do
       helper.template_set_collection.should == template_sets
     end
   end
+
+  describe '#row_class' do
+    context 'when the page is the homepage' do
+      it 'returns item' do
+        page = mock_page(:homepage? => true)
+        helper.row_class(page).should == 'item'
+      end
+    end
+
+    context 'when the page is not the homepage' do
+      before(:each) do
+        page_1 = mock_page(:homepage? => false)
+        page_2 = mock_page(:homepage? => false)
+        @output = [row_class(page_1), row_class(page_2)]
+      end
+
+      it 'returns "item" for all odd page rows' do
+        @output.first.should == 'item'
+      end
+
+      it 'returns "item alt" for all even page rows' do
+        @output.second.should == 'item alt'
+      end
+    end
+  end
 end

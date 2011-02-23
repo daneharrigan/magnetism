@@ -1,6 +1,6 @@
-.item
+%div{ :class => row_class(page) }
   = link_to page.title, edit_admin_page_path(page)
-  = "(Homepage)" if defined?(is_homepage)
+  = "(Homepage)" if page.homepage?
   .actions
     - unless page.homepage?
       = link_to 'Delete Page', admin_page_path(page, :format => :js), :remote => true, :method => :delete

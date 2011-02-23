@@ -14,6 +14,6 @@ def mock_template_set
   mock_model(TemplateSet)
 end
 
-def mock_page
-  mock_model(Page)
+def mock_page(args={})
+  mock_model(Page, args)
 end

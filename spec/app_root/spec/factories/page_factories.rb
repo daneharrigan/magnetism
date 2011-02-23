@@ -12,6 +12,7 @@ end
 
 Factory.define :blog_section, :parent => :page do |f|
   f.blog_section true
+  f.uri_format ':year/:month/:day/:slug'
 end
 
 Factory.define :blog_entry, :parent => :page do |f|

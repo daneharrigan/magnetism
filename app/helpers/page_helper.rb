@@ -21,4 +21,9 @@ module PageHelper
   def template_set_collection
     @template_set_collection ||= current_site.theme.template_sets
   end
+
+  def row_class(page)
+    return 'item' if page.homepage?
+    cycle('item','item alt')
+  end
 end

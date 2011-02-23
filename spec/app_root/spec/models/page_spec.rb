@@ -191,6 +191,87 @@ describe Page do
         Page.find_by_path('does/not/exist').should be_nil
       end
     end
+
+    context 'when a page is a blog post' do
+      before(:each) do
+        @homepage.blog_section = true
+
+        template = mock_template
+
+        templates = [template]
+        template_set = templates
+        templates_by_name = templates
+
+        templates_by_name.stub :first => template
+        templates.stub :by_name => templates_by_name
+        template_set.stub :templates => templates
+        @homepage.stub :template_set => template_set
+        @subpage = Factory(:page, :parent => @homepage, :site => @homepage.site)
+      end
+
+      context 'when the request is /<year>/<month>/<day>/slug' do
+        it 'should return the blog page' do
+          @homepage.update_attribute(:uri_format, ':year/:month/:day/:slug')
+          path = "#{@subpage.publish_at.strftime('%Y/%m/%d')}/#{@subpage.slug}"
+          
+          Page.find_by_path(path).should == @subpage
+        end 
+      end 
+
+      context 'when the request is /<year>/<month>/page-path is requested' do
+        it 'should return the blog page' do
+          @homepage.update_attribute(:uri_format, ':year/:month/:slug')
+          path = "#{@subpage.publish_at.strftime('%Y/%m')}/#{@subpage.slug}"
+
+          Page.find_by_path(path).should == @subpage
+        end
+      end
+
+      context 'when /<page-id>/path-name is requested' do
+        it 'should return a blog page' do
+          @homepage.update_attribute(:uri_format, ':id/:slug')
+          path = "#{@subpage.id}/#{@subpage.slug}"
+
+          Page.find_by_path(path).should == @subpage
+        end
+      end
+
+      context 'when /<page-id>-path-name is requested' do
+        it 'should return the blog page' do
+          @homepage.update_attribute(:uri_format, ':id-:slug')
+          path = "#{@subpage.id}-#{@subpage.slug}"
+
+          Page.find_by_path(path).should == @subpage
+        end
+      end
+    end
+
+    context 'when a page is a blog post within a subsection' do
+      before(:each) do
+        @section = Factory.build(:blog_section, :parent => @homepage, :site => @homepage.site)
+
+        template = mock_template
+
+        templates = [template]
+        template_set = templates
+        templates_by_name = templates
+
+        templates_by_name.stub :first => template
+        templates.stub :by_name => templates_by_name
+        template_set.stub :templates => templates
+        @section.stub :template_set => template_set
+        @section.save
+        @subpage = Factory(:blog_entry, :parent => @section, :site => @homepage.site)
+      end
+
+      context 'when the request is /<section>/<year>/<month>/<day>/<slug>' do
+        it 'should return the blog page' do
+          path = "#{@section.slug}/#{@subpage.publish_at.strftime('%Y/%m/%d')}/#{@subpage.slug}"
+          
+          Page.find_by_path(path).should == @subpage
+        end 
+      end 
+    end
   end
 
   describe '#permalink' do

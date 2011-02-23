@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110201004404) do
+ActiveRecord::Schema.define(:version => 20110218005635) do
 
   create_table "assets", :force => true do |t|
     t.integer  "site_id"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(:version => 20110201004404) do
     t.integer "author_id"
     t.text    "excerpt"
     t.text    "article"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer "blog_id"
+    t.string  "name"
+    t.string  "email"
+    t.text    "message"
   end
 
   create_table "data", :force => true do |t|
