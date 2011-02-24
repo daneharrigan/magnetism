@@ -15,18 +15,22 @@ module Magnetism
       end
 
       def update_page_cache
+        return unless response.status == 200
+
         page = self.instance_variable_get(:@page)
         page.update_attribute(:cached_at, Time.now)
       end
 
       def file_system_cache
-        file_path = Rails.public_path + '/cache' + request.path + '.html'
-        directory_path = file_path.split('/')
+        return unless response.status == 200
+
+        page = self.instance_variable_get(:@page)
+        directory_path = page.cache_path.split('/')
         directory_path.pop
         directory_path = directory_path.join('/')
 
         FileUtils.mkdir_p(directory_path)
-        File.open(file_path, 'w') { |f| f.write(response.body) }
+        File.open(page.cache_path, 'w') { |f| f.write(response.body) }
       end
   end
 end

@@ -376,4 +376,11 @@ describe Page do
       end
     end
   end
+
+  describe '#cache_path' do
+    it 'returns the file system path of where to write a static file' do
+      page = Factory.build(:page)
+      page.cache_path.should == "#{Rails.public_path}/cache/#{page.site.domain}#{page.permalink}.html"
+    end
+  end
 end

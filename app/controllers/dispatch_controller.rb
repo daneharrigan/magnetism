@@ -10,13 +10,13 @@ class DispatchController < ApplicationController
     site = Site.first(:conditions => { :domain => request.domain })
     site.current!
 
-    page = site.pages.find_by_path(params[:path] || '')
+    @page = site.pages.find_by_path(params[:path] || '')
     # params[:path] is nil when / is requested
 
-    raise Magnetism::PageNotFound if page.nil?
+    raise Magnetism::PageNotFound if @page.nil?
 
-    page.current!
-    render :text => Liquify.invoke(page.template.content)
+    @page.current!
+    render :text => Liquify.invoke(@page.template.content)
   rescue Magnetism::PageNotFound
     render :nothing => true, :status => 404
   end

@@ -76,6 +76,10 @@ class Page < ActiveRecord::Base
     parent.try(:blog_section?)
   end
 
+  def cache_path
+    "#{Rails.public_path}/cache/#{site.domain}#{permalink}.html"
+  end
+
   private
     def self.find_by_blog(page, path)
       regex = page.uri_format.sub(':id','(\d+)').sub(':year','(\d{4})').gsub(/:month|:day/,'(\d{2})').sub(':slug','([a-z0-9_-]+)')
