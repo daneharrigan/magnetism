@@ -16,20 +16,13 @@ running please do the following:
   # bundle everything up
   $ bundle install
 
+  # install magnetism
+  $ rails g magnetism:install
+
   # setup magnetism
   $ rake m:setup
 </code></pre>
 You can now launch the rails server and navigate to localhost:3000/admin
-
-h3. Well I already did the setup. What about updates?
-
-<pre><code>
-  # have bundler update the gems
-  $ bundle update
-
-  # update magnetism
-  $ rake m:update
-</code></pre>
 
 h3. Magnetism and Liquify?
 
