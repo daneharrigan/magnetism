@@ -1,6 +1,8 @@
 module Magnetism
   module Cache
     def self.included(base)
+      return unless Rails.env.production? # only worry about caching in production
+
       if Magnetism.cache == :varnish
         base.send(:before_filter, :varnish_cache)
         base.send(:after_filter, :update_page_cache)

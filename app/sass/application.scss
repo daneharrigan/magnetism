@@ -236,7 +236,6 @@ a.new:active, a.new:hover {
 #content textarea, span.textarea, .input, .asset {
   font: 14px/16px Helvetica, Arial, sans-serif;
   padding: 2px 4px;
-  width: 72%;
   border: 1px inset #CCC;
   width: 75%;
   display: inline-block;
@@ -245,6 +244,13 @@ a.new:active, a.new:hover {
 #content textarea, span.textarea {
   height: 200px;
   margin-left: 124px
+}
+#content .editor-container textarea {
+  width: 99%; // cant be 100% because it has padding
+  margin-left: 0;
+}
+.editor-container {
+  width: 75%;
 }
 .indent {
   margin-left: 120px;
@@ -305,7 +311,7 @@ fieldset .fields label {
   position: absolute;
   top: 10px;
 }
-.fields li.textarea .textarea {
+.fields li.textarea .editor-container {
   margin-left: 124px;
 }
 .fields li {

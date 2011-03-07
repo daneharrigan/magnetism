@@ -23,8 +23,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'current_object', '~> 0.2'
   s.add_dependency 'fog', '~> 0.3.34'
   s.add_dependency 'mini_magick', '~> 3.2'
-  s.add_dependency 'carrierwave', '~> 0.5.1'
-  # will need to add liquify in here...
+  s.add_dependency 'carrierwave', '~> 0.5.2'
+  s.add_dependency 'liquify', '~> 0.2'
 
   s.add_development_dependency 'shoulda', '~> 2.11.3'
   s.add_development_dependency 'rspec', '~> 2.4.0'

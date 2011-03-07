@@ -11,7 +11,7 @@ running please do the following:
 
   # add two gems to your Gemfile
   gem 'magnetism', :git => 'git://github.com/daneharrigan/magnetism.git', :branch => 'development'
-  gem 'liquify', :git => 'git://github.com/daneharrigan/liquify.git', :branch => '1.0-alpha'
+  gem 'liquify', :git => 'git://github.com/daneharrigan/liquify.git', :branch => 'master'
 
   # bundle everything up
   $ bundle install

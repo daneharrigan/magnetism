@@ -27,7 +27,9 @@ module FieldHelper
         when :input
           text_field_tag(name, field.value)
         when :textarea
-          text_area_tag(name, field.value)
+          content_tag :div, :class => 'editor-container' do
+            text_area_tag(name, field.value, :class => 'editor')
+          end
         when :asset
           html = file_field_tag(name)
           html = "#{image_tag(field.entry.file.thumbnail.url)} #{html}".html_safe unless field.entry.nil?

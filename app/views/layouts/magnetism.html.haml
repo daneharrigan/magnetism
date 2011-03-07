@@ -10,6 +10,12 @@
 
     = stylesheet_link_tag '/admin/stylesheets/application'
     = section_stylesheet_link_tag
+
+    - if resource.is_a?(Page)
+      = javascript_include_tag '/admin/javascripts/textile-editor'
+      = javascript_include_tag '/admin/javascripts/textile-editor-config'
+      = stylesheet_link_tag '/admin/stylesheets/textile-editor'
+
     = csrf_meta_tag
   %body
     = render 'admin/header'
