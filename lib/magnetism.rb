@@ -12,6 +12,7 @@ require 'liquify'
 require 'fog'
 require 'mini_magick'
 require 'carrierwave'
+require 'redcloth'
 
 module Magnetism
   mattr_accessor :cache
