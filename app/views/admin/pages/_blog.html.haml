@@ -2,7 +2,9 @@
   %ol.fields
     %li.textarea
       = blog.label :excerpt
-      = blog.text_area :excerpt
+      .editor-container
+        = blog.text_area :excerpt, :class => 'editor'
     %li.textarea
       = blog.label :article
-      = blog.text_area :article
+      .editor-container
+        = blog.text_area :article, :class => 'editor'
