@@ -4,6 +4,7 @@ module HTMLHelpers
   end
 
   def textile(text)
+    return if text.blank?
     RedCloth.new(text).to_html
   end
 end

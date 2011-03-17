@@ -27,4 +27,11 @@ describe Admin::SitesController do
       controller.theme_collection.should == [theme]
     end
   end
+
+  describe '#new' do
+    it 'renders the overlay layout' do
+      get :new, params
+      response.should render_template('layouts/overlay')
+    end
+  end
 end
