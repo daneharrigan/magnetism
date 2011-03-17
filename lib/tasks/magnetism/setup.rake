@@ -1,6 +1,6 @@
 namespace :m do
   desc 'Initial database setup and copying dependent files'
-  task :setup => [:schema_load, :seed, :javascript, :page_cache, :demo]
+  task :setup => [:schema_load, :seed, :demo]
 
   desc 'Used to apply schema changes and update dependent files'
   task :update => :javascript
