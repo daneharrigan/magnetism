@@ -1,7 +1,7 @@
 module Admin
-  class StylesheetsController < ApplicationController
+  class JavascriptsController < ApplicationController
     def show
-      @full_path = "#{Magnetism.root}/app/views/admin/stylesheets/#{params[:file_name]}.*"
+      @full_path = "#{Magnetism.root}/app/views/admin/javascripts/#{params[:file_name]}.*"
       files = Dir.glob(@full_path)
 
       if files.empty?
@@ -9,7 +9,7 @@ module Admin
       else
         content = File.open(files.first).read
 
-        response.headers['Content-Type'] = "text/css; charset=utf-8"
+        response.headers['Content-Type'] = "text/javascript; charset=utf-8"
         render :text => content 
       end
     end

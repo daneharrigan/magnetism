@@ -4,8 +4,6 @@ html, body {
 h2 {
 	background: #e2f1f9;
 	line-height: 40px;
-}
-h2, .message {
 	margin: 0 40px 10px;	
 }
 form {
