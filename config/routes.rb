@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # admin routes
   match '/admin' => 'admin/dashboard#show', :as => :user_root
   match '/admin/logout' => 'admin/sessions#destroy', :as => :logout
-  match '/admin/:directory/:file_name.:format' => 'admin/support_files#show', :constraints => { :directory => /(stylesheets|javascripts|images)/}
+  match '/admin/:directory/*file_name.:format' => 'admin/support_files#show', :constraints => { :directory => /(stylesheets|javascripts|images)/}
 
   # public routes
   match '/assets/:site_key/:directory/:file_name' => 'assets#show'

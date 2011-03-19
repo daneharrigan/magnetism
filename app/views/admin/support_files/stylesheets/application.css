@@ -250,10 +250,12 @@ a.new:active, a.new:hover {
 }
 #content textarea, span.textarea {
   height: 200px;
-  margin-left: 124px
+}
+span.textara {
+  margin-left: 124px;
 }
 #content .editor-container textarea {
-  width: 99%; // cant be 100% because it has padding
+  width: 99%; /* cant be 100% because it has padding */
   margin-left: 0;
 }
 .editor-container {
