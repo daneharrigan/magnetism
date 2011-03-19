@@ -24,6 +24,15 @@ running please do the following:
 </code></pre>
 You can now launch the rails server and navigate to localhost:3000/admin
 
+h3. Oh no! I updated and things aren't right!
+
+All images, stylesheets and javascript files were copied into the Rails.root/public directory
+when you'd run <code>rails g magnetism:install</code>. These files are now kept within the gem
+and do not get copied out.
+
+If you're updating your copy of magnetism please delete the Rails.root/public/admin directory if
+it exists.
+
 h3. Magnetism and Liquify?
 
 Liquify is a wrapper to the popular Liquid templating engine. It's being developed at the same time
