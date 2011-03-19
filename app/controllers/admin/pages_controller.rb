@@ -17,7 +17,10 @@ module Admin
       resource.current!
 
       update! do |success, failure|
-        success.html { }
+        success.html do
+          flash[:success] = flash[:notice]
+          flash.delete :notice
+        end
         failure.html { flash[:failure] = 'Page could not be updated.' }
       end
 

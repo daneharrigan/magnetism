@@ -8,10 +8,6 @@ module Magnetism
         copy_file 'magnetism.rb', 'config/initializers/magnetism.rb'
         copy_file 'carrierwave.rb', 'config/initializers/carrierwave.rb'
       end
-
-      def copy_javascripts
-        directory 'admin', 'public/admin'
-      end
     end
   end
 end
