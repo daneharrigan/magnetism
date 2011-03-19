@@ -30,11 +30,15 @@ module Magnetism
   end
 
   def self.stylesheet_root
-    self.root + '/app/views/admin/stylesheets'
+    self.root + '/app/views/admin/support_files/stylesheets'
   end
 
   def self.javascript_root
-    self.root + '/app/views/admin/javascripts'
+    self.root + '/app/views/admin/support_files/javascripts'
   end
+
+  #def self.image_root
+  #  self.root + '/app/views/admin/support_files/images'
+  #end
 end
 
