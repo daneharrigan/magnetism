@@ -1,7 +1,7 @@
 var Magnetism = {
   hideFlash: function(){
     setTimeout(function(){
-      $('div.notice, div.failure').animate({ height: 0, opacity: 0 }, 500, function(){ $(this).remove() });
+      $('div.notice, div.failure, div.success').animate({ height: 0, opacity: 0 }, 500, function(){ $(this).remove() });
     }, 5000);
   }
 };

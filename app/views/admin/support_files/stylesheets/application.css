@@ -105,8 +105,8 @@ section {
   border-bottom: 2px solid #f33;
 }
 .success {
-  background: #9f9;
-  border-bottom: 2px solid #3f3;
+  background: #3c3;
+  border-bottom: 2px solid #0c0;
 }
 #settings {
   position: absolute;

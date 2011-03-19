@@ -15,7 +15,7 @@ module Admin
         render :nothing => true
       else
         update! do |success, failure|
-          success.json { render :json => {:notice => 'Template was successfully updated.'} }
+          success.json { render :json => {:success => 'Template was successfully updated.'} }
           failure.json { render :json => {:failure => 'Template could not be updated.'} }
         end
       end

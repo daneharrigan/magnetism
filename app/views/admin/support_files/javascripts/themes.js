@@ -152,12 +152,12 @@ jQuery(function($){
   });
 
   $('div.code-content form').live('ajax:success', function(el, json, status){
-    var class_name = 'notice';
+    var class_name = 'success';
     if(json.failure)
       class_name = 'failure';
 
-    var message = json.failure ? json.failure : json.notice;
-    $('#content').prepend( $('<div />', { 'class': class_name}).text(message) );
+    var message = json.failure ? json.failure : json.success;
+    $('body').prepend( $('<div />', { 'class': class_name}).text(message) );
     Magnetism.hideFlash();
   });
 });

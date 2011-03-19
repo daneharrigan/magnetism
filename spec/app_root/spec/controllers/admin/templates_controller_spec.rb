@@ -86,7 +86,7 @@ describe Admin::TemplatesController do
       context 'when the update is successful' do
         it 'returns a json object of the success message' do
           put :update, @params
-          response.body.should == {:notice => 'Template was successfully updated.'}.to_json
+          response.body.should == {:success => 'Template was successfully updated.'}.to_json
         end
       end
 
