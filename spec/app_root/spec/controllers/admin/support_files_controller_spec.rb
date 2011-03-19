@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Admin::StylesheetsController do
+describe Admin::SupportFilesController do
   before(:each) { sign_in Factory(:user) }
 
   describe '#show' do
@@ -12,7 +12,7 @@ describe Admin::StylesheetsController do
       glob = ['path/to/file']
       Dir.stub :glob => glob
 
-      params = { :file_name => 'main', :format => 'css' }
+      params = { :file_name => 'main', :format => 'css', :directory => 'stylesheets' }
       get :show, params
     end
 
@@ -21,7 +21,7 @@ describe Admin::StylesheetsController do
     end
 
     it 'sets @file_name to the full path' do
-      full_path = "#{Magnetism.root}/app/views/admin/stylesheets/main.*"
+      full_path = "#{Magnetism.root}/app/views/admin/support_files/stylesheets/main.*"
       assigns(:full_path).should == full_path
     end
 
@@ -30,7 +30,25 @@ describe Admin::StylesheetsController do
         glob = []
         Dir.stub :glob => glob
 
-        params = { :file_name => 'main', :format => 'css' }
+        params = { :file_name => 'main', :format => 'css', :directory => 'stylesheets' }
+        get :show, params
+      end
+
+      it 'renders nothing' do
+        response.body.should be_blank
+      end
+
+      it 'returns a 404 status' do
+        response.status.should == 404
+      end
+    end
+
+    context 'when an incorrect file extension is used' do
+      before(:each) do
+        glob = ['path/to/file']
+        Dir.stub :glob => glob
+
+        params = { :file_name => 'main', :format => 'doesntexist', :directory => 'stylesheets' }
         get :show, params
       end
 
