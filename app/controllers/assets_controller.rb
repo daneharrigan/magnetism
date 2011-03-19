@@ -15,7 +15,7 @@ class AssetsController < ApplicationController
       response.headers['Content-Type'] = "#{content_type}; charset=utf-8"
       render :text => template.content
     rescue
-      render :text => '404: Page Not Found', :status => 404
+      render :nothing => true, :status => 404
     end
   end
 end

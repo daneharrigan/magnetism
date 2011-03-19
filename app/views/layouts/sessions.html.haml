@@ -6,4 +6,6 @@
     = section_stylesheet_link_tag
     = csrf_meta_tag
   %body
+    - if flash[:alert]
+      %p.message.failure= flash[:alert]
     = yield

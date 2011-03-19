@@ -1,8 +1,6 @@
 #login
   = form_for resource, :as => resource_name, :url => session_path(resource_name) do |f|
     %h2 Sign In
-    - if flash[:failure]
-      %p.message.failure= flash[:failure]
     %fieldset
       = f.label :login
       = f.text_field :login, :value => 'dane'

@@ -30,7 +30,7 @@ describe Admin::SitesController do
 
   describe '#new' do
     it 'renders the overlay layout' do
-      get :new, params
+      get :new
       response.should render_template('layouts/overlay')
     end
   end
