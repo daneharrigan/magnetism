@@ -81,30 +81,32 @@ section {
   background: #FFF;
 }
 .notice, .failure, .success {
-  font-style: italic;
   font-weight: bold;
   text-align: center;
   padding: 0 40px;
   margin-bottom: 20px;
   overflow: hidden;
-  line-height: 40px;
+  line-height: 50px;
+  color: #fff;
+  text-shadow: #666 1px 1px 3px;
 
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  z-index: 10;
 }
 .notice {
-  background: #FFD;
-  border: 1px solid #FC0;
+  background: #FC0;
+  border: 2px solid #FC0;
 }
 .failure {
-  background: #fcc;
-  border: 1px solid #f99;
+  background: #f99;
+  border-bottom: 2px solid #f33;
 }
 .success {
-  border: 1px solid #00a14c;
-  background: #79f7b4;
+  background: #9f9;
+  border-bottom: 2px solid #3f3;
 }
 #settings {
   position: absolute;

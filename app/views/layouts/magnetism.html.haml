@@ -18,7 +18,7 @@
 
     = csrf_meta_tag
   %body
-    - unless flash.empty?
+    - unless flash.values.first.blank?
       %div{:class => flash.keys.first}= flash.values.first
 
     = render 'admin/header'

@@ -8,6 +8,7 @@ module Magnetism
 
     initializer 'magnetism.initializer' do |app|
       app.config.filter_parameters += [:login, :email, :password, :password_confirmation]
+      app.config.i18n.load_path += Dir[Magnetism.root + '/config/locales/*.yml']
     end
   end
 end

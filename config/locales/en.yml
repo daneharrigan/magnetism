@@ -1,0 +1,6 @@
+en:
+  devise:
+    failure:
+      invalid: 'Your login or password was incorrect.'
+    sessions:
+      signed_in: ''
