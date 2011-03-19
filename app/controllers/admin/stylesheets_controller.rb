@@ -7,8 +7,9 @@ module Admin
       if files.empty?
         render :nothing => true, :status => 404
       else
-        response.headers['Content-Type'] = "text/css; charset=utf-8"
         content = File.open(files.first).read
+
+        response.headers['Content-Type'] = "text/css; charset=utf-8"
         render :text => content 
       end
     end

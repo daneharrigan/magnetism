@@ -28,5 +28,13 @@ module Magnetism
   def self.root
     File.expand_path(File.dirname(__FILE__) + '/..')
   end
+
+  def self.stylesheet_root
+    self.root + '/app/views/admin/stylesheets'
+  end
+
+  def self.javascript_root
+    self.root + '/app/views/admin/javascripts'
+  end
 end
 
