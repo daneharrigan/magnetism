@@ -10,15 +10,16 @@ describe Page do
 
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:site_id) }
-  it { should validate_presence_of(:template_id) }
+  # it { should validate_presence_of(:template_id) }
+  # TODO: need to test can_be_published
 
   context 'when a page exists' do
     before(:each) do
       Factory(:page)
     end
 
-    it { should validate_uniqueness_of(:title).scoped_to(:parent_id) }
-    it { should validate_uniqueness_of(:slug).scoped_to(:parent_id) }
+    it { should validate_uniqueness_of(:title).scoped_to(:site_id, :parent_id) }
+    it { should validate_uniqueness_of(:slug).scoped_to(:site_id, :parent_id) }
   end
 
   describe '#homepage?' do
@@ -146,10 +147,8 @@ describe Page do
 
   describe '.find_by_path' do
     before(:each) do
-      @homepage = Factory(:page, :slug => '/', :template => mock_template)
-      @site = @homepage.site
-      @site.homepage = @homepage
-      @site.save!
+      @site = Factory(:site)
+      @homepage = @site.homepage
     end
 
     it 'returns the homepage' do
@@ -205,8 +204,10 @@ describe Page do
         templates_by_name.stub :first => template
         templates.stub :by_name => templates_by_name
         template_set.stub :templates => templates
-        @homepage.stub :template_set => template_set
-        @subpage = Factory(:page, :parent => @homepage, :site => @homepage.site)
+
+        @subpage = Factory.build(:page, :parent => @homepage, :site => @homepage.site)
+        @subpage.parent.stub :template_set => template_set
+        @subpage.save
       end
 
       context 'when the request is /<year>/<month>/<day>/slug' do
@@ -279,11 +280,9 @@ describe Page do
       template_set = Factory(:template_set)
       Factory(:template, :name => 'Post', :theme => template_set.theme, :template_set_id => template_set.id)
 
-      @homepage = Factory(:homepage, :template => mock_template, :template_set => template_set)
-      @site = @homepage.site
-
-      @site.homepage = @homepage
-      @site.save!
+      @site = Factory(:site)
+      @homepage = @site.homepage
+      @homepage.update_attribute(:template_set, template_set)
     end
 
     it 'returns the full URL to the homepage' do
@@ -310,7 +309,7 @@ describe Page do
         @homepage.update_attributes(:blog_section => true,
           :uri_format => ':year/:month/:day/:slug')
 
-        page = Factory(:page, :parent => @homepage)
+        page = Factory(:page, :parent => @homepage, :site => @site)
         page.permalink.should == "/#{page.publish_at.strftime('%Y/%m/%d')}/#{page.slug}"
       end
     end
@@ -320,7 +319,7 @@ describe Page do
         @homepage.update_attributes(:blog_section => true,
           :uri_format => ':year/:month/:slug')
 
-        page = Factory(:page, :parent => @homepage)
+        page = Factory(:page, :parent => @homepage, :site => @site)
         page.permalink.should == "/#{page.publish_at.strftime('%Y/%m')}/#{page.slug}"
       end
     end
@@ -329,7 +328,7 @@ describe Page do
       it 'returns the full URL to the blog post' do
         @homepage.update_attributes(:blog_section => true, :uri_format => ':id/:slug')
 
-        page = Factory(:page, :parent => @homepage)
+        page = Factory(:page, :parent => @homepage, :site => @site)
         page.permalink.should == "/#{page.id}/#{page.slug}"
       end
     end
@@ -338,7 +337,7 @@ describe Page do
       it 'returns the full URL to the blog post' do
         @homepage.update_attributes(:blog_section => true, :uri_format => ':id-:slug')
 
-        page = Factory(:page, :parent => @homepage)
+        page = Factory(:page, :parent => @homepage, :site => @site)
         page.permalink.should == "/#{page.id}-#{page.slug}"
       end
     end

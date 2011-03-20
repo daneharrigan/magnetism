@@ -10,14 +10,15 @@ class Page < ActiveRecord::Base
   has_one :blog, :dependent => :destroy
 
   validates_presence_of :title, :site_id
-  validates_presence_of :template_id, :unless => Proc.new { |p| p.blog_section? || p.blog_entry? }
-  validates_uniqueness_of :title, :scope => :parent_id
-  validates_uniqueness_of :slug, :scope => :parent_id
+  #validates_presence_of :template_id, :unless => Proc.new { |p| p.blog_section? || p.blog_entry? }
+  validates_uniqueness_of :title, :scope => [:site_id, :parent_id]
+  validates_uniqueness_of :slug, :scope => [:site_id, :parent_id]
+  #validate :can_be_published
 
-  before_save :generate_slug, :if => Proc.new { |p| !p.slug? }
-  before_create :assign_parent, :if => Proc.new { |p| !p.parent_id? }
-  before_create :assign_template, :if => Proc.new { |p| p.blog_section? || p.blog_entry? }
-  after_create :create_blog, :if => Proc.new { |p| p.blog_entry? }
+  before_save :generate_slug, :if => proc { |p| !p.slug? }
+  before_create :assign_parent, :if => proc { |p| !p.parent_id? }
+  before_create :assign_template, :if => proc { |p| p.blog_section? || p.blog_entry? }
+  after_create :create_blog, :if => proc { |p| p.blog_entry? }
 
   accepts_nested_attributes_for :blog
 
@@ -148,5 +149,9 @@ class Page < ActiveRecord::Base
       replacements.each { |key, value| uri_format.sub!(":#{key}", value.to_s) }
 
       page.publish_at.strftime(uri_format)
+    end
+
+    def can_be_published
+      errors.add(:base, 'A page needs a template before it can be published') if publish? && !template_id?
     end
 end

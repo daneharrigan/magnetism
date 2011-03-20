@@ -1,7 +1,7 @@
 %h2.toggle-sibling Sites
 %section
   %ol#sites= render :partial => 'admin/sites/site', :collection => site_collection, :as => :site
-  = link_to 'New Site', '#', :class => 'new', :remote => true, :method => :get, 'data-type' => :html
+  = link_to 'New Site', new_admin_manage_site_path, :class => 'new', :remote => true, :method => :get, 'data-type' => :html
 
 %h2.toggle-sibling Themes
 %section

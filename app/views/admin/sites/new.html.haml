@@ -10,9 +10,9 @@
     %li
       = f.label :theme_id
       = f.select :theme_id, options_from_collection_for_select(theme_collection, :id, :name)
-    %li
-      = f.label :production
-      = f.boolean :production
+    /%li
+    /  = f.label :production
+    /  = f.check_box :production
   .actions
     = link_to 'Cancel', '#cancel', :class => 'cancel'
     = f.submit

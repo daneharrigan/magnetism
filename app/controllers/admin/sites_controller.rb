@@ -10,8 +10,23 @@ module Admin
       redirect_to admin_pages_path
     end
 
-    def theme_collection
-      @theme_collection ||= Theme.all
+    def create
+      create! do |success, failure|
+        success.html do
+          flash[:success] = 'Site '
+          redirect_to admin_manage_site_path(resource)
+        end
+
+        failure.html do
+          flash[:alert] = 'TEST'
+          redirect_to admin_manage_path
+        end
+      end
     end
+
+    private
+      def theme_collection
+        @theme_collection ||= Theme.all
+      end
   end
 end

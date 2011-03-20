@@ -26,4 +26,15 @@ describe Site do
       site.key.should == Digest::MD5.new(site.id).to_s
     end
   end
+
+  context 'when a site is created' do
+    before(:each) do
+      @site = Factory(:site)
+    end
+
+    it 'makes a "Homepage" page' do
+      @site.homepage.should_not be_nil
+      @site.homepage.new_record?.should == false
+    end
+  end
 end
