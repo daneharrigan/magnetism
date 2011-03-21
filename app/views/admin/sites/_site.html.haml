@@ -1,9 +1,7 @@
 %li{ :id => "site-#{site.id}", :class => 'item' }
   = link_to site.name, edit_admin_manage_site_path(site), :remote => true, :method => :get, 'data-type' => :html
   .actions
-    - if current_site == site
-      %span.disabled Delete Site
-    - else
+    - unless current_site == site
       = link_to 'Delete Site', admin_manage_site_path(site, :format => :js), :class => :delete
-    |
+      |
     = link_to 'Edit Site', edit_admin_manage_site_path(site), :remote => true, :method => :get, 'data-type' => :html
