@@ -7,6 +7,7 @@ class Page < ActiveRecord::Base
   belongs_to :template
   belongs_to :template_set
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
+  has_many :data
   has_one :blog, :dependent => :destroy
 
   validates_presence_of :title, :site_id

@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Field do
   it { should belong_to(:template) }
   it { should belong_to(:field_type) }
-  it { should have_many(:data) }
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:template_id) }
@@ -41,7 +40,7 @@ describe Field do
       entry = Factory(:string_datum)
 
       page.template.fields << field
-      field.data.create(:page => page, :entry => entry)
+      page.data.create(:field_name => field.name, :entry => entry)
 
       page.current!
       field.value.should == entry.value

@@ -4,7 +4,6 @@ class Field < ActiveRecord::Base
 
   belongs_to :template
   belongs_to :field_type
-  has_many :data
 
   before_create :auto_position
 
@@ -35,7 +34,7 @@ class Field < ActiveRecord::Base
           asset
       end
 
-      data.create(:page => Page.current, :entry => datum)
+      Page.current.data.create(:field_name => name, :entry => datum)
       return datum
     else
       # DH: need to set entry to something because I cant update a value
@@ -51,7 +50,7 @@ class Field < ActiveRecord::Base
   end
 
   def entry
-    data.first(:conditions => { :page_id => Page.current.id }).try(:entry)
+    Page.current.data.where(:field_name => name).first.try(:entry)
   end
 
   private

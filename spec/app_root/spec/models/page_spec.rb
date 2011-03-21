@@ -6,6 +6,7 @@ describe Page do
   it { should belong_to(:template) }
   it { should belong_to(:template_set) }
   it { should have_many(:pages) }
+  it { should have_many(:data) }
   it { should have_one(:blog) }
 
   it { should validate_presence_of(:title) }
