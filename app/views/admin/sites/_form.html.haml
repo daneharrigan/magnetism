@@ -1,0 +1,18 @@
+= form_for [:admin, :manage, resource] do |f|
+  .large-title
+    = f.label :name
+    = f.text_field :name
+  %ol.fields
+    %li
+      = f.label :domain
+      = f.text_field :domain
+    %li
+      = f.label :theme_id
+      = f.select :theme_id, options_from_collection_for_select(theme_collection, :id, :name)
+    /%li
+    /  = f.label :production
+    /  = f.check_box :production
+  .actions
+    = link_to 'Cancel', '#cancel', :class => 'cancel'
+    = f.submit
+

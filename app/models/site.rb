@@ -29,5 +29,6 @@ class Site < ActiveRecord::Base
 
     def generate_homepage
       create_homepage(:title => 'Homepage', :site => self, :slug => '/')
+      self.save
     end
 end

@@ -10,5 +10,7 @@ module Admin
         success.html { redirect_to admin_manage_path }
       end
     end
+
+    alias :destroy :render_destroy_js
   end
 end

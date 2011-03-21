@@ -3,4 +3,7 @@
   .actions
     = link_to 'Edit User', edit_admin_manage_user_path(user)
     |
-    = link_to 'Delete User', admin_manage_user_path(user, :format => :js), :remote => true, :method => :delete
+    - if User.count > 1
+      = link_to 'Delete User', admin_manage_user_path(user, :format => :js), :remote => true, :method => :delete
+    - else
+      %span.disabled Delete User

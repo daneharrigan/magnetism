@@ -1,0 +1,4 @@
+$('#site-<%= resource.id %>').remove();
+<%- if Site.count == 1 -%>
+$('#site-selector').remove();
+<%- end -%>

@@ -37,6 +37,12 @@ jQuery(function($){
   });
 
   $('body').delegate('*', 'click', function(){ $('div.selector ul').hide() });
+
+  $('a.delete').live('click',function(e){
+      var data = { authenticity_token: $('meta[name=csrf-token]').attr('content'), _method: 'delete' };
+      $.post(this.href, data, false, 'script');
+      e.preventDefault();
+    });
 });
 
 jQuery(window).load(function(){ Magnetism.hideFlash() });

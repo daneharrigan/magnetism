@@ -31,10 +31,4 @@ jQuery(function($){
       $template.parent().show();
     }
   });
-
-  $('a.delete').live('click',function(e){
-      var data = { authenticity_token: $('meta[name=csrf-token]').attr('content'), _method: 'delete' };
-      $.post(this.href, data, false, 'script');
-      e.preventDefault();
-    });
 });
