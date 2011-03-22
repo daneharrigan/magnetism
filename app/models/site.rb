@@ -9,7 +9,7 @@ class Site < ActiveRecord::Base
   validates_inclusion_of :production, :in => [true, false]
   validates_numericality_of :theme_id
 
-  before_create :assign_key
+  after_create :assign_key
   after_create :generate_homepage
 
   liquify_method :name, :homepage
@@ -25,6 +25,7 @@ class Site < ActiveRecord::Base
   private
     def assign_key
       write_attribute :key, Digest::MD5.new(id).to_s
+      self.save
     end
 
     def generate_homepage
