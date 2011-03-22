@@ -305,7 +305,6 @@ fieldset .fields label {
   padding-left: 124px;
 }
 .actions {
-  line-height: 50px;
   text-align: right;
 }
 .action-buttons {
@@ -327,6 +326,9 @@ fieldset .fields label {
   position: relative;
   margin-top: 5px;
   background: #fff;
+}
+.alt {
+  background: #f7f7f7;
 }
 
 /* overlay windows */

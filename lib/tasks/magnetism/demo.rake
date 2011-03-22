@@ -66,11 +66,8 @@ namespace :m do
       single_page_template = theme.templates.first(:conditions => { :name => 'Single Page' })
       homepage_template = theme.templates.first(:conditions => { :name => 'Homepage' })
 
-      homepage = site.pages.create(
-        :title => 'Homepage',
-        :slug => '/',
-        :publish_at => 1.hour.ago,
-        :template => homepage_template)
+      homepage = site.homepage
+      homepage.update_attributes(:publish_at => 1.hour.ago, :template => homepage_template)
 
       # adding content to homepage fields
       homepage.current!

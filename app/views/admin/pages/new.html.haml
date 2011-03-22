@@ -1,5 +1,5 @@
 %h2
-  New Page
+  = defined?(title) ? title : "New Page"
   - if parent_page
     = "Under #{parent_page.title}"
 = form_for [:admin, resource] do |f|

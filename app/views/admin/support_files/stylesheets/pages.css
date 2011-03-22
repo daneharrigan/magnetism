@@ -9,10 +9,6 @@
 #homepage .item a:visited {
   font-weight: bold;
 }
-.alt {
-  background: #f7f7f7;
-}
-
 /* edit view */
 #page-form {
   margin-right: 270px;

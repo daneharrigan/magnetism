@@ -1,4 +1,4 @@
-%li{ :id => "site-#{site.id}", :class => 'item' }
+%li{ :id => "site-#{site.id}", :class => cycle('item', 'item alt') }
   = link_to site.name, edit_admin_manage_site_path(site), :remote => true, :method => :get, 'data-type' => :html
   .actions
     - unless current_site == site

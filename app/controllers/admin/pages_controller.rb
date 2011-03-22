@@ -9,7 +9,12 @@ module Admin
     def edit
       current_site.current!
       resource.current!
-      edit!
+      if request.xhr?
+        @page = begin_of_association_chain.pages.find(params[:id])
+        render 'new', :layout => 'overlay', :locals => { :title => 'Edit Page' }
+      else
+        edit!
+      end
     end
 
     def update

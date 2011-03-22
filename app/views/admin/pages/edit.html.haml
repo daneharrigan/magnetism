@@ -8,7 +8,7 @@
     = editable_permalink(resource)
   - if resource.blog_entry?
     = render :partial => 'blog', :locals => { :f => f, :resource => resource }
-  - unless resource.fields.empty?
+  - if resource.template_id? && !resource.fields.empty?
     %ol.fields
       = render :partial => 'admin/fields/item', :collection => resource.template.fields, :as => :field
   .actions

@@ -4,7 +4,10 @@
   .actions
     - unless page.homepage?
       = link_to 'Delete Page', admin_page_path(page, :format => :js), :class => :delete
-      - unless page.blog_entry?
+      |
+    - unless page.blog_entry?
+      = link_to 'Page Settings', edit_admin_page_path(page), :remote => true, :method => :get, 'data-type' => :html
+      - unless page.homepage?
         |
         = link_to 'New Sub-Page', new_admin_page_path(:parent_id => page.id), :remote => true, :method => :get, 'data-type' => :html
         |
