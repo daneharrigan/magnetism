@@ -51,22 +51,39 @@ describe Admin::PagesController do
   end
 
   describe '#edit' do
-    before(:each) do
-      page = Factory(:page)
-      params = { :id => page.id }
-
-      get :edit, params
-    end
+    let(:page) { Factory(:page) }
 
     # need to clear the current page to treat each test as a new request
     after(:each) { Page.clear_current! }
 
-    it 'renders page/edit' do
-      response.should render_template('admin/pages/edit')
+    context 'when a request is made without xhr' do
+      before(:each) do
+        params = { :id => page.id }
+        get :edit, params
+      end
+
+      it 'renders page/edit' do
+        response.should render_template('admin/pages/edit')
+      end
+
+      it 'renders layouts/magnetism' do
+        response.should render_template('layouts/magnetism')
+      end
     end
 
-    it 'renders layouts/magnetism' do
-      response.should render_template('layouts/magnetism')
+    context 'when a request is made with xhr' do
+      before(:each) do
+        params = { :id => page.id }
+        xhr :get, :edit, params
+      end
+
+      it 'renders page/new' do
+        response.should render_template('admin/pages/new')
+      end
+
+      it 'renders layouts/overlay' do
+        response.should render_template('layouts/overlay')
+      end
     end
   end
 
