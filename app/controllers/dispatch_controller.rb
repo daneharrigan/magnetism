@@ -7,7 +7,7 @@ class DispatchController < ApplicationController
   after_filter :clear_current
 
   def show
-    site = Site.first(:conditions => { :domain => request.domain })
+    site = Site.find_by_request(request)
 
     raise Magnetism::PageNotFound if site.nil?
 
