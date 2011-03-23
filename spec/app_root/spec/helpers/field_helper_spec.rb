@@ -28,7 +28,7 @@ describe FieldHelper do
       it 'should return a text input' do
         field = Factory(:field_with_text_field)
         entry = Factory(:string_datum)
-        field.data.create(:page => @page, :entry => entry)
+        @page.data.create(:entry => entry, :field_name => field.name)
         @page.template.fields << field
 
         name = "page[fields][#{field.input_name}]"
@@ -40,7 +40,7 @@ describe FieldHelper do
       it 'should return a textarea' do
         field = Factory(:field_with_large_text_field)
         entry = Factory(:text_datum)
-        field.data.create(:page => @page, :entry => entry)
+        @page.data.create(:entry => entry, :field_name => field.name)
         @page.template.fields << field
 
         name = "page[fields][#{field.input_name}]"
