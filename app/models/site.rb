@@ -22,13 +22,16 @@ class Site < ActiveRecord::Base
   belongs_to :homepage, :class_name => 'Page'
   belongs_to :theme
 
-  def self.find_by_request(request)
+  def self.find_by_request(request, args={})
     domain = request.domain
     unless request.subdomain == 'www' || request.subdomain.empty?
       domain = "#{request.subdomain}.#{domain}"
     end
 
-    first(:conditions => {:domain => domain})
+    conditions = { :domain => domain }
+    conditions[:key] = args[:with_key] if args[:with_key]
+
+    first(:conditions => conditions)
   end
 
   private

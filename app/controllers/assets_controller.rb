@@ -1,7 +1,7 @@
 class AssetsController < ApplicationController
   def show
     begin
-      site = Site.first(:conditions => { :domain => request.domain, :key => params[:site_key] })
+      site = Site.find_by_request(request, :with_key => params[:site_key])
       templates = site.theme.templates.send(params[:directory]) if %W(stylesheets javascripts).include? params[:directory]
       template = templates.first(:conditions => [ 'name LIKE ?', params[:file_name]+'%' ])
 
