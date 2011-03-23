@@ -27,6 +27,38 @@ describe Site do
     end
   end
 
+  describe '.find_by_request' do
+    before(:all) do
+      Request = Struct.new(:domain, :subdomain)
+    end
+    context 'when the request is to www.domain.com' do
+      it 'finds the site witht he domain "domain.com"' do
+        request = Request.new('domain.com', 'www')
+        site = Factory(:site, :domain => 'domain.com')
+
+        Site.find_by_request(request).should == site
+      end
+    end
+
+    context 'when the request is to domain.com' do
+      it 'finds the site witht he domain "domain.com"' do
+        request = Request.new('domain.com', '')
+        site = Factory(:site, :domain => 'domain.com')
+
+        Site.find_by_request(request).should == site
+      end
+    end
+
+    context 'when the request is to test.domain.com' do
+      it 'finds the site witht he domain "test.domain.com"' do
+        request = Request.new('domain.com', 'test')
+        site = Factory(:site, :domain => 'test.domain.com')
+
+        Site.find_by_request(request).should == site
+      end
+    end
+  end
+
   context 'when a site is created' do
     before(:each) do
       @site = Factory(:site)

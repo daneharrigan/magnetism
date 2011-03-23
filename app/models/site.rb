@@ -22,6 +22,15 @@ class Site < ActiveRecord::Base
   belongs_to :homepage, :class_name => 'Page'
   belongs_to :theme
 
+  def self.find_by_request(request)
+    domain = request.domain
+    unless request.subdomain == 'www' || request.subdomain.empty?
+      domain = "#{request.subdomain}.#{domain}"
+    end
+
+    first(:conditions => {:domain => domain})
+  end
+
   private
     def assign_key
       write_attribute :key, Digest::MD5.new(id).to_s

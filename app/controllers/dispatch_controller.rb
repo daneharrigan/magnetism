@@ -8,8 +8,10 @@ class DispatchController < ApplicationController
 
   def show
     site = Site.first(:conditions => { :domain => request.domain })
-    site.current!
 
+    raise Magnetism::PageNotFound if site.nil?
+
+    site.current!
     @page = site.pages.find_by_path(params[:path] || '')
     # params[:path] is nil when / is requested
 
