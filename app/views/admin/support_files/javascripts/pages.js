@@ -31,4 +31,24 @@ jQuery(function($){
       $template.parent().show();
     }
   });
+
+  var $page_publish = $('#page_publish');
+
+  $page_publish.click(function(){
+    var $input = $(this);
+    var $date_select = $('#publish').find('select');
+
+    if($input.is(':checked'))
+    {
+      $date_select.parent().show();
+      $date_select.removeAttr('disabled');
+    }
+    else
+    {
+      $date_select.parent().hide();
+      $date_select.attr('disabled',true);
+    }
+  });
+
+  $page_publish.triggerHandler('click');
 });

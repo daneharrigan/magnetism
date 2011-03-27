@@ -11,6 +11,13 @@
   - if resource.template_id? && !resource.fields.empty?
     %ol.fields
       = render :partial => 'admin/fields/item', :collection => resource.template.fields, :as => :field
+  #publish
+    %p
+      = f.label :publish
+      = f.check_box :publish
+    %p
+      = f.label :publish_at
+      = f.date_select :publish_at
   .actions
     .action-buttons
       = link_to 'Back to Pages', admin_pages_path

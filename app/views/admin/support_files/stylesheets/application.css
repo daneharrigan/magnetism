@@ -311,6 +311,10 @@ fieldset .fields label {
   width: 75%;
   margin-left: 124px;
 }
+#overlay .actions,
+#content .actions {
+  line-height: 50px;
+}
 .note {
   font-size: 11px;
   color: #999;
@@ -319,7 +323,8 @@ fieldset .fields label {
   position: absolute;
   top: 10px;
 }
-.fields li.textarea .editor-container {
+.fields li.textarea .editor-container,
+.fields li.textarea span.textarea {
   margin-left: 124px;
 }
 .fields li {

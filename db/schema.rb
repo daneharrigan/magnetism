@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110320234922) do
+ActiveRecord::Schema.define(:version => 20110327115838) do
 
   create_table "assets", :force => true do |t|
     t.integer  "site_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20110320234922) do
     t.datetime "cached_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   add_index "pages", ["slug"], :name => "index_pages_on_slug"

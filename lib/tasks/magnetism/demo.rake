@@ -1,7 +1,7 @@
 namespace :m do
   # these tasks should not be known to the user
   # they'll be taken out prior to the initial release
-  task :demo => [:user, :site]
+  task :demo => [:environment, :user, :site]
 
   task :user do
     User.create(:login => 'dane', :name => 'Dane Harrigan',

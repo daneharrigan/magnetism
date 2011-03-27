@@ -2,8 +2,23 @@ namespace :m do
   desc 'Initial database setup and copying dependent files'
   task :setup => [:schema_load, :seed, :demo]
 
-  desc 'Used to apply schema changes and update dependent files'
-  task :update => :javascript
+  desc 'Used to apply schema changes'
+  task :update => :environment do
+    # get all migrations that havent run yet
+    migrated_files = ActiveRecord::Base.connection.execute('SELECT * FROM `schema_migrations`').map {|s| s[0]}
+    migration_directory = "#{Magnetism.root}/db/migrate"
+
+    all_migrations = Dir.glob("#{migration_directory}/*.rb").sort
+    migrations_to_run = all_migrations.reject do |m|
+      serial = m.split('/').last.split('_').first
+
+      migrated_files.include? serial
+    end
+
+    # run the remaining migrations
+    migrations_to_run.map { |migration| require migration }.flatten.
+      each { |class_name| class_name.constantize.up }
+  end
 
   # these tasks are all "private." They should not be called
   # independently.
@@ -21,17 +36,6 @@ namespace :m do
     FieldType.create(:name => 'Text field')
     FieldType.create(:name => 'Large text field')
     FieldType.create(:name => 'Asset')
-  end
-
-  task :javascript do
-    FileUtils.cp_r "#{Magnetism.root}/public/admin", "#{Rails.root}/public"
-  end
-
-  task :page_cache do
-    if Magnetism.cache == :file_system
-      FileUtils.mkdir_p "#{Rails.public_path}/cache"
-      # will need to copy over .htaccess file
-    end
   end
 
   task :migrate => :environment do
