@@ -12,7 +12,10 @@ namespace :m do
     migrations_to_run = all_migrations.reject do |m|
       serial = m.split('/').last.split('_').first
 
-      migrated_files.include? serial
+      already_migrated = migrated_files.include?(serial)
+      migrated_via_schema_rb = migrated_files.any? { |migrated_serial| serial <= migrated_serial }
+
+      already_migrated || migrated_via_schema_rb
     end
 
     # run the remaining migrations
