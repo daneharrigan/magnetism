@@ -25,7 +25,7 @@ class Page < ActiveRecord::Base
 
   delegate :fields, :to => :template
 
-  liquify_method :title, :publish_at, :permalink, :data => lambda { |page| DataDrop.new(page) }
+  liquify_method :title, :publish_at, :permalink, :pages, :data => lambda { |page| DataDrop.new(page) }
 
   # validates_presence_of :publish_at # if the page is going active
   # validates_presence_of :template_id
