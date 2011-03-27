@@ -32,8 +32,18 @@ jQuery(function($){
     }
   });
 
-  var $page_publish = $('#page_publish');
+  /*
+  var $pages = $('#pages ol');
+  $pages.sortable({
+    handle: 'a.sort',
+    placeholder: 'placeholder',
+    opacity: 0.8,
+    axis: 'y'
+  });
+  $pages.disableSelection();
+  */
 
+  var $page_publish = $('#page_publish');
   $page_publish.click(function(){
     var $input = $(this);
     var $date_select = $('#publish').find('select');

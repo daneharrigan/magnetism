@@ -40,7 +40,7 @@ class Page < ActiveRecord::Base
 
     until path.empty? || page.nil?
       return find_by_blog(page, path) if page && page.blog_section? && path.present?
-      page = page.pages.first(:conditions => { :slug => path.shift })
+      page = page.pages.first(:conditions => ['slug = ? AND publish = ? AND publish_at <= ?', path.shift, true, Time.now])
     end
 
     page
@@ -113,6 +113,13 @@ class Page < ActiveRecord::Base
         conditional_sql << 'publish_at BETWEEN ? AND ?'
         conditional_values << start_date
         conditional_values << end_date
+
+        # limit blog entry to published pages
+        conditional_sql << 'publish_at <= ?'
+        conditional_sql << 'publish = ?'
+
+        conditional_values << Time.now
+        conditional_values << true
       end
 
       conditional_sql = conditional_sql.join(' AND ')

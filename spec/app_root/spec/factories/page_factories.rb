@@ -4,6 +4,7 @@ Factory.define :page do |f|
   f.publish_at 1.hour.ago
   f.association :site
   f.association :template, :factory => :template_with_generic_template_type
+  f.publish true
 end
 
 Factory.define :homepage, :parent => :page do |f|

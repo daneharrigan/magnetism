@@ -1,9 +1,3 @@
-/* Template: Used to build the theme templates.
- * - load:
- * - focus:
- * - close:
- */
-
 var Template = {
   load: function(link, html){
     var link_id = Template.link_id(link),

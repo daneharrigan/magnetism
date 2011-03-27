@@ -150,6 +150,7 @@ describe Page do
     before(:each) do
       @site = Factory(:site)
       @homepage = @site.homepage
+      @homepage.update_attributes(:publish => true, :publish_at => 1.hour.ago)
     end
 
     it 'returns the homepage' do
