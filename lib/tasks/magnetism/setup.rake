@@ -5,7 +5,7 @@ namespace :m do
   desc 'Used to apply schema changes'
   task :update => :environment do
     # get all migrations that havent run yet
-    migrated_files = ActiveRecord::Base.connection.execute('SELECT * FROM `schema_migrations`').map {|s| s[0]}
+    migrated_files = ActiveRecord::Base.connection.execute('SELECT * FROM schema_migrations').map {|s| s[0]}
     migration_directory = "#{Magnetism.root}/db/migrate"
 
     all_migrations = Dir.glob("#{migration_directory}/*.rb").sort
