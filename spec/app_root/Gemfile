@@ -2,7 +2,6 @@ source 'http://rubygems.org'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'magnetism', :path => '../../'
-gem 'liquify', :git => 'git://github.com/daneharrigan/liquify.git', :branch => 'master'
 
 group :development do
   gem 'mongrel', '1.2.0.pre2'
