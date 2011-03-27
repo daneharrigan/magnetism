@@ -126,7 +126,7 @@ describe Page do
 
   describe '#fields=' do
     it 'calls Field#field= on each of the fields in the collection' do
-      page = Factory(:page, :template => mock_template)
+      page = Factory(:page)
       page.current!
       args = {}
 
@@ -171,7 +171,6 @@ describe Page do
       page_1.pages << page_2
 
       uri = [page_1.slug, page_2.slug].join('/')
-
       Page.find_by_path(uri).should == page_2
     end
 
