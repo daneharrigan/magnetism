@@ -9,18 +9,21 @@ namespace :m do
     migration_directory = "#{Magnetism.root}/db/migrate"
 
     all_migrations = Dir.glob("#{migration_directory}/*.rb").sort
-    migrations_to_run = all_migrations.reject do |m|
+    migrations_to_run = all_migrations.reject do |m| 
       serial = m.split('/').last.split('_').first
 
       already_migrated = migrated_files.include?(serial)
       migrated_via_schema_rb = migrated_files.any? { |migrated_serial| serial <= migrated_serial }
 
       already_migrated || migrated_via_schema_rb
-    end
+    end 
 
     # run the remaining migrations
-    migrations_to_run.map! { |migration| require migration }
-    migrations_to_run.flatten.each { |class_name| class_name.constantize.up }
+    migrations_to_run.each { |migration| require migration }
+    migrations_to_run.each do |migration|
+      class_name = migration.match(/\d+_(.*)\.rb/)[1].classify
+      class_name.constantize.up
+    end 
   end
 
   # these tasks are all "private." They should not be called
