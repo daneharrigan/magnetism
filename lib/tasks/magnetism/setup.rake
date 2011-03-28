@@ -5,7 +5,7 @@ namespace :m do
   desc 'Used to apply schema changes'
   task :update => :environment do
     # get all migrations that havent run yet
-    migrated_files = ActiveRecord::Base.connection.execute('SELECT * FROM schema_migrations').map {|s| s[0]}
+    migrated_files = ActiveRecord::Base.connection.execute('SELECT * FROM schema_migrations').map {|s| s['version']}
     migration_directory = "#{Magnetism.root}/db/migrate"
 
     all_migrations = Dir.glob("#{migration_directory}/*.rb").sort
@@ -19,8 +19,8 @@ namespace :m do
     end
 
     # run the remaining migrations
-    migrations_to_run.map { |migration| require migration }.flatten.
-      each { |class_name| class_name.constantize.up }
+    migrations_to_run.map! { |migration| require migration }
+    migrations_to_run.flatten.each { |class_name| class_name.constantize.up }
   end
 
   # these tasks are all "private." They should not be called
