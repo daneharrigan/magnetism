@@ -1,23 +1,20 @@
-class DataDrop < Liquify::Drop
+class DataDrop < Liquid::Drop
   def initialize(page)
-    @fields = {}
+    field_names = page.fields.map(&:name)
+    field_keys = page.fields.map(&:input_name)
+    @fields = Hash[field_keys.zip]
 
-    page.fields.each do |field|
-      method = field.input_name
-      @fields[method] = field.value
+    page.data.all(:conditions => { :field_name => field_names }).each do |datum|
+      index = field_names.index datum.field_name
+      key = field_keys[index]
+
+      @fields[key] = datum.entry.try(:value)
     end
   end
 
-  def invoke_drop(method)
-    if @fields.include? method
-      @fields[method]
-    else
-      before_method(method)
-    end
-  end
 
-  def to_liquid
-    self
+  def invoke_drop(key)
+    @fields[key]
   end
 
   alias :[] :invoke_drop

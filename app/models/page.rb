@@ -25,6 +25,7 @@ class Page < ActiveRecord::Base
 
   delegate :fields, :to => :template
 
+  #liquify_method :title, :publish_at, :permalink, :pages, :data => lambda { |page| DataDrop.new.build(page, page.fields_as_hash, :as => :hash) }
   liquify_method :title, :publish_at, :permalink, :pages, :data => lambda { |page| DataDrop.new(page) }
 
   # validates_presence_of :publish_at # if the page is going active
@@ -82,6 +83,12 @@ class Page < ActiveRecord::Base
     "#{Rails.public_path}/cache/#{site.domain}#{permalink}.html"
   end
 
+  def fields_as_hash
+    hash = {}
+    fields.each { |field| hash[field.input_name] = field.value }
+    hash
+  end
+
   private
     def self.find_by_blog(page, path)
       regex = page.uri_format.sub(':id','(\d+)').sub(':year','(\d{4})').gsub(/:month|:day/,'(\d{2})').sub(':slug','([a-z0-9_-]+)')
@@ -124,7 +131,7 @@ class Page < ActiveRecord::Base
 
       conditional_sql = conditional_sql.join(' AND ')
       page.pages.first(:conditions => [conditional_sql, *conditional_values])
-    end 
+    end
 
     def generate_slug
       slug = title.downcase.gsub(/[_\s]/,'-').gsub(/([^a-z0-9-])/,'')
