@@ -41,7 +41,7 @@ class Page < ActiveRecord::Base
 
     until path.empty? || page.nil?
       return find_by_blog(page, path) if page && page.blog_section? && path.present?
-      page = page.pages.first(:conditions => ['slug = ? AND publish = ? AND publish_at <= ?', path.shift, true, Time.now])
+      page = page.pages.first(:conditions => ['slug = ? AND publish = ? AND publish_at <= ?', path.shift, true, Time.now.utc])
     end
 
     page

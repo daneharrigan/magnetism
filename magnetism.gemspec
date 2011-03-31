@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'fog', '~> 0.3.34'
   s.add_dependency 'mini_magick', '~> 3.2'
   s.add_dependency 'carrierwave', '~> 0.5.2'
-  s.add_dependency 'liquify', '~> 0.2.1'
+  s.add_dependency 'liquify', '~> 0.2.2'
   s.add_dependency 'RedCloth', '~> 4.2.7'
 
   s.add_development_dependency 'shoulda', '~> 2.11.3'
