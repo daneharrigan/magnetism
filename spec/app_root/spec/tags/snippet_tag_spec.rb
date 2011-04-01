@@ -18,6 +18,7 @@ describe SnippetTag do
     Page.stub :current => @page
     Site.stub :current => @site
   end
+
   describe 'snippet "post"' do
     it 'renders the "post" snippet once' do
       #output = Liquify.invoke('{% snippet "post" %}')
@@ -35,14 +36,15 @@ describe SnippetTag do
       blog.stub :fields => []
       @page_1.stub :fields => []
       @page_2.stub :fields => []
+      pages = [@page_1, @page_2]
+      pages.stub :published => pages
 
-      blog.stub :pages => [@page_1, @page_2]
+      blog.stub :pages => pages
       Site.current.pages.stub :find_by_path => blog
     end
 
     it 'renders the "post" snippet 2 times' do
-      output = Liquify.invoke('{% snippet "post", collection: "pages", parent_uri: "/blog" %}')
-      debugger
+      output = Liquify.invoke('{% snippet "post", collection: "subpages", parent_uri: "/blog" %}')
       [@page_1, @page_2].each do |page|
         output.should =~ /<p>#{page.title}<\/p>/
       end

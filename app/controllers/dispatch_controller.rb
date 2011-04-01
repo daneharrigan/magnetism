@@ -12,7 +12,7 @@ class DispatchController < ApplicationController
     raise Magnetism::PageNotFound if site.nil?
 
     site.current!
-    @page = site.pages.find_by_path(request.request_uri)
+    @page = site.pages.find_by_path(request.fullpath)
 
     raise Magnetism::PageNotFound if @page.nil?
 

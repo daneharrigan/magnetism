@@ -108,7 +108,7 @@ class Page < ActiveRecord::Base
       datestamp = [args[:year], args[:month], args[:day]].compact
       if datestamp.present?
         start_date = Date.civil(*datestamp.map(&:to_i))
-        end_date = datestamp.length == 3 ? start_date.end_of_day : start_date.end_of_month
+        end_date = datestamp.length == 3 ? start_date.end_of_day : start_date.end_of_month.end_of_day
 
         # add the start/end date
         conditional_sql << 'publish_at BETWEEN ? AND ?'
