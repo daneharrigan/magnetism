@@ -21,11 +21,8 @@ namespace :m do
     # run the remaining migrations
     migrations_to_run.each { |migration| require migration }
     migrations_to_run.each do |migration|
-      matches = migration.match(/(\d+)_(.*)\.rb/)
-      class_name = matches[2].classify
-      version = matches[1]
-      class_name.constantize.run(:up)
-      #class_name.constantize.migrate(:up, version)
+      version = migration.match(/\/(\d+)_/)[1].to_i
+      ActiveRecord::Migrator.new(:up, "#{Magnetism.root}/db/migrate", version).run
     end
   end
 
