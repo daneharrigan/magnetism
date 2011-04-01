@@ -9,7 +9,7 @@ class SnippetTag < Liquify::Tag
     collection = find_collection(options)
 
     collection.map do |item|
-      extra_context = { :first => (collection.first == item), :last => (collection.last == item) }
+      extra_context = { 'first' => (collection.first == item), 'last' => (collection.last == item) }
       key = options['as'] || 'item'
       extra_context[key] = item
 
