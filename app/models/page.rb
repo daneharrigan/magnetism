@@ -24,7 +24,7 @@ class Page < ActiveRecord::Base
   delegate :fields, :to => :template
   scope :published, lambda { where(['publish = ? AND publish_at <= ?', true, Time.now]) }
 
-  liquify_method :title, :publish_at, :permalink,
+  liquify_method :title, :publish_at, :permalink, :blog,
     :data => lambda { |page| DataDrop.new(page) },
     :subpages => lambda { |page| page.pages.published }
 
