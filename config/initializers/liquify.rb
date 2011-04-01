@@ -1,6 +1,6 @@
 Liquify.setup do |config|
   config.register_drop :site, lambda { Site.current }
-  config.register_drop :navigation, lambda { Site.current.homepage.pages }
+  config.register_drop :navigation, lambda { Site.current.homepage.pages.published }
   config.register_drop :page, lambda { Page.current }
   config.register_drop :parent, lambda { Page.current.parent }
 
