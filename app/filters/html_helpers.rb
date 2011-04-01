@@ -7,4 +7,10 @@ module HTMLHelpers
     return if text.blank?
     RedCloth.new(text).to_html
   end
+
+  def date_format(timestamp, format)
+    timestamp.strftime(format)
+  end
+
+  alias :time_format :date_format
 end
