@@ -21,7 +21,9 @@ h3. Page Methods
   4. data
   5. subpages
 
-Question: Should blog content (eg: exceprt and article) be stored in "page.data" or in "page.blog"
+*Question:* Should blog content (eg: exceprt and article) be stored in "page.data" or in "page.blog"
+*DH:* I'm thinking "data"
+
 
 h2. Available Tags
   1. snippet
