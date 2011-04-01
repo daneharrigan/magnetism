@@ -16,14 +16,14 @@ namespace :m do
       migrated_via_schema_rb = migrated_files.any? { |migrated_serial| serial <= migrated_serial }
 
       already_migrated || migrated_via_schema_rb
-    end 
+    end
 
     # run the remaining migrations
     migrations_to_run.each { |migration| require migration }
     migrations_to_run.each do |migration|
       class_name = migration.match(/\d+_(.*)\.rb/)[1].classify
-      class_name.constantize.up
-    end 
+      class_name.constantize.migrate(:up)
+    end
   end
 
   # these tasks are all "private." They should not be called
