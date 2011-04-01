@@ -3,6 +3,7 @@ Liquify.setup do |config|
   config.register_drop :navigation, lambda { Site.current.homepage.pages.published }
   config.register_drop :page, lambda { Page.current }
   config.register_drop :parent, lambda { Page.current.parent }
+  config.register_drop :homepage, lambda { Site.current.homepage }
 
   config.register_tag :snippet, SnippetTag
 

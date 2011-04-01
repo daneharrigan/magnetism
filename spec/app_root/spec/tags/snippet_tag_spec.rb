@@ -21,6 +21,7 @@ describe SnippetTag do
 
   describe 'snippet "post"' do
     it 'renders the "post" snippet once' do
+      pending
       #output = Liquify.invoke('{% snippet "post" %}')
       #snippet_matches = output.match /<p>#{@page.title}<\/p>/
       #snippet_matches.length.should == 1
