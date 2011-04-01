@@ -11,10 +11,8 @@ class Page < ActiveRecord::Base
   has_one :blog, :dependent => :destroy
 
   validates_presence_of :title, :site_id
-  #validates_presence_of :template_id, :unless => Proc.new { |p| p.blog_section? || p.blog_entry? }
   validates_uniqueness_of :title, :scope => [:site_id, :parent_id]
   validates_uniqueness_of :slug, :scope => [:site_id, :parent_id]
-  #validate :can_be_published
 
   before_save :generate_slug, :if => proc { |p| !p.slug? }
   before_create :assign_parent, :if => proc { |p| !p.parent_id? }
@@ -24,24 +22,26 @@ class Page < ActiveRecord::Base
   accepts_nested_attributes_for :blog
 
   delegate :fields, :to => :template
+  scope :published, lambda { where(['publish = ? AND publish_at <= ?', true, Time.now]) }
 
-  #liquify_method :title, :publish_at, :permalink, :pages, :data => lambda { |page| DataDrop.new.build(page, page.fields_as_hash, :as => :hash) }
-  liquify_method :title, :publish_at, :permalink, :pages, :data => lambda { |page| DataDrop.new(page) }
-
-  # validates_presence_of :publish_at # if the page is going active
-  # validates_presence_of :template_id
-  # validates_format_of :uri_matcher, :with => /\A[a-z\/\-\:]+\z/, :allow_nil => true
+  liquify_method :title, :publish_at, :permalink,
+    :data => lambda { |page| DataDrop.new(page) },
+    :subpages => lambda { |page| page.pages.published }
 
   def self.find_by_path(path)
-    path = path.split('/')
-    path.unshift '/'
+    if path.length == 1
+      path = [path]
+    else
+      path = path.split('/')
+      path[0] = '/'
+    end
 
     page = first(:conditions => { :slug => path.shift })
     return if page.nil?
 
     until path.empty? || page.nil?
       return find_by_blog(page, path) if page && page.blog_section? && path.present?
-      page = page.pages.first(:conditions => ['slug = ? AND publish = ? AND publish_at <= ?', path.shift, true, Time.now.utc])
+      page = page.pages.published.first(:conditions => {:slug => path.shift})
     end
 
     page
@@ -83,12 +83,6 @@ class Page < ActiveRecord::Base
     "#{Rails.public_path}/cache/#{site.domain}#{permalink}.html"
   end
 
-  def fields_as_hash
-    hash = {}
-    fields.each { |field| hash[field.input_name] = field.value }
-    hash
-  end
-
   private
     def self.find_by_blog(page, path)
       regex = page.uri_format.sub(':id','(\d+)').sub(':year','(\d{4})').gsub(/:month|:day/,'(\d{2})').sub(':slug','([a-z0-9_-]+)')
@@ -120,17 +114,10 @@ class Page < ActiveRecord::Base
         conditional_sql << 'publish_at BETWEEN ? AND ?'
         conditional_values << start_date
         conditional_values << end_date
-
-        # limit blog entry to published pages
-        conditional_sql << 'publish_at <= ?'
-        conditional_sql << 'publish = ?'
-
-        conditional_values << Time.now
-        conditional_values << true
       end
 
       conditional_sql = conditional_sql.join(' AND ')
-      page.pages.first(:conditions => [conditional_sql, *conditional_values])
+      page.pages.published.first(:conditions => [conditional_sql, *conditional_values])
     end
 
     def generate_slug

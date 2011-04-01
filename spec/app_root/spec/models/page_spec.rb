@@ -154,13 +154,14 @@ describe Page do
     end
 
     it 'returns the homepage' do
-      Page.find_by_path('').should == @homepage
+      Page.find_by_path('/').should == @homepage
     end
 
     it 'returns a top level page' do
       page = Factory(:page, :template => mock_template, :site => @site)
       @homepage.pages << page
-      Page.find_by_path(page.slug).should == page
+      uri = '/' << page.slug
+      Page.find_by_path(uri).should == page
     end
 
     it 'returns a second level page' do
@@ -170,7 +171,7 @@ describe Page do
       @homepage.pages << page_1
       page_1.pages << page_2
 
-      uri = [page_1.slug, page_2.slug].join('/')
+      uri = '/' << [page_1.slug, page_2.slug].join('/')
       Page.find_by_path(uri).should == page_2
     end
 
@@ -181,14 +182,14 @@ describe Page do
       page_3 = Factory(:page, :site => @site,
         :template => mock_template, :parent => page_2)
 
-      uri = [page_1.slug, page_2.slug, page_3.slug].join('/')
+      uri = '/' << [page_1.slug, page_2.slug, page_3.slug].join('/')
 
       Page.find_by_path(uri).should == page_3
     end
 
     context 'when a page cant be found' do
       it 'returns nil' do
-        Page.find_by_path('does/not/exist').should be_nil
+        Page.find_by_path('/does/not/exist').should be_nil
       end
     end
 
@@ -214,7 +215,7 @@ describe Page do
       context 'when the request is /<year>/<month>/<day>/slug' do
         it 'should return the blog page' do
           @homepage.update_attribute(:uri_format, ':year/:month/:day/:slug')
-          path = "#{@subpage.publish_at.strftime('%Y/%m/%d')}/#{@subpage.slug}"
+          path = "/#{@subpage.publish_at.strftime('%Y/%m/%d')}/#{@subpage.slug}"
           
           Page.find_by_path(path).should == @subpage
         end 
@@ -223,7 +224,7 @@ describe Page do
       context 'when the request is /<year>/<month>/page-path is requested' do
         it 'should return the blog page' do
           @homepage.update_attribute(:uri_format, ':year/:month/:slug')
-          path = "#{@subpage.publish_at.strftime('%Y/%m')}/#{@subpage.slug}"
+          path = "/#{@subpage.publish_at.strftime('%Y/%m')}/#{@subpage.slug}"
 
           Page.find_by_path(path).should == @subpage
         end
@@ -232,7 +233,7 @@ describe Page do
       context 'when /<page-id>/path-name is requested' do
         it 'should return a blog page' do
           @homepage.update_attribute(:uri_format, ':id/:slug')
-          path = "#{@subpage.id}/#{@subpage.slug}"
+          path = "/#{@subpage.id}/#{@subpage.slug}"
 
           Page.find_by_path(path).should == @subpage
         end
@@ -241,7 +242,7 @@ describe Page do
       context 'when /<page-id>-path-name is requested' do
         it 'should return the blog page' do
           @homepage.update_attribute(:uri_format, ':id-:slug')
-          path = "#{@subpage.id}-#{@subpage.slug}"
+          path = "/#{@subpage.id}-#{@subpage.slug}"
 
           Page.find_by_path(path).should == @subpage
         end
@@ -268,7 +269,7 @@ describe Page do
 
       context 'when the request is /<section>/<year>/<month>/<day>/<slug>' do
         it 'should return the blog page' do
-          path = "#{@section.slug}/#{@subpage.publish_at.strftime('%Y/%m/%d')}/#{@subpage.slug}"
+          path = "/#{@section.slug}/#{@subpage.publish_at.strftime('%Y/%m/%d')}/#{@subpage.slug}"
           
           Page.find_by_path(path).should == @subpage
         end 
