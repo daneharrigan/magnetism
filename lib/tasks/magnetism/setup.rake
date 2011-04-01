@@ -21,8 +21,11 @@ namespace :m do
     # run the remaining migrations
     migrations_to_run.each { |migration| require migration }
     migrations_to_run.each do |migration|
-      class_name = migration.match(/\d+_(.*)\.rb/)[1].classify
-      class_name.constantize.migrate(:up)
+      matches = migration.match(/(\d+)_(.*)\.rb/)
+      class_name = matches[2].classify
+      version = matches[1]
+      class_name.constantize.run(:up)
+      #class_name.constantize.migrate(:up, version)
     end
   end
 
