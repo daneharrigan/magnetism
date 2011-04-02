@@ -4,12 +4,12 @@ class SnippetTag < Liquify::Tag
     snippets = Site.current.theme.templates.snippets
     template = snippets.first(:conditions => { :name => params.first })
 
-    return Liquify.invoke(template.content) unless options['collection']
+    return Liquify.invoke(template.content, :first => true, :last => true) unless options['collection']
 
     collection = find_collection(options)
 
     collection.map do |item|
-      extra_context = { 'first' => (collection.first == item), 'last' => (collection.last == item) }
+      extra_context = { :first => (collection.first == item), :last => (collection.last == item) }
       key = options['as'] || 'item'
       extra_context[key] = item
 
