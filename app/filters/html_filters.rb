@@ -1,4 +1,4 @@
-module HTMLHelpers
+module HTMLFilters
   def stylesheet(name)
     %{<link href="/assets/#{Site.current.key}/stylesheets/#{name}.css" media="screen" rel="stylesheet" type="text/css" />}
   end
@@ -13,4 +13,8 @@ module HTMLHelpers
   end
 
   alias :time_format :date_format
+
+  def link_to(page)
+    %{<a href="#{page.permalink}" title="#{page.title}">#{page.title}</a>}
+  end
 end

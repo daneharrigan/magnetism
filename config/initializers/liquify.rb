@@ -7,7 +7,7 @@ Liquify.setup do |config|
 
   config.register_tag :snippet, SnippetTag
 
-  config.register_filters HTMLHelpers
+  config.register_filters HTMLFilters
 
   # A tag is a class that inherits from Liquify::Tag or Liquid::Tag
   # config.register_tag :tag_name, TagClass
