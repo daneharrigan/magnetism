@@ -5,6 +5,6 @@
 #homepage
   = render :partial => 'page', :locals => { :page => homepage }
 
-#pages= render :partial => 'collection', :locals => { :list => collection }
+#pages= render :partial => 'collection', :locals => { :list => collection.ordered(homepage) }
 
 = link_to 'New Page', new_admin_page_path, :class => 'new', :remote => true, :method => :get, 'data-type' => :html
