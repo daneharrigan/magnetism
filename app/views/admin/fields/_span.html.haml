@@ -3,5 +3,5 @@
   = field_tag(field, :span)
   .buttons
     = link_to '(E)', edit_polymorphic_path([:admin, :manage, association_group(field)].flatten), :remote => true, 'data-type' => :html
-    = link_to '(D)', polymorphic_path([:admin, :manage, association_group(field)].flatten), :remote => true, :method => :delete
+    = link_to '(D)', polymorphic_path([:admin, :manage, association_group(field)].flatten), :class => :delete
     = link_to '(S)', '#sort', :class => 'sort'
