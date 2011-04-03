@@ -32,16 +32,15 @@ jQuery(function($){
     }
   });
 
-  /*
   var $pages = $('#pages ol');
   $pages.sortable({
     handle: 'a.sort',
-    placeholder: 'placeholder',
+    placeholder: 'placeholder item',
     opacity: 0.8,
+    stop: Magnetism.reorder,
     axis: 'y'
   });
   $pages.disableSelection();
-  */
 
   var $page_publish = $('#page_publish');
   $page_publish.click(function(){
@@ -61,4 +60,13 @@ jQuery(function($){
   });
 
   $page_publish.triggerHandler('click');
+
+  $('#pages ol.ui-sortable').live('restripe',function(){
+    var $div = $(this).find('li div.item');
+    $div.removeClass('alt');
+    $div.each(function(i, div){
+      if( i%2 != 0 )
+        $(div).addClass('alt');
+    });
+  });
 });

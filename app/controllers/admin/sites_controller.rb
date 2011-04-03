@@ -25,8 +25,16 @@ module Admin
     end
 
     def update
-      update! do |success, failure|
-        success.html { redirect_to admin_manage_path }
+      if params[:position]
+        ids = params[:position]
+        values = (1..ids.count).map { |i| {:position => i} }
+        resource.pages.update(ids, values)
+
+        render :nothing => true
+      else
+        update! do |success, failure|
+          success.html { redirect_to admin_manage_path }
+        end
       end
     end
 

@@ -1,6 +1,9 @@
 #pages li li {
   padding-left: 20px;
 }
+#pages .placeholder {
+  height: 40px;
+}
 #homepage .item {
   background: #FFD;
   border: 1px solid #FC0;

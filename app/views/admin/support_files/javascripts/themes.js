@@ -16,7 +16,7 @@ var Template = {
       handle: 'a.sort, ol.fields label',
       placeholder: 'placeholder',
       opacity: 0.8,
-      stop: Template.sort_fields,
+      stop: Magnetism.reorder,
       axis: 'y'
     });
     $fields.disableSelection();
@@ -58,12 +58,6 @@ var Template = {
   },
   update_field: function(selector, html){
     $(selector).replaceWith(html);
-  },
-  sort_fields: function(){
-    var $ol = $(this),
-        params = $ol.sortable('serialize', { key: 'position[]' }),
-        $form = $ol.parents('form');
-    $.ajax({ url: $form.attr('action'), data: params, type: 'put' });
   }
 };
 

@@ -74,8 +74,6 @@ aside .delete:visited {
 }
 .fields .placeholder {
   height: 25px;
-  background: #efefef;
-  border: 1px dashed #aaa;
 }
 #new-template {
   position: relative;

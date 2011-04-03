@@ -5,6 +5,7 @@
 #homepage
   = render :partial => 'page', :locals => { :page => homepage }
 
-#pages= render :partial => 'collection', :locals => { :list => collection.ordered(homepage) }
+= form_tag admin_manage_site_path(current_site) do
+  #pages= render :partial => 'collection', :locals => { :list => collection.ordered(homepage) }
 
 = link_to 'New Page', new_admin_page_path, :class => 'new', :remote => true, :method => :get, 'data-type' => :html

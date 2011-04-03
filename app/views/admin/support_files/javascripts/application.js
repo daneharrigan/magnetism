@@ -3,6 +3,15 @@ var Magnetism = {
     setTimeout(function(){
       $('div.notice, div.failure, div.success').animate({ height: 0, opacity: 0 }, 500, function(){ $(this).remove() });
     }, 5000);
+  },
+  reorder: function(){
+    var $ol = $(this),
+        params = $ol.sortable('serialize', { key: 'position[]' }),
+        $form = $ol.parents('form');
+        params += '&' + $form.serialize();
+    $.ajax({ url: $form.attr('action'), data: params, type: 'put' });
+    var $li = $ol.parents('form').find('li');
+    $form.find('ol.ui-sortable').trigger('restripe');
   }
 };
 
@@ -39,10 +48,10 @@ jQuery(function($){
   $('body').delegate('*', 'click', function(){ $('div.selector ul').hide() });
 
   $('a.delete').live('click',function(e){
-      var data = { authenticity_token: $('meta[name=csrf-token]').attr('content'), _method: 'delete' };
-      $.post(this.href, data, false, 'script');
-      e.preventDefault();
-    });
+    var data = { authenticity_token: $('meta[name=csrf-token]').attr('content'), _method: 'delete' };
+    $.post(this.href, data, false, 'script');
+    e.preventDefault();
+  });
 });
 
 jQuery(window).load(function(){ Magnetism.hideFlash() });

@@ -313,7 +313,7 @@ fieldset .fields label {
 }
 #overlay .actions,
 #content .actions {
-  line-height: 50px;
+  line-height: 40px;
 }
 .note {
   font-size: 11px;
@@ -374,7 +374,10 @@ fieldset .fields label {
   color: #9c0a0a;
   margin-right: 20px;
 }
-
+.placeholder {
+  background: #efefef;
+  border: 1px dashed #aaa;
+}
 /* item index */
 .item {
   position: relative;
