@@ -384,4 +384,26 @@ describe Page do
       page.cache_path.should == "#{Rails.public_path}/cache/#{page.site.domain}#{page.permalink}.html"
     end
   end
+
+  describe '.order' do
+    before(:each) do
+      @parent = Factory(:page, :template => mock_template, :site => mock_site(:homepage_id? => false))
+      @page_1 = Factory(:page, :parent => @parent, :template => @parent.template, :site => @parent.site, :position => 1, :publish_at => 3.hours.ago)
+      @page_2 = Factory(:page, :parent => @parent, :template => @parent.template, :site => @parent.site, :position => 2, :publish_at => 2.hours.ago)
+      @page_3 = Factory(:page, :parent => @parent, :template => @parent.template, :site => @parent.site, :position => 3, :publish_at => 1.hours.ago)
+    end
+
+    context 'when the parent page is a regular page (not a blog)' do
+      it 'returns the subpages in ascending order by the position attribute' do
+        @parent.pages.ordered(@parent).should == [@page_1, @page_2, @page_3]
+      end
+    end
+
+    context 'when the parent page is a blog section' do
+      it 'returns the subpages in descending order by the publish_at attribute' do
+        @parent.update_attribute(:blog_section, true)
+        @parent.pages.ordered(@parent).should == [@page_3, @page_2, @page_1]
+      end
+    end
+  end
 end
