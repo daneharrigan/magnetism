@@ -385,6 +385,17 @@ describe Page do
     end
   end
 
+  describe '#archive_months' do
+    before(:each) do
+      #@blog = 
+    end
+    it 'returns an array of month and article counts'
+
+    context 'when "true" is passed' do
+      it 'returns an array including months that have no articles'
+    end
+  end
+
   describe '.order' do
     before(:each) do
       @parent = Factory(:page, :template => mock_template, :site => mock_site(:homepage_id? => false))
