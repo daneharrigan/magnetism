@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110327115838) do
+ActiveRecord::Schema.define(:version => 20110404151150) do
+
+  create_table "archives", :force => true do |t|
+    t.integer "blog_section_id"
+    t.date    "publish_range"
+    t.integer "article_count"
+  end
 
   create_table "assets", :force => true do |t|
     t.integer  "site_id"

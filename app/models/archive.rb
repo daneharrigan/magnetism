@@ -1,0 +1,16 @@
+class Archive < ActiveRecord::Base
+  belongs_to :page, :foreign_key => :blog_section_id
+
+  def self.recount(parent, date)
+    date = date.beginning_of_month.to_date
+    archive = parent.archives.where(:publish_range => date).first
+
+    if archive
+      end_date = date.end_of_month.end_of_day
+      article_count = parent.pages.where(:publish => true, :publish_at => (date.to_time..end_date)).where(['publish_at <= ?', Time.now]).count
+      archive.update_attribute(:article_count, article_count)
+    else
+      parent.archives.create(:publish_range => date.to_date, :article_count => 1)
+    end
+  end
+end

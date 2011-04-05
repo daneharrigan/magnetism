@@ -7,12 +7,11 @@ describe Page do
   it { should belong_to(:template_set) }
   it { should have_many(:pages) }
   it { should have_many(:data) }
+  it { should have_many(:archives) }
   it { should have_one(:blog) }
 
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:site_id) }
-  # it { should validate_presence_of(:template_id) }
-  # TODO: need to test can_be_published
 
   context 'when a page exists' do
     before(:each) do
@@ -385,14 +384,52 @@ describe Page do
     end
   end
 
-  describe '#archive_months' do
+  describe '#update_archive' do
     before(:each) do
-      #@blog = 
-    end
-    it 'returns an array of month and article counts'
+      @parent = Factory.build(:blog_section,
+        :site => mock_site,
+        :template => mock_template)
+      @parent.stub :assign_parent => true, :assign_template => true
+      @parent.save
 
-    context 'when "true" is passed' do
-      it 'returns an array including months that have no articles'
+      @page = Factory.build(:blog_entry,
+        :parent => @parent,
+        :site => mock_site,
+        :template => mock_template)
+      @page.stub :assign_parent => true, :assign_template => true
+    end
+
+    context 'when a new blog post is published' do
+      it 'increases the archive count on the blog section' do
+        lambda { @page.save }.should change(@parent.archives, :count).by(+1)
+      end
+
+      it 'increases the count of the post month/year' do
+        @page.save
+        date = @page.publish_at.to_date.beginning_of_month
+        @parent.archives.find_by_publish_range(date).article_count.should == 1
+      end
+    end
+
+    context "when a blog post's publish date changes" do
+      before(:each) do
+        @page.save
+        @previous_date = @page.publish_at.beginning_of_month.to_date
+        @page.update_attribute(:publish_at, 2.months.ago)
+        @new_date = @page.publish_at.beginning_of_month.to_date
+      end
+
+      it 'decreases the archive count on the old publish month' do
+        @parent.archives.find_by_publish_range(@previous_date).article_count.should == 0
+      end
+
+      it 'increases the archive count on the new publish month' do
+        @parent.archives.find_by_publish_range(@new_date).article_count.should == 1
+      end
+
+      it 'only contains two archive entries' do
+        @parent.archives.count.should == 2
+      end
     end
   end
 

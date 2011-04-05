@@ -8,6 +8,7 @@ class Page < ActiveRecord::Base
   belongs_to :template_set
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
   has_many :data
+  has_many :archives, :foreign_key => :blog_section_id, :order => 'publish_range ASC'
   has_one :blog, :dependent => :destroy
 
   validates_presence_of :title, :site_id
@@ -18,6 +19,7 @@ class Page < ActiveRecord::Base
   before_create :assign_parent, :if => proc { |p| !p.parent_id? }
   before_create :assign_template, :if => proc { |p| p.blog_section? || p.blog_entry? }
   after_create :create_blog, :if => proc { |p| p.blog_entry? }
+  after_save :update_archive, :if => proc { |p| p.blog_entry? }
 
   accepts_nested_attributes_for :blog
 
@@ -155,7 +157,21 @@ class Page < ActiveRecord::Base
       page.publish_at.strftime(uri_format)
     end
 
-    def can_be_published
-      errors.add(:base, 'A page needs a template before it can be published') if publish? && !template_id?
+    def update_archive
+      return unless publish_changed? || publish_at_changed?
+      decrease_date, increase_date = nil
+
+      if publish_at_was
+        decrease_date = publish_at_was
+      elsif publish_at && publish_changed? && !publish?
+        decrease_date = publish_at
+      end
+
+      if publish_at && publish? && (publish_changed? || publish_at_changed?)
+        increase_date = publish_at
+      end
+
+      parent.archives.recount(parent, decrease_date) if decrease_date
+      parent.archives.recount(parent, increase_date) if increase_date
     end
 end
