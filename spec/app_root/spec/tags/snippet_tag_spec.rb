@@ -38,7 +38,7 @@ describe SnippetTag do
       @page_1.stub :fields => []
       @page_2.stub :fields => []
       pages = [@page_1, @page_2]
-      pages.stub :published => pages
+      pages.stub_chain(:published, :ordered).and_return(pages)
 
       blog.stub :pages => pages
       Site.current.pages.stub :find_by_path => blog

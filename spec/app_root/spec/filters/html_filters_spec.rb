@@ -3,7 +3,7 @@ require 'spec_helper'
 describe HTMLFilters do
   before(:each) do
     allow_message_expectations_on_nil
-    Site.current.stub_chain(:homepage, :pages, :published).and_return([])
+    Site.current.stub_chain(:homepage, :pages, :published, :ordered).and_return([])
     Site.current.stub :key => 'hash-value'
     Page.current.stub :parent => nil
 

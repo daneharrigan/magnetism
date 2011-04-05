@@ -7,9 +7,9 @@ describe DispatchController do
       page = mock_model(Page,
         :current! => true,
         :template => template,
-        :pages => [],
         :parent => nil,
         :to_liquid => { 'title' => 'Foo Title' })
+      page.stub_chain(:pages, :published, :ordered).and_return([])
       pages = []
       pages.stub :find_by_path => page
 

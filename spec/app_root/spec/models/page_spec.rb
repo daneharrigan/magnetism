@@ -8,7 +8,7 @@ describe Page do
   it { should have_many(:pages) }
   it { should have_many(:data) }
   it { should have_many(:archives) }
-  it { should have_one(:blog) }
+  it { should have_many(:comments) }
 
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:site_id) }

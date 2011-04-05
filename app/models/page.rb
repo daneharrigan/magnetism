@@ -9,7 +9,7 @@ class Page < ActiveRecord::Base
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
   has_many :data
   has_many :archives, :foreign_key => :blog_section_id, :order => 'publish_range ASC'
-  has_one :blog, :dependent => :destroy
+  has_many :comments
 
   validates_presence_of :title, :site_id
   validates_uniqueness_of :title, :scope => [:site_id, :parent_id]
@@ -18,17 +18,14 @@ class Page < ActiveRecord::Base
   before_save :generate_slug, :if => proc { |p| !p.slug? }
   before_create :assign_parent, :if => proc { |p| !p.parent_id? }
   before_create :assign_template, :if => proc { |p| p.blog_section? || p.blog_entry? }
-  after_create :create_blog, :if => proc { |p| p.blog_entry? }
   after_save :update_archive, :if => proc { |p| p.blog_entry? }
-
-  accepts_nested_attributes_for :blog
 
   delegate :fields, :to => :template
 
   scope :published, lambda { where(['publish = ? AND publish_at <= ?', true, Time.now]) }
   scope :ordered, lambda { |parent| order(parent.blog_section? ? 'publish_at DESC' : 'position ASC') }
 
-  liquify_method :title, :publish_at, :permalink, :blog, :slug,
+  liquify_method :title, :publish_at, :permalink, :blog, :slug, :article, :excerpt,
     :data => lambda { |page| DataDrop.new(page) },
     :subpages => lambda { |page| page.pages.published.ordered(page) }
 

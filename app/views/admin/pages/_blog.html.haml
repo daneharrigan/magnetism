@@ -1,10 +1,9 @@
-= f.fields_for :blog do |blog|
-  %ol.fields
-    %li.textarea
-      = blog.label :excerpt
-      .editor-container
-        = blog.text_area :excerpt, :class => 'editor'
-    %li.textarea
-      = blog.label :article
-      .editor-container
-        = blog.text_area :article, :class => 'editor'
+%ol.fields
+  %li.textarea
+    = f.label :excerpt
+    .editor-container
+      = f.text_area :excerpt, :class => 'editor'
+  %li.textarea
+    = f.label :article
+    .editor-container
+      = f.text_area :article, :class => 'editor'
