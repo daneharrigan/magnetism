@@ -8,7 +8,11 @@ class Archive < ActiveRecord::Base
     if archive
       end_date = date.end_of_month.end_of_day
       article_count = parent.pages.where(:publish => true, :publish_at => (date.to_time..end_date)).where(['publish_at <= ?', Time.now]).count
-      archive.update_attribute(:article_count, article_count)
+      if article_count.zero?
+        archive.destroy
+      else
+        archive.update_attribute(:article_count, article_count)
+      end
     else
       parent.archives.create(:publish_range => date.to_date, :article_count => 1)
     end

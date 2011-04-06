@@ -419,16 +419,12 @@ describe Page do
         @new_date = @page.publish_at.beginning_of_month.to_date
       end
 
-      it 'decreases the archive count on the old publish month' do
-        @parent.archives.find_by_publish_range(@previous_date).article_count.should == 0
+      it 'deletes the archive count if its zero' do
+        @parent.archives.find_by_publish_range(@previous_date).should be_nil
       end
 
       it 'increases the archive count on the new publish month' do
         @parent.archives.find_by_publish_range(@new_date).article_count.should == 1
-      end
-
-      it 'only contains two archive entries' do
-        @parent.archives.count.should == 2
       end
     end
   end
