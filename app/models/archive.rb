@@ -1,5 +1,8 @@
 class Archive < ActiveRecord::Base
+  include Liquify::Methods
+
   belongs_to :page, :foreign_key => :blog_section_id
+  liquify_methods :publish_range, :article_count
 
   def self.recount(parent, date)
     date = date.beginning_of_month.to_date
