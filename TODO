@@ -6,6 +6,7 @@ Release: 0.1
   Page caching (eg: static files, varnish)
   Blog component
     Comments (scan with defenseo)
+      Comment Liquid Tag
     Trackbacks
   Make flash success/notice messages consistant
 

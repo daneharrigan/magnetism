@@ -2,37 +2,43 @@ h1. Liquid Templates
 
 h2. Available Drops
 
-1. site
-2. navigation
-3. page
-4. parent
-5. homepage
+# site
+# navigation
+# page
+# parent
+# homepage
 
 h3. Site Methods
 
-1. name
-2. homepage
+# name
+# homepage
 
 h3. Navigation
 
 This is an array of top level page drops
 
 h3. Page Methods
-1. title
 
-2. publish_at
-3. permalink
-4. data
-5. subpages
-
-*Question:* Should blog content (eg: exceprt and article) be stored in "page.data" or in "page.blog"
-*DH:* I'm thinking "data"
+# title
+# publish_at
+# permalink
+# data
+# subpages
 
 
 h2. Available Tags
 
-1. snippet
+# snippet
+# comment_for
+
+h3. comment_for
+
+comment_for page do |c|
+  c.name <all args looked at as tag attributes. exclude "name">
+  c.email <all args looked at as tag attributes. exclude "name">
+  c.message <all args looked at as tag attributes. exclude "name">
+endcomment_for
 
 h2. Available Filters
 
-1. textile
+# textile
