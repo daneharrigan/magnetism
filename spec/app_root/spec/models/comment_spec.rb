@@ -5,4 +5,8 @@ describe Comment do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:message) }
+
+  describe '#gravatar' do
+    it 'returns the URL to the gravatar image'
+  end
 end

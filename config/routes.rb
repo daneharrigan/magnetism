@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   # public routes
   match '/assets/:site_key/:directory/:file_name' => 'assets#show'
+  match '/(*path)/comments' => 'comments#create', :via => :post
   match '/(*path)' => 'dispatch#show'
 end

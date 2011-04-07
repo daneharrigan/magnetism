@@ -9,7 +9,7 @@ class Page < ActiveRecord::Base
   has_many :pages, :foreign_key => 'parent_id', :dependent => :destroy
   has_many :data
   has_many :archives, :foreign_key => :blog_section_id, :order => 'publish_range ASC'
-  has_many :comments
+  has_many :comments, :order => 'created_at ASC'
 
   validates_presence_of :title, :site_id
   validates_uniqueness_of :title, :scope => [:site_id, :parent_id]
