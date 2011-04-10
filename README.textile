@@ -26,6 +26,12 @@ You can now launch the rails server and navigate to localhost:3000/admin
 
 h3. Oh no! I updated and things aren't right!
 
+h4. 2011-04-10
+
+I added @mattr_accessor :defensio_key@ to the @config/initializers/magnetism.rb@ generator file. If this is your first time installing Magnetism you wont see an problem, but if you are now updating Magnetism you wont see any indicator of where to add your Defensio key. Add @config.defensio_key = 'my-key-here'@ and you should be set.
+
+h4. 2011-03-19
+
 All images, stylesheets and javascript files were copied into the Rails.root/public directory
 when you'd run <code>rails g magnetism:install</code>. These files are now kept within the gem
 and do not get copied out.

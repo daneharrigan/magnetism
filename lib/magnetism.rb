@@ -21,6 +21,9 @@ module Magnetism
   mattr_accessor :cache_length
   @@cache_length = 300
 
+  mattr_accessor :defensio_key
+  @@defensio_key = nil
+
   def self.setup
     yield(self)
   end

@@ -8,4 +8,7 @@ Magnetism.setup do |config|
   # increase the cache_length if you want your pages cached
   # for longer periods of time.
   #config.cache_length = 300
+  #
+  # 
+  #config.defensio_key = '<defensio api key>'
 end

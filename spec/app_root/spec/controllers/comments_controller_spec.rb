@@ -38,7 +38,11 @@ describe CommentsController do
 
         controller.stub :current_page => @page
         @params = {}
-        @params[:comment] = { :name => 'Dane Harrigan', :email => 'dane@example.com', :message => 'Comments!' }
+        @params[:comment] = {
+          :author_name => 'Dane Harrigan',
+          :author_email => 'dane@example.com',
+          :author_url => 'http://localhost',
+          :body => 'Comments!' }
       end
 
       it 'creates a new comment' do
