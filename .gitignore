@@ -13,3 +13,4 @@ public/admin
 spec/app_root/public/assets
 spec/app_root/public/uploads
 spec/app_root/public/admin
+spec/watchr.script

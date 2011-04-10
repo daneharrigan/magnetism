@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'carrierwave', '~> 0.5.2'
   s.add_dependency 'liquify', '~> 0.2.2'
   s.add_dependency 'RedCloth', '~> 4.2.7'
+  s.add_dependency 'defensio', '~> 0.9.1'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
