@@ -7,7 +7,7 @@ namespace :m do
 
   task :migration, :name do |cmd, args|
     timestamp = Time.now.strftime('%Y%m%d%H%M%S')
-    FileUtils.touch("#{Magnetism.root}/db/migrate/#{timestamp}_create_#{args[:name]}.rb")
+    FileUtils.touch("#{Magnetism.root}/db/migrate/#{timestamp}_#{args[:name]}.rb")
   end
 
   namespace :test do
