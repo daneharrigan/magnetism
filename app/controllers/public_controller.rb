@@ -17,7 +17,7 @@ class PublicController < ApplicationController
       raise Magnetism::PageNotFound if site.nil?
 
       site.current!
-      @page = site.pages.find_by_path(request.fullpath)
+      @page = site.pages.find_by_path(full_path)
 
       raise Magnetism::PageNotFound if @page.nil?
 
@@ -34,5 +34,9 @@ class PublicController < ApplicationController
       yield
       rescue Magnetism::PageNotFound
         render :nothing => true, :status => 404
+    end
+
+    def full_path
+      request.fullpath.sub(/\/comments$/,'')
     end
 end

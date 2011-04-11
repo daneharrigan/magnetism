@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Comment do
   it { should belong_to(:page) }
-  it { should validate_presence_of(:author_name) }
   it { should validate_presence_of(:author_ip) }
   it { should validate_presence_of(:body) }
 

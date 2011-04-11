@@ -11,7 +11,7 @@ PATH
       haml (~> 3.0.23)
       inherited_resources (~> 1.1.2)
       layout_options (~> 0.2.1)
-      liquify (~> 0.2.2)
+      liquify (~> 0.2.5)
       mini_magick (~> 3.2)
       rails (~> 3.0.4)
 
@@ -101,7 +101,7 @@ GEM
     linecache19 (0.5.11)
       ruby_core_source (>= 0.1.4)
     liquid (2.2.2)
-    liquify (0.2.2)
+    liquify (0.2.5)
       liquid (>= 2.2.2)
     mail (2.2.15)
       activesupport (>= 2.3.6)

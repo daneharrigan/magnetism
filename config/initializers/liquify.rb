@@ -6,6 +6,7 @@ Liquify.setup do |config|
   config.register_drop :homepage, lambda { Site.current.homepage }
 
   config.register_tag :snippet, SnippetTag
+  config.register_tag :comment_for, CommentFor
 
   config.register_filters HTMLFilters
 
