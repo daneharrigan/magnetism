@@ -36,7 +36,7 @@ class Page < ActiveRecord::Base
   def self.find_by_path(request)
     path = request.full_path
 
-    if path.match =~ /\/comments$/ && request.post?
+    if path =~ /\/comments$/ && request.post?
       comment = nil
       path.sub!(/\/comments$/,'')
     else
@@ -58,9 +58,11 @@ class Page < ActiveRecord::Base
       page = page.pages.published.first(:conditions => {:slug => path.shift})
     end
 
-    comment ||= true if page.try(:blog_entry?)
+    if page
+      comment ||= true if page.blog_entry?
+      page.comment = comment
+    end
 
-    page.comment = comment
     page
   end
 

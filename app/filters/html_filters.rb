@@ -5,7 +5,7 @@ module HTMLFilters
 
   def textile(text)
     return if text.blank?
-    Magnetism::ContentParser.new(text)
+    Magnetism::ContentParser.new(text).invoke
   end
 
   def date_format(timestamp, format)

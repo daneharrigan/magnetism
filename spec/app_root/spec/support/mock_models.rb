@@ -20,3 +20,8 @@ def mock_page(args={})
   options = {:comment? => false}.merge(args)
   mock_model(Page, options)
 end
+
+def mock_request(args)
+  args[:post?] ||= false
+  Struct.new(*args.keys).new(*args.values)
+end
