@@ -1,6 +1,7 @@
 require 'magnetism/engine'
 require 'magnetism/page_not_found'
 require 'magnetism/cache'
+require 'magnetism/content_parser'
 
 # gems
 require 'haml'

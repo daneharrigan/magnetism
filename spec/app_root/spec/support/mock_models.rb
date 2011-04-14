@@ -1,5 +1,6 @@
 def mock_site(args={})
-  mock_model(Site, args)
+  options = {:pages => []}.merge(args)
+  mock_model(Site, options)
 end
 
 def mock_theme(args={})
@@ -16,5 +17,6 @@ def mock_template_set
 end
 
 def mock_page(args={})
-  mock_model(Page, args)
+  options = {:comment? => false}.merge(args)
+  mock_model(Page, options)
 end

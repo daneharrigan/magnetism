@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'liquify', '~> 0.2.5'
   s.add_dependency 'RedCloth', '~> 4.2.7'
   s.add_dependency 'defender', '~> 2.0.0'
+  s.add_dependency 'coderay', '~> 0.9.7'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

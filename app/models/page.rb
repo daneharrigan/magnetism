@@ -20,6 +20,9 @@ class Page < ActiveRecord::Base
   before_create :assign_template, :if => proc { |p| p.blog_section? || p.blog_entry? }
   after_save :update_archive, :if => proc { |p| p.blog_entry? }
 
+  attr_accessor :comment
+  alias :comment? :comment
+
   delegate :fields, :to => :template
 
   scope :published, lambda { where(['publish = ? AND publish_at <= ?', true, Time.now]) }
@@ -30,7 +33,16 @@ class Page < ActiveRecord::Base
     :subpages => lambda { |page| page.pages.published.ordered(page) },
     :comments => lambda { |page| page.comments.excluding_spam }
 
-  def self.find_by_path(path)
+  def self.find_by_path(request)
+    path = request.full_path
+
+    if path.match =~ /\/comments$/ && request.post?
+      comment = nil
+      path.sub!(/\/comments$/,'')
+    else
+      comment = false
+    end
+
     if path.length == 1
       path = [path]
     else
@@ -46,6 +58,9 @@ class Page < ActiveRecord::Base
       page = page.pages.published.first(:conditions => {:slug => path.shift})
     end
 
+    comment ||= true if page.try(:blog_entry?)
+
+    page.comment = comment
     page
   end
 

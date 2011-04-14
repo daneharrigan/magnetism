@@ -10,12 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110409221726) do
+ActiveRecord::Schema.define(:version => 20110411002850) do
 
   create_table "archives", :force => true do |t|
-    t.integer "blog_section_id"
-    t.date    "publish_range"
-    t.integer "article_count"
+    t.integer  "blog_section_id"
+    t.date     "publish_range"
+    t.integer  "article_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "assets", :force => true do |t|
@@ -27,15 +29,17 @@ ActiveRecord::Schema.define(:version => 20110409221726) do
   end
 
   create_table "comments", :force => true do |t|
-    t.integer "page_id"
-    t.string  "author_name"
-    t.string  "author_email"
-    t.text    "body"
-    t.boolean "spam"
-    t.string  "defensio_sig"
-    t.float   "spaminess"
-    t.string  "author_ip"
-    t.string  "author_url"
+    t.integer  "page_id"
+    t.string   "author_name"
+    t.string   "author_email"
+    t.text     "body"
+    t.boolean  "spam"
+    t.string   "defensio_sig"
+    t.float    "spaminess"
+    t.string   "author_ip"
+    t.string   "author_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "data", :force => true do |t|
