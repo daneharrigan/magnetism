@@ -34,7 +34,7 @@ class Page < ActiveRecord::Base
     :comments => lambda { |page| page.comments.excluding_spam }
 
   def self.find_by_path(request)
-    path = request.fullpath
+    path = request.is_a?(String) ? request : request.fullpath
 
     if path =~ /\/comments$/ && request.post?
       comment = nil
