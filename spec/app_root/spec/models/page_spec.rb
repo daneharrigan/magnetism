@@ -153,14 +153,14 @@ describe Page do
     end
 
     it 'returns the homepage' do
-      Page.find_by_path(mock_request(:full_path => '/')).should == @homepage
+      Page.find_by_path(mock_request(:fullpath => '/')).should == @homepage
     end
 
     it 'returns a top level page' do
       page = Factory(:page, :template => mock_template, :site => @site)
       @homepage.pages << page
       uri = '/' << page.slug
-      Page.find_by_path(mock_request(:full_path => uri)).should == page
+      Page.find_by_path(mock_request(:fullpath => uri)).should == page
     end
 
     it 'returns a second level page' do
@@ -171,7 +171,7 @@ describe Page do
       page_1.pages << page_2
 
       uri = '/' << [page_1.slug, page_2.slug].join('/')
-      Page.find_by_path(mock_request(:full_path => uri)).should == page_2
+      Page.find_by_path(mock_request(:fullpath => uri)).should == page_2
     end
 
     it 'returns a third level page' do
@@ -183,12 +183,12 @@ describe Page do
 
       uri = '/' << [page_1.slug, page_2.slug, page_3.slug].join('/')
 
-      Page.find_by_path(mock_request(:full_path => uri)).should == page_3
+      Page.find_by_path(mock_request(:fullpath => uri)).should == page_3
     end
 
     context 'when a page cant be found' do
       it 'returns nil' do
-        Page.find_by_path(mock_request(:full_path => '/does/not/exist')).should be_nil
+        Page.find_by_path(mock_request(:fullpath => '/does/not/exist')).should be_nil
       end
     end
 
@@ -216,7 +216,7 @@ describe Page do
           @homepage.update_attribute(:uri_format, ':year/:month/:day/:slug')
           path = "/#{@subpage.publish_at.strftime('%Y/%m/%d')}/#{@subpage.slug}"
           
-          Page.find_by_path(mock_request(:full_path => path)).should == @subpage
+          Page.find_by_path(mock_request(:fullpath => path)).should == @subpage
         end 
       end 
 
@@ -225,7 +225,7 @@ describe Page do
           @homepage.update_attribute(:uri_format, ':year/:month/:slug')
           path = "/#{@subpage.publish_at.strftime('%Y/%m')}/#{@subpage.slug}"
 
-          Page.find_by_path(mock_request(:full_path => path)).should == @subpage
+          Page.find_by_path(mock_request(:fullpath => path)).should == @subpage
         end
       end
 
@@ -234,7 +234,7 @@ describe Page do
           @homepage.update_attribute(:uri_format, ':id/:slug')
           path = "/#{@subpage.id}/#{@subpage.slug}"
 
-          Page.find_by_path(mock_request(:full_path => path)).should == @subpage
+          Page.find_by_path(mock_request(:fullpath => path)).should == @subpage
         end
       end
 
@@ -243,7 +243,7 @@ describe Page do
           @homepage.update_attribute(:uri_format, ':id-:slug')
           path = "/#{@subpage.id}-#{@subpage.slug}"
 
-          Page.find_by_path(mock_request(:full_path => path)).should == @subpage
+          Page.find_by_path(mock_request(:fullpath => path)).should == @subpage
         end
       end
     end
@@ -269,10 +269,10 @@ describe Page do
       context 'when the request is /<section>/<year>/<month>/<day>/<slug>' do
         it 'should return the blog page' do
           path = "/#{@section.slug}/#{@subpage.publish_at.strftime('%Y/%m/%d')}/#{@subpage.slug}"
-          
-          Page.find_by_path(mock_request(:full_path => path)).should == @subpage
-        end 
-      end 
+
+          Page.find_by_path(mock_request(:fullpath => path)).should == @subpage
+        end
+      end
     end
   end
 
