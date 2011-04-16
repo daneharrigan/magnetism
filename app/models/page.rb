@@ -58,10 +58,11 @@ class Page < ActiveRecord::Base
       page = page.pages.published.first(:conditions => {:slug => path.shift})
     end
 
-    if page
-      comment ||= true if page.blog_entry?
-      page.comment = comment
+    if page && page.blog_entry?
+      date_has_not_passed = page.close_comments_at.ni? || page.close_comments_at > Time.now
+      comment ||= true if date_has_not_passed && !page.close_comments?
     end
+    page.comment = comment if page
 
     page
   end
