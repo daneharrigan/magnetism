@@ -60,6 +60,7 @@ describe Admin::FieldsController do
     before(:each) do
       field = Factory(:field, :template => @template)
       @params[:id] = field.id
+      @params[:format] = 'js'
     end
 
     it 'deletes a field' do
