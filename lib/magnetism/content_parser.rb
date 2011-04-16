@@ -29,6 +29,7 @@ module Magnetism
       end
 
       def textile(content)
+        return unless content.present?
         RedCloth.new(content).to_html
       end
 

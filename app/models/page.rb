@@ -30,8 +30,8 @@ class Page < ActiveRecord::Base
 
   liquify_method :title, :publish_at, :permalink, :blog, :slug,
     :archives, :blog_entry?, :close_comments?,
-    :excerpt  => lambda { |page| page.excerpt.presence },
-    :article  => lambda { |page| page.article.presence },
+    :excerpt  => lambda { |page| Magnetism::ContentParser.new(page.excerpt).invoke },
+    :article  => lambda { |page| Magnetism::ContentParser.new(page.article).invoke },
     :data     => lambda { |page| DataDrop.new(page) },
     :subpages => lambda { |page| page.pages.published.ordered(page) },
     :comments => lambda { |page| page.comments.excluding_spam }
