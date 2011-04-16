@@ -4,15 +4,12 @@ module Admin
     belongs_to :theme, :template
     layout_options :overlay => [:edit, :new]
     helper_method :field_type_collection, :association_group
+    helper :field
 
     def create
-      field = parent.fields.create(params[:field])
-      render :partial => 'span', :locals => { :field => field }
-    end
-
-    def destroy
-      resource.destroy
-      render :nothing => true
+      create! do |success, failure|
+        success.html { render :partial => 'span', :locals => { :field => resource } }
+      end
     end
 
     def update
@@ -28,5 +25,7 @@ module Admin
     def association_group(field)
       [association_chain, field].flatten
     end
+
+    alias :destroy :render_destroy_js
   end
 end
