@@ -28,7 +28,8 @@ class Page < ActiveRecord::Base
   scope :published, lambda { where(['publish = ? AND publish_at <= ?', true, Time.now]) }
   scope :ordered, lambda { |parent| order(parent.blog_section? ? 'publish_at DESC' : 'position ASC') }
 
-  liquify_method :title, :publish_at, :permalink, :blog, :slug, :article, :excerpt, :archives, :blog_entry?,
+  liquify_method :title, :publish_at, :permalink, :blog, :slug,
+    :article, :excerpt, :archives, :blog_entry?, :close_comments?,
     :data => lambda { |page| DataDrop.new(page) },
     :subpages => lambda { |page| page.pages.published.ordered(page) },
     :comments => lambda { |page| page.comments.excluding_spam }

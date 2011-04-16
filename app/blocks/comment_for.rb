@@ -5,6 +5,14 @@ class CommentFor < Liquify::Block
 
     return unless page['blog_entry?']
 
+    if page['close_comments?']
+      return <<-STR
+        <div id="closed-comments">
+          <p>Comments have been closed.<p>
+        </div>
+      STR
+    end
+
     attributes['action'] = "#{page.permalink}/comments"
     attributes['method'] = 'post'
     attributes.delete 'as'
