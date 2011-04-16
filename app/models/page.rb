@@ -29,7 +29,7 @@ class Page < ActiveRecord::Base
   scope :ordered, lambda { |parent| order(parent.blog_section? ? 'publish_at DESC' : 'position ASC') }
 
   liquify_method :title, :publish_at, :permalink, :blog, :slug,
-    :archives, :blog_entry?, :close_comments?,
+    :archives, :blog_entry?, :close_comments?, :id,
     :excerpt  => lambda { |page| Magnetism::ContentParser.new(page.excerpt).invoke },
     :article  => lambda { |page| Magnetism::ContentParser.new(page.article).invoke },
     :data     => lambda { |page| DataDrop.new(page) },
@@ -62,7 +62,7 @@ class Page < ActiveRecord::Base
     end
 
     if page && page.blog_entry?
-      date_has_not_passed = page.close_comments_at.ni? || page.close_comments_at > Time.now
+      date_has_not_passed = page.close_comments_at.nil? || page.close_comments_at > Time.now
       comment ||= true if date_has_not_passed && !page.close_comments?
     end
     page.comment = comment if page
