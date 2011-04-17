@@ -16,7 +16,7 @@ class Comment < ActiveRecord::Base
 
   liquify_methods :author_name, :author_email, :author_url, :body, :gravatar
 
-  scope :excluding_spam, lambda { where(:spam => false) }
+  scope :excluding_spam, lambda { where('spam = false OR spam IN NULL') }
 
   def gravatar
     hash_value = Digest::MD5.hexdigest(author_email.to_s)
