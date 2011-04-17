@@ -66,7 +66,7 @@ class Page < ActiveRecord::Base
 
     if page && page.blog_entry?
       date_has_not_passed = page.close_comments_at.nil? || page.close_comments_at > Time.now
-      comment ||= true if date_has_not_passed && !page.close_comments?
+      comment = true if comment.nil? && date_has_not_passed && !page.close_comments?
     end
     page.comment = comment if page
 
