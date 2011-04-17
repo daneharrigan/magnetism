@@ -429,6 +429,36 @@ describe Page do
     end
   end
 
+  describe '#comment?' do
+    context 'when a post request is sent to a blog entry with the url ending with "/comments"' do
+      it 'returns true' do
+        site = mock_site
+
+        parent = Factory.build(:blog_section,
+          :site => site,
+          :template => mock_template,
+          :slug => '/')
+        parent.stub :assign_parent => true, :assign_template => true
+
+        page = Factory.build(:blog_entry,
+          :parent => parent,
+          :site => site,
+          :template => mock_template)
+        page.stub :assign_parent => true, :assign_template => true
+
+        site.stub :homepage => parent
+        parent.save
+        page.save
+
+        # redeclare page
+        request = mock_request(:fullpath => page.permalink, :post? => true)
+        page = Page.find_by_path(request)
+
+        page.comment?.should == true
+      end
+    end
+  end
+
   describe '.order' do
     before(:each) do
       @parent = Factory(:page, :template => mock_template, :site => mock_site(:homepage_id? => false))

@@ -57,7 +57,10 @@ class Page < ActiveRecord::Base
     return if page.nil?
 
     until path.empty? || page.nil?
-      return find_by_blog(page, path) if page && page.blog_section? && path.present?
+      if page && page.blog_section? && path.present?
+        page = find_by_blog(page, path)
+        break
+      end
       page = page.pages.published.first(:conditions => {:slug => path.shift})
     end
 

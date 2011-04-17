@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110411002850) do
+ActiveRecord::Schema.define(:version => 20110415211235) do
 
   create_table "archives", :force => true do |t|
     t.integer  "blog_section_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20110411002850) do
     t.string   "author_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "data", :force => true do |t|
@@ -74,15 +75,17 @@ ActiveRecord::Schema.define(:version => 20110411002850) do
     t.integer  "template_id"
     t.integer  "template_set_id"
     t.datetime "publish_at"
-    t.boolean  "blog_section",    :default => false
+    t.boolean  "blog_section",      :default => false
     t.string   "uri_format"
-    t.boolean  "publish",         :default => false
+    t.boolean  "publish",           :default => false
     t.datetime "cached_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
     t.text     "excerpt"
     t.text     "article"
+    t.boolean  "close_comments"
+    t.date     "close_comments_at"
   end
 
   add_index "pages", ["slug"], :name => "index_pages_on_slug"
