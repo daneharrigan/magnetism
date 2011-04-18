@@ -14,12 +14,20 @@ class Comment < ActiveRecord::Base
   validates_presence_of :author_ip, :body
   attr_accessible :author_name, :author_email, :author_url, :author_ip, :body
 
-  liquify_methods :author_name, :author_email, :author_url, :body, :gravatar
+  liquify_methods :author_name, :author_email, :author_url, :body, :gravatar, :id, :publish_at, :by_user?
 
   scope :excluding_spam, lambda { where(['spam = ? OR spam IS NULL', false]) }
 
   def gravatar
     hash_value = Digest::MD5.hexdigest(author_email.to_s)
     "http://gravatar.com/avatar/#{hash_value}"
+  end
+
+  def publish_at
+    created_at
+  end
+
+  def by_user?
+    user_id?
   end
 end

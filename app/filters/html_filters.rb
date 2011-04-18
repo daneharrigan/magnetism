@@ -9,12 +9,16 @@ module HTMLFilters
   end
 
   def date_format(timestamp, format)
+    return if timestamp.nil?
     timestamp.strftime(format)
   end
 
   alias :time_format :date_format
 
-  def link_to(page)
-    %{<a href="#{page.permalink}" title="#{page.title}">#{page.title}</a>}
+  def link_to(page, link=nil)
+    title = page.respond_to?(:title) ? page.title : page
+    url = link || page.permalink
+
+    %{<a href="#{url}" title="#{title}">#{title}</a>}
   end
 end
