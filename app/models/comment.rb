@@ -3,6 +3,7 @@ require 'defender'
 
 class Comment < ActiveRecord::Base
   include Liquify::Methods
+  include ActionView::Helpers::SanitizeHelper
 
   if Magnetism.defensio_key
     include Defender::Spammable
@@ -29,5 +30,10 @@ class Comment < ActiveRecord::Base
 
   def by_user?
     user_id?
+  end
+
+  def body
+    value = read_attribute :body
+    sanitize(value, :tags => %w(a strong em blockquote pre code), :attributes => 'href')
   end
 end
