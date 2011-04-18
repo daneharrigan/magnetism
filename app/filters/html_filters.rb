@@ -21,4 +21,10 @@ module HTMLFilters
 
     %{<a href="#{url}" title="#{title}">#{title}</a>}
   end
+
+  def read_more(page, title=nil)
+    return unless page.excerpt.present? && page.article.present?
+    title ||= 'Read more...'
+    link_to(title, "#{page.permalink}#read-more")
+  end
 end
