@@ -34,7 +34,9 @@ class Comment < ActiveRecord::Base
 
   def body
     value = read_attribute :body
+    return if value.nil?
+
     value = RedCloth.new(value).to_html
-    sanitize(value, :tags => %w(a strong em blockquote pre code), :attributes => 'href')
+    sanitize(value, :tags => %w(p a strong em blockquote pre code), :attributes => 'href')
   end
 end
