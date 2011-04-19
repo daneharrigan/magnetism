@@ -28,12 +28,11 @@ class Page < ActiveRecord::Base
   scope :published, lambda { where(['publish = ? AND publish_at <= ?', true, Time.now]) }
   scope :ordered, lambda { |parent| order(parent.blog_section? ? 'publish_at DESC' : 'position ASC') }
 
-  liquify_method :title, :publish_at, :permalink, :blog, :slug,
-    :archives, :blog_entry?, :close_comments?, :id,
+  liquify_method :title, :publish_at, :permalink, :blog, :slug, :full_content,
+    :archives, :blog_entry?, :close_comments?, :id, :subpages,
     :excerpt  => lambda { |page| Magnetism::ContentParser.new(page.excerpt).invoke },
     :article  => lambda { |page| Magnetism::ContentParser.new(page.article).invoke },
     :data     => lambda { |page| DataDrop.new(page) },
-    :subpages => lambda { |page| page.pages.published.ordered(page) },
     :comments => lambda { |page| page.comments.excluding_spam }
 
   def self.find_by_path(request)
@@ -45,6 +44,13 @@ class Page < ActiveRecord::Base
     else
       comment = false
     end
+
+		if path =~ /feed\.atom$/
+			atom_feed = true
+			path.sub!(/feed\.atom$/,'')
+		else
+			atom_feed = false
+		end
 
     if path.length == 1
       path = [path]
@@ -68,6 +74,8 @@ class Page < ActiveRecord::Base
       date_has_not_passed = page.close_comments_at.nil? || page.close_comments_at > Time.now
       comment = true if comment.nil? && date_has_not_passed && !page.close_comments?
     end
+
+		return if atom_feed && !page.try(:blog_section?)
     page.comment = comment if page
 
     page
@@ -84,7 +92,7 @@ class Page < ActiveRecord::Base
     site.homepage == self
   end
 
-  def permalink
+  def permalink(full_path=false)
     slugs = []
     page = self
 
@@ -94,7 +102,8 @@ class Page < ActiveRecord::Base
       end
     end while page = page.parent
 
-    '/' + slugs.reverse.join('/')
+    path = '/' + slugs.reverse.join('/')
+		full_path ? "http://#{site.domain}#{path}" : path
   end
 
   def publish_at
@@ -108,6 +117,18 @@ class Page < ActiveRecord::Base
   def cache_path
     "#{Rails.public_path}/cache/#{site.domain}#{permalink}.html"
   end
+
+  def full_content
+     html_excerpt << Magnetism::ContentParser.new(article).invoke.to_s
+  end
+
+	def html_excerpt
+    Magnetism::ContentParser.new(excerpt).invoke.to_s
+	end
+
+  def subpages
+		pages.published.ordered(self)
+	end
 
   private
     def self.find_by_blog(page, path)

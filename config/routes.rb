@@ -26,5 +26,6 @@ Rails.application.routes.draw do
 
   # public routes
   match '/assets/:site_key/:directory/:file_name' => 'assets#show'
+  match '/(*path)/feed.:format' => 'feeds#show'
   match '/(*path)' => 'dispatch#show', :via => [:get, :post]
 end
