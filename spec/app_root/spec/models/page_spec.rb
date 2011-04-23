@@ -9,6 +9,7 @@ describe Page do
   it { should have_many(:data) }
   it { should have_many(:archives) }
   it { should have_many(:comments) }
+  it { should have_many(:redirects) }
 
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:site_id) }
@@ -451,7 +452,8 @@ describe Page do
         page.save
 
         # redeclare page
-        request = mock_request(:fullpath => page.permalink, :post? => true)
+        request = mock_request(:fullpath => "#{page.permalink}/comments")
+        request.stub :post? => true
         page = Page.find_by_path(request)
 
         page.comment?.should == true

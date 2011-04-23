@@ -10,6 +10,7 @@ class Page < ActiveRecord::Base
   has_many :data
   has_many :archives, :foreign_key => :blog_section_id, :order => 'publish_range ASC'
   has_many :comments, :order => 'created_at ASC'
+  has_many :redirects
 
   validates_presence_of :title, :site_id
   validates_uniqueness_of :title, :scope => [:site_id, :parent_id]
@@ -37,6 +38,7 @@ class Page < ActiveRecord::Base
 
   def self.find_by_path(request)
     path = request.is_a?(String) ? request : request.fullpath
+    debugger if $BREAK
 
     if path =~ /\/comments$/ && request.post?
       comment = nil

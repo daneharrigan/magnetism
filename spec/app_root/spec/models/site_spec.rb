@@ -10,6 +10,7 @@ describe Site do
 
   it { should have_many(:pages) }
   it { should have_many(:assets) }
+  it { should have_many(:redirects) }
 
   it { should belong_to(:homepage) }
   it { should belong_to(:theme) }

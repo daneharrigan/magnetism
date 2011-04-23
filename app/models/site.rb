@@ -18,6 +18,7 @@ class Site < ActiveRecord::Base
 
   has_many :pages, :dependent => :destroy
   has_many :assets, :dependent => :destroy
+  has_many :redirects
 
   belongs_to :homepage, :class_name => 'Page'
   belongs_to :theme

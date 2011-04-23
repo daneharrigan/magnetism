@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110415211235) do
+ActiveRecord::Schema.define(:version => 20110422215441) do
 
   create_table "archives", :force => true do |t|
     t.integer  "blog_section_id"
@@ -89,6 +89,12 @@ ActiveRecord::Schema.define(:version => 20110415211235) do
   end
 
   add_index "pages", ["slug"], :name => "index_pages_on_slug"
+
+  create_table "redirects", :force => true do |t|
+    t.string  "url"
+    t.integer "page_id"
+    t.integer "site_id"
+  end
 
   create_table "sites", :force => true do |t|
     t.string   "name"

@@ -22,6 +22,6 @@ def mock_page(args={})
 end
 
 def mock_request(args)
-  args[:post?] ||= false
+  args['post?'] ||= false
   Struct.new(*args.keys).new(*args.values)
 end
