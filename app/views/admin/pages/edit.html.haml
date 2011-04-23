@@ -18,10 +18,11 @@
     %p
       = f.label :publish_at
       = f.date_select :publish_at
-  .options
-    %p
-      = f.label :close_comments
-      = f.check_box :close_comments
+  - if resource.blog_entry?
+    .options
+      %p
+        = f.label :close_comments
+        = f.check_box :close_comments
   .actions
     .action-buttons
       = link_to 'Back to Pages', admin_pages_path
