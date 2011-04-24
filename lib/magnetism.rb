@@ -1,5 +1,6 @@
 require 'magnetism/engine'
 require 'magnetism/page_not_found'
+require 'magnetism/page_redirect'
 require 'magnetism/cache'
 require 'magnetism/content_parser'
 

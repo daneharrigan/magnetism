@@ -1,6 +1,8 @@
 def mock_site(args={})
   options = {:pages => []}.merge(args)
-  mock_model(Site, options)
+  site = mock_model(Site, options)
+  site.stub_chain(:redirects, :by_url).and_return([])
+  site
 end
 
 def mock_theme(args={})

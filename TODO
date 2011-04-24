@@ -20,3 +20,5 @@ Release 0.x
   Non-evaluating Haml templates
   Add git integration to allow for updating templates remotely
   Make more awesome?
+  Codemirror
+  Allow template editing outside of the browser

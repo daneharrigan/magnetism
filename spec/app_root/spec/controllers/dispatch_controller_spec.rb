@@ -38,6 +38,25 @@ describe DispatchController do
     end
   end
 
+  context 'when the URL requested is a redirect to a page' do
+    before(:each) do
+      @page = Factory(:page)
+      page_redirect = @page.redirects.create(:url => '/some/old/url', :site => @page.site)
+      controller.stub :current_site => @page.site
+      request.stub :fullpath => page_redirect.url
+
+      get :show
+    end
+
+    it 'redirects the user to the appropraite page permalink' do
+      response.should redirect_to @page.permalink
+    end
+
+    it 'sets the 301 status code' do
+      response.status.should == 301
+    end
+  end
+
   context 'when posting a comment' do
     before(:each) do
       @page = Factory.build(:blog_entry, :site => mock_site, :parent => mock_page(:blog_section? => true))

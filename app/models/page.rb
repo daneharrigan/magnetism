@@ -38,7 +38,6 @@ class Page < ActiveRecord::Base
 
   def self.find_by_path(request)
     path = request.is_a?(String) ? request : request.fullpath
-    debugger if $BREAK
 
     if path =~ /\/comments$/ && request.post?
       comment = nil
