@@ -30,7 +30,7 @@ class Page < ActiveRecord::Base
   scope :ordered, lambda { |parent| order(parent.blog_section? ? 'publish_at DESC' : 'position ASC') }
 
   liquify_method :title, :publish_at, :permalink, :blog, :slug, :full_content,
-    :archives, :blog_entry?, :close_comments?, :id, :subpages,
+    :archives, :blog_entry?, :close_comments?, :id, :subpages, :homepage?,
     :excerpt  => lambda { |page| Magnetism::ContentParser.new(page.excerpt).invoke },
     :article  => lambda { |page| Magnetism::ContentParser.new(page.article).invoke },
     :data     => lambda { |page| DataDrop.new(page) },
