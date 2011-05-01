@@ -140,11 +140,11 @@ jQuery(function($){
   });
 
   $('div.code-content form').live('ajax:success', function(el, json, status){
-    var class_name = 'success';
-    if(json.failure)
-      class_name = 'failure';
+    var class_name = 'notice';
+    if(json.alert)
+      class_name = 'alert';
 
-    var message = json.failure ? json.failure : json.success;
+    var message = json.alert ? json.alert : json.notice;
     $('body').prepend( $('<div />', { 'class': class_name}).text(message) );
     Magnetism.hideFlash();
   });

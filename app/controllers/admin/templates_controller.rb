@@ -1,6 +1,8 @@
 module Admin
   class TemplatesController < MagnetismController
     actions :all, :except => [:index, :show]
+    respond_to :html
+    respond_to :json, :only => :update
     layout_options :overlay => :new, :none => [:edit, :update, :create, :destroy]
     belongs_to :theme
     helper_method :association_group
@@ -15,8 +17,14 @@ module Admin
         render :nothing => true
       else
         update! do |success, failure|
-          success.json { render :json => {:success => 'Template was successfully updated.'} }
-          failure.json { render :json => {:failure => 'Template could not be updated.'} }
+          resource_name = resource_class.name.titleize
+          success.json do
+            render :json => { :notice => I18n.t('flash.actions.update.notice', :resource_name => resource_name) }
+          end
+
+          failure.json do
+            render :json => { :alert => I18n.t('flash.actions.update.alert', :resource_name  => resource_name) }
+          end
         end
       end
     end

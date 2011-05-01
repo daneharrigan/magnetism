@@ -77,16 +77,16 @@ describe Admin::TemplatesController do
       it 'updates the template content field' do
         # the content attribute is set when Factory runs, so a reload
         # is needed to fetch the updated value
-
         put :update, @params
         @template.reload
         @template.content.should == @content
       end
 
       context 'when the update is successful' do
-        it 'returns a json object of the success message' do
+        it 'returns a json object of the notice message' do
           put :update, @params
-          response.body.should == {:success => 'Template was successfully updated.'}.to_json
+          message = { :notice => I18n.t('flash.actions.update.notice', :resource_name => 'Template') }
+          response.body.should == message.to_json
         end
       end
 
@@ -101,7 +101,8 @@ describe Admin::TemplatesController do
           Theme.stub :find => theme
 
           put :update, @params
-          response.body.should == {:failure => 'Template could not be updated.'}.to_json
+          message = { :alert => I18n.t('flash.actions.update.alert', :resource_name => 'Template') }
+          response.body.should == message.to_json
         end
       end
     end
