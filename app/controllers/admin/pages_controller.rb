@@ -20,16 +20,7 @@ module Admin
     def update
       current_site.current!
       resource.current!
-
-      update! do |success, failure|
-        success.html do
-          flash[:success] = flash[:notice]
-          flash.delete :notice
-        end
-        failure.html { flash[:failure] = 'Page could not be updated.' }
-      end
-
-      redirect_to edit_admin_page_path(resource)
+      update! { edit_admin_page_path(resource) }
     end
 
     alias :show :redirect_to_edit

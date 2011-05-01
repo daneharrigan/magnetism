@@ -90,12 +90,12 @@ describe Admin::UsersController do
     end
 
     context 'when the update fails' do
-      it 'sets the flash failure message' do
+      it 'sets the flash alert message' do
         user.stub :update_attributes => false, :errors => { :fail => true }
         User.stub :find => user
 
         put :update, @params
-        flash[:failure].should_not be_nil
+        flash[:alert].should_not be_nil
       end
     end
   end

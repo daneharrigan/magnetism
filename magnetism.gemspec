@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 3.0.6'
   s.add_dependency 'haml', '~> 3.0.23'
   s.add_dependency 'devise', '~> 1.1.5'
-  s.add_dependency 'inherited_resources', '~> 1.1.2'
+  s.add_dependency 'inherited_resources', '~> 1.2.2'
   s.add_dependency 'layout_options', '~> 0.2.1'
   s.add_dependency 'current_object', '~> 0.2'
   s.add_dependency 'fog', '~> 0.3.34'

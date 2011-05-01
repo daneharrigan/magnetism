@@ -3,7 +3,7 @@ module Admin
     before_filter :allow_user?, :only => [:edit, :update]
     actions :all, :except => :index
     layout_options :none => :destroy
-    resources_configuration[:self][:route_prefix] = 'admin/manage'
+    resources_configuration[:self][:route_prefix] = 'admin_manage'
 
     def index
       redirect_to admin_manage_path
@@ -20,14 +20,7 @@ module Admin
         params[:user].delete(key) if params[:user][key].empty?
       end
 
-      update! do |success, failure|
-        success.html { }
-        failure.html do
-          flash[:failure] = 'User could not be updated.'
-        end
-      end
-
-      redirect_to admin_manage_path
+      update! { admin_manage_path }
     end
 
     alias :destroy :render_destroy_js

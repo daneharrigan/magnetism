@@ -80,7 +80,7 @@ footer a:visited {
 section {
   background: #FFF;
 }
-.notice, .failure, .success {
+.notice, .alert {
   font-weight: bold;
   text-align: center;
   padding: 0 40px;
@@ -97,16 +97,12 @@ section {
   z-index: 10;
 }
 .notice {
-  background: #FC0;
-  border: 2px solid #FC0;
-}
-.failure {
-  background: #f99;
-  border-bottom: 2px solid #f33;
-}
-.success {
   background: #3c3;
   border-bottom: 2px solid #0c0;
+}
+.alert {
+  background: #c33;
+  border-bottom: 2px solid #911;
 }
 #settings {
   position: absolute;
@@ -416,4 +412,7 @@ aside li {
 /* extras */
 .clear {
   clear: both;
+}
+.field_with_errors {
+  display: inline;
 }

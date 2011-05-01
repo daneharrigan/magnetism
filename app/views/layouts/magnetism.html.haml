@@ -18,8 +18,10 @@
 
     = csrf_meta_tag
   %body
-    - unless flash.values.first.blank?
-      %div{:class => flash.keys.first}= flash.values.first
+    - if flash[:alert]
+      %div.alert= flash[:alert]
+    - if flash[:notice]
+      %div.notice= flash[:notice]
 
     = render 'admin/header'
     %section

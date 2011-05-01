@@ -155,12 +155,12 @@ describe Admin::PagesController do
         put :update, @params
       end
 
-      it 'sets the flash[:failure] message' do
-        flash[:failure].should_not be_nil
+      it 'sets the flash[:alert] message' do
+        flash[:alert].should_not be_nil
       end
 
-      it 'redirects to the edit page' do
-        response.should redirect_to edit_admin_page_path(@page)
+      it 'renders the edit view' do
+        response.should render_template('edit')
       end
     end
 

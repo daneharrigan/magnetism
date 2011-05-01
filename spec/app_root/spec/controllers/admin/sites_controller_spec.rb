@@ -65,8 +65,8 @@ describe Admin::SitesController do
         post :create, @params
       end
 
-      it 'sets the flash success message' do
-        flash[:success].should_not be_nil
+      it 'sets the flash notice message' do
+        flash[:notice].should_not be_nil
       end
 
       it 'redirects the user to /admin/manage/sites/<site_id>' do

@@ -2,7 +2,7 @@ module Admin
   class SitesController < MagnetismController
     actions :all
     helper_method :theme_collection
-    resources_configuration[:self][:route_prefix] = 'admin/manage'
+    resources_configuration[:self][:route_prefix] = 'admin_manage'
     layout_options :overlay => [:new, :edit]
 
     def show
@@ -12,16 +12,10 @@ module Admin
 
     def create
       create! do |success, failure|
-        success.html do
-          flash[:success] = t('magnetism.success.site')
-          redirect_to admin_manage_site_path(resource)
-        end
-
-        failure.html do
-          flash[:alert] = t('magnetism.failure.site')
-          redirect_to admin_manage_path
-        end
+        success.html { redirect_to admin_manage_site_path(resource) }
+        failure.html { redirect_to admin_manage_path }
       end
+
     end
 
     def update
@@ -32,9 +26,7 @@ module Admin
 
         render :nothing => true
       else
-        update! do |success, failure|
-          success.html { redirect_to admin_manage_path }
-        end
+        update! { admin_manage_path }
       end
     end
 
