@@ -8,13 +8,14 @@ Release: 0.1
     Comments (scan with defenseo)
       Comment Liquid Tag
     Trackbacks
-  Make flash success/notice messages consistant
+  Make sure all success AND failure controller responses are spec'd
 
 Release 0.2
   Asset manager
   Sass templates
   Support multiple markups (eg: textile, markdown)
   i18n
+  Allow usage of Haml in templates
 
 Release 0.x
   Non-evaluating Haml templates
