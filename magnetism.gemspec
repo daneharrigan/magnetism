@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "magnetism"
 
-  s.add_dependency 'rails', '~> 3.0.6'
+  s.add_dependency 'rails', '~> 3.0.7'
   s.add_dependency 'haml', '~> 3.0.23'
   s.add_dependency 'devise', '~> 1.1.5'
   s.add_dependency 'inherited_resources', '~> 1.2.2'
