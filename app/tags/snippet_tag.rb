@@ -3,8 +3,12 @@ class SnippetTag < Liquify::Tag
     options = params.extract_options!
     snippets = Site.current.theme.templates.snippets
     template = snippets.first(:conditions => { :name => params.first })
-
-    return Liquify.invoke(template.content, :first => true, :last => true) unless options['collection']
+    
+    unless options['collection']
+      extra_context = { :first => true, :last => true }
+      extra_context['item'] = Page.current
+      return Liquify.invoke(template.content, extra_context)
+    end
 
     collection = find_collection(options)
 
