@@ -1,6 +1,6 @@
 h1. Magnetism
 
-Magnetism is a website CMS. Its currently under heavy development and is not yet production ready.
+Magnetism is a website CMS. It's now *abandoned* and not production ready.
 
 For those that have been watching Magnetism, it has been converted into a gem. To get it up and
 running please do the following:
